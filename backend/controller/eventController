@@ -1,0 +1,249 @@
+/*const eventController = (req,res) => {
+  async (req, res) => {
+    try {
+      const listOfEvents = await event.findAll();
+      res.json(listOfEvents);
+    } catch (error) {
+      console.error("Error retrieving events:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+    finally {
+        if (connection) {
+          try {
+            // Release the connection when done
+            await connection.close();
+          } catch (error) {
+            console.error('Error closing database connection:', error);
+          }
+        }
+    } 
+  },
+
+    return res.status(200).json({message: "fjdsfsk"});
+ 
+};
+
+module.exports = {eventController};
+*/
+const {getConnection} = require('../config/connection');
+
+
+module.exports = {
+    removeAllEvents: async function (req, res){
+        let connection ;
+        try {
+            connection = await getConnection();
+            const query = "TRUNCATE TABLE events";
+            const options={
+                autoCommit: true, // Commit each insert immediately
+            }
+            await connection.execute(query ,[], options);
+            // console.log(table.rows);
+            res.status(202).send("Deleted");
+          } catch (error) {
+            console.error('Error executing SQL query:', error);
+            res.status(500).send('Internal Server Error');
+          } finally {
+            if (connection) {
+              try {
+                // Release the connection when done
+                await connection.close();
+              } catch (error) {
+                console.error('Error closing database connection:', error);
+              }
+            }
+        }
+    },
+    populateEvents: async function (req, res){
+
+        let connection ;
+        try {
+
+            // INSERT INTO Orders (person_id, desert_id, order_date, quantity)
+            // VALUES (1, 1, '2023/09/15', 2); 
+
+            connection = await getConnection();
+            const dataOrder = [
+                [1,10, 'e1','event'],
+                [2,5, 'e2', 'event'],
+                [3,2, 'e3','event'],
+                [2,7, 'e4', 'event'],
+                [4,10, 'e5', 'event'],
+                [5,1, 'e6', 'event'],
+            ];
+            
+            for (const EventData of dataOrder) {
+                const queryEvent = `INSERT INTO events (id, eventid, eventname, eventdesc) VALUES (:1, :2, :3, :4)`;
+                const bindsOrder = EventData; // Bind the OrderData array directly
+                const optionsOrder = {
+                  autoCommit: true, // Commit each insert immediately
+                };
+                // console.log(query , "aaa----------->>>>")
+                await connection.execute(queryEvent,bindsOrder,optionsOrder);
+              }
+
+              res.status(202).send("Populated");
+        } 
+        catch (error) {
+            console.error('Error executing SQL query:', error);
+            res.status(500).send('Internal Server Error');
+          
+        } 
+        finally {
+            if (connection) {
+              try {
+                // Release the connection when done
+                await connection.close();
+              } catch (error) {
+                console.error('Error closing database connection:', error);
+              }
+            }
+        }
+    },
+
+    GetWholeTable: async function  (req, res){
+        let connection ;
+        try {
+            connection = await getConnection();
+            const table = await connection.execute("SELECT * from events");
+            //SELECT events.*,id , Deserts.deserts , Deserts.unit_price FROM (Orders join Person on Orders.person_id = Person.person_id) join Deserts on Orders.desert_id = Deserts.desert_id"
+            // console.log(table.rows);
+            res.status(200).send(table);
+          } catch (error) {
+            console.error('Error executing SQL query:', error);
+            res.status(500).send('Internal Server Error');
+          } finally {
+            if (connection) {
+              try {
+                // Release the connection when done
+                await connection.close();
+              } catch (error) {
+                console.error('Error closing database connection:', error);
+              }
+            }
+        } 
+        // return table;
+    },
+
+    getEventwithCondition: async function (req, res) {
+        let connection;
+        try {
+            connection = await getConnection();
+            const query = `SELECT * from events WHERE ${req.body.condition}`;
+            const binds = [req.body.condition];
+            const table = await connection.execute(query, binds);
+            res.status(200).send(table);
+        } catch (error) {
+            console.error('Error executing SQL query:', error);
+            res.status(500).send('Internal Server Error');
+        } finally {
+            if (connection) {
+                try {
+                    await connection.close();
+                } catch (error) {
+                    console.error('Error closing database connection:', error);
+                }
+            }
+        }
+    },
+    
+
+    AddNewOrder: async function (req, res){
+        let connection ;
+        try {
+            connection = await getConnection();
+            const query = `INSERT INTO events (eventid, eventname, eventdesc) VALUES (:1, :2, :3, :4)`;
+            const binds = [req.body.eventid, req.body.eventname, req.body.eventdesc];
+            const options = {
+              autoCommit: true, // Commit each insert immediately
+            };
+            // console.log(query , "aaa----------->>>>")
+            await connection.execute(query,binds,options);
+            res.status(202).send("Added");
+        } 
+        catch (error) {
+            console.error('Error executing SQL query:', error);
+            res.status(500).send('Internal Server Error');
+          
+        } 
+        finally {
+            if (connection) {
+              try {
+                // Release the connection when done
+                await connection.close();
+              } catch (error) {
+                console.error('Error closing database connection:', error);
+              }
+            }
+        }
+    },
+
+    UpdateEvent: async function (req, res) {
+        let connection;
+        try {
+          connection = await getConnection();
+          const binds = [
+            req.body.eventid,
+            req.body.eventname,
+            req.body.eventdesc,
+            req.body.id
+          ];
+      
+          console.log("binds -> ", binds);
+          const query = `UPDATE events SET eventid = :1, eventname = :2, eventdesc = :3 WHERE id = :4`;
+          const options = {
+            autoCommit: true, // Commit each insert immediately
+          }
+    
+          const respnse = await connection.execute(query, binds, options);
+  
+      
+          res.status(202).send("Updated");
+        } catch (error) {
+          console.error("Error executing SQL query:", error);
+          res.status(500).send('Internal Server Error');
+        } finally {
+          if (connection) {
+            try {
+              // Release the connection when done
+              await connection.close();
+            } catch (error) {
+              console.error('Error closing database connection:', error);
+            }
+          }
+        }
+      },
+  
+  
+      DeleteOrderAtID : async function (req, res){
+  
+        let connection ;
+        try{
+          connection = await getConnection();
+          const query = `Delete from events WHERE id = :1`;
+          const binds = [req.body.id];
+          const options = {
+            autoCommit: true, // Commit each insert immediately
+          };
+  
+          await connection.execute(query,binds,options);
+          res.status(202).send("Deleted");
+        }
+        catch(error){
+          console.log("Error executing SQL query:" ,error)
+          res.status(500).send('Internal Server Error');
+        }
+        finally{
+          if(connection){
+            try{
+              await connection.close();
+            }
+            catch(error){
+              console.log("Error closing database connection:", error);
+            }
+          }
+  
+        }
+  
+      }
+}
