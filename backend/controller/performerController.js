@@ -97,12 +97,10 @@ module.exports = {
     getPerformerswithCondition: async function (req, res){
         let connection ;
         try {
-            // console.log(req, "req from getDesertwithCondition")
+            
             connection = await getConnection();
             const query = `SELECT Performers.*,Performers.performer_id, Performers.performer_name, Performers.performer_type FROM Performers WHERE ${req.body.condition}`;
-            
-            // bind = [req.body.condition];
-            // console.log(bind[0], "bind")
+          
             const table = await connection.execute(query);
             // console.log(table.rows);
             res.status(200).send(table);
@@ -130,7 +128,7 @@ module.exports = {
             const options = {
               autoCommit: true, 
             };
-            // console.log(query , "aaa----------->>>>")
+            
             await connection.execute(query,binds,options);
             res.status(202).send("Added");
         } 
