@@ -72,10 +72,17 @@ country_id int primary key
 
 
 create sequence ticket_count
-minvalue 1
 start with 1
-increment by 1
-cache 10;
+increment by 1;
+
+create or replace trigger ticket_id_trigger
+before insert on tickets for each row
+begin
+  select ticket_id_seq.nextval
+  into :NEW.ticket_id
+  from dual;
+end;
+/
 
 create table tickets(
 ticket_id int,
@@ -85,7 +92,6 @@ seat_num int,
 primary key(ticket_id,event_id),
 constraint event_fk foreign key (event_id) references events(event_id)
 )
-drop table tickets;
 
 --insert into tickets(ticket_id,event_id,ticket_type,seat_num) values (ticket_count.nextval,1,2,3)
 
