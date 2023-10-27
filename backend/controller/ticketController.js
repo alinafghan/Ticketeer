@@ -244,7 +244,32 @@ module.exports = {
             }
           }
         }
-      }
+      },
 
+      DeleteTicketsWithCondition : async function (req,res) {
+        let connection;
+        try{
+          connection = await getConnection();
+          const query = `Delete from tickets WHERE ${req.body.condition}`;
+  
+          await connection.execute(query);
+          res.status(202).send("Deleted!");
+        }
 
+        catch(error){
+          console.log("Error executing SQL query:" ,error)
+          res.status(500).send('Internal Server Error');
+        }
+        finally{
+          if(connection){
+            try{
+              await connection.close();
+            }
+            catch(error){
+              console.log("Error closing database connection:", error);
+            }
+          }
+  
+        }
+    }
 }

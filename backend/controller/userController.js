@@ -189,7 +189,7 @@ module.exports = {
       },
   
   
-      DeleteVenueAtID : async function (req, res){
+      DeleteUserAtID : async function (req, res){
   
         let connection ;
         try{
@@ -221,25 +221,13 @@ module.exports = {
   
       },
 
-      DeleteuserWithCondition : async function (req,res) {
+      DeleteUserWithCondition : async function (req,res) {
         let connection;
         try{
           connection = await getConnection();
           const query = `Delete from users WHERE ${req.body.condition}`;
-          const binds = [
-            req.body.user_id,
-            req.body.username,
-            req.body.email,
-             req.body.phone_number,
-             req.body.password, 
-             req.body.city_state_country,
-            req.body.user_type,
-          ];
-          const options = {
-            autoCommit: true, // Commit each insert immediately
-          };
-  
-          await connection.execute(query,binds,options);
+          
+          await connection.execute(query);
           res.status(202).send("Deleted");
         }
 
