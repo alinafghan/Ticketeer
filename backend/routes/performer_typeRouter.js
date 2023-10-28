@@ -16,7 +16,7 @@ router.put("/Updateperformer_type",performer_typeController.Updateperformer_type
 
 router.delete("/Deleteperformer_typeAtID",performer_typeController.Deleteperformer_typeAtID);
 
-router.delete("/Deleteperformer_typeAtID",performer_typeController.Deleteperformer_typeWithCondition);
+router.delete("/Deleteperformer_typeAtID",performer_typeController.DeletePerformer_TypeWithCondition);
 
 
 module.exports = router;
