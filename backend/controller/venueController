@@ -1,11 +1,13 @@
 const {getConnection} = require('../connection');
 
+// Path: order/....
+
 module.exports = {
-    removeAllPerformers: async function (req, res){
+    removeAllVenues: async function (req, res){
         let connection ;
         try {
             connection = await getConnection();
-            const query = "TRUNCATE TABLE Performers";
+            const query = "TRUNCATE TABLE Venues";
             const options={
                 autoCommit: true, // Commit each insert immediately
             }
@@ -26,30 +28,30 @@ module.exports = {
             }
         }
     },
-    populatePerformers: async function (req, res){
+    populateVenues: async function (req, res){
 
         let connection ;
         try {
 
             
             connection = await getConnection();
-            const dataPerformers = [
-                [1,'Beyonce','beyonce@gmail.com',3028898756,'beybey2828','Colorado', 1],
-                [2,'TSwizzle', 'taylorswift@gmail.com',3028898756,'password1','Colorado',1],
-                [3,'Jayz','jayzbayz@gmail.com',3028898756,'password1', 'Colorado',1],
-                [2,'Spongebob Squarepants','squidwardfan@gmail.com',3028898756,'password1','Colorado', 3],
-                [4,'the Strokes','roomonfire@hotmail.com',3028898756, 'password1','Colorado',1],
-                [5,'Nasty Nas','theking@gmail.com',3028898756,'password1','Colorado', 1],
+            const dataVenues = [
+                [1,'Gugenheim', 840, 2],
+                [2,'Metropolitan Museum of Art', 700, 3],
+                [3,'Bobs bar', 450, 7],
+                [2,'Krabby Patty', 3000, 24],
+                [4,'Airbnb at Tipu Sultan', 500, 9],
+                [5,'Checking', 150, 8],
             ];
             
-            for (const PerformersData of dataPerformers) {
-                const queryPerformers = `INSERT INTO Performers (performer_id, performer_name, email, phone_number,password, city_state_country, performer_type) VALUES (:1, :2, :3)`;
-                const bindsPerformers = PerformersData; // Bind the PerformersData array directly
-                const optionsPerformers = {
+            for (const VenuesData of dataVenues) {
+                const queryVenues = `INSERT INTO Venues (venue_id, venue_name, venue_capacity, location_id) VALUES (:1, :2, :3, :4)`;
+                const bindsVenues = VenuesData; // Bind the VenuesData array directly
+                const optionsVenues = {
                   autoCommit: true, // Commit each insert immediately
                 };
                 // console.log(query , "aaa----------->>>>")
-                await connection.execute(queryPerformers,bindsPerformers,optionsPerformers);
+                await connection.execute(queryVenues,bindsVenues,optionsVenues);
               }
 
               res.status(202).send("Populated");
@@ -75,7 +77,7 @@ module.exports = {
         let connection ;
         try {
             connection = await getConnection();
-            const table = await connection.execute("select * from Performers");
+            const table = await connection.execute("select * from Venues");
             // console.log(table.rows);
             res.status(200).send(table);
           } catch (error) {
@@ -94,13 +96,15 @@ module.exports = {
         // return table;
     },
 
-    getPerformerswithCondition: async function (req, res){
+    getVenueswithCondition: async function (req, res){
         let connection ;
         try {
-            
+            // console.log(req, "req from getDesertwithCondition")
             connection = await getConnection();
-            const query = `SELECT Performers.*,Performers.performer_id, Performers.performer_name,Performers.email, Performers.phone_number,Performers.password, Performers.city_state_country, Performers.performer_type FROM Performers WHERE ${req.body.condition}`;
-          
+            const query = `SELECT Venues.*,Venues.venue_name , Venues.venue_capacity, Venues.location_id FROM Venues WHERE ${req.body.condition}`;
+            
+            // bind = [req.body.condition];
+            // console.log(bind[0], "bind")
             const table = await connection.execute(query);
             // console.log(table.rows);
             res.status(200).send(table);
@@ -119,16 +123,16 @@ module.exports = {
         } 
     },
 
-    AddNewPerformer: async function (req, res){
+    AddNewVenue: async function (req, res){
         let connection ;
         try {
             connection = await getConnection();
-            const query = `INSERT INTO Performers (performer_id, performer_name,email, phone_number,password, city_state_country, performer_type) VALUES (:1, :2, :3, :4)`;
-            const binds = [req.body.performer_id, req.body.performer_name,req.body.email, req.body.phone_number,req.body.password, req.body.city_state_country, req.body.performer_type];
+            const query = `INSERT INTO Venues (venue_id, venue_name, venue_capacity, location_id) VALUES (:1, :2, :3, :4)`;
+            const binds = [req.body.venue_id, req.body.venue_name, req.body.venue_capacity, req.body.location_id];
             const options = {
               autoCommit: true, 
             };
-            
+            // console.log(query , "aaa----------->>>>")
             await connection.execute(query,binds,options);
             res.status(202).send("Added");
         } 
@@ -149,22 +153,19 @@ module.exports = {
         }
     },
 
-    UpdatePerformers: async function (req, res) {
+    UpdateVenues: async function (req, res) {
         let connection;
         try {
           connection = await getConnection();
           const binds = [
-            req.body.performer_id,
-            req.body.performer_name,
-            req.body.email, 
-            req.body.phone_number,
-            req.body.password,
-             req.body.city_state_country,
-            req.body.performer_type,
+            req.body.venue_id,
+            req.body.venue_name,
+            req.body.venue_capacity,
+            req.body.location_id,
           ];
       
           console.log("binds -> ", binds);
-          const query = `UPDATE Performers SET performer_id = :1, performer_name= :2,email =:3, phone_number =: 4,password =: 5, city_state_country =:6, performer_type = :7 WHERE ${req.body.condition}`;
+          const query = `UPDATE Venues SET venue_id = :1, venue_name= :2, venue_capacity = :3, location_id = :4 WHERE ${req.body.condition}`;
           const options = {
             autoCommit: true, // Commit each insert immediately
           }
@@ -189,13 +190,13 @@ module.exports = {
       },
   
   
-
-      DeletePerformerAtID : async function (req, res){  
+      DeleteVenueAtID : async function (req, res){
+  
         let connection ;
         try{
           connection = await getConnection();
-          const query = `Delete from Performers WHERE performer_id = :1`;
-          const binds = [req.body.performer_id];
+          const query = `Delete from Venues WHERE venue_id = :1`;
+          const binds = [req.body.order_id];
           const options = {
             autoCommit: true, // Commit each insert immediately
           };
@@ -219,45 +220,6 @@ module.exports = {
   
         }
   
-      },
-
-      DeletePerformerWithCondition : async function (req,res) {
-        let connection;
-        try{
-          connection = await getConnection();
-          const query = `Delete from Performers WHERE ${req.body.condition}`;
-          const binds = [
-            req.body.performer_id,
-            req.body.performer_name,
-            req.body.email,
-             req.body.phone_number,
-             req.body.password, 
-             req.body.city_state_country,
-            req.body.performer_type,
-          ];
-          const options = {
-            autoCommit: true, // Commit each insert immediately
-          };
-  
-          await connection.execute(query,binds,options);
-          res.status(202).send("Deleted");
-        }
-
-        catch(error){
-          console.log("Error executing SQL query:" ,error)
-          res.status(500).send('Internal Server Error');
-        }
-        finally{
-          if(connection){
-            try{
-              await connection.close();
-            }
-            catch(error){
-              console.log("Error closing database connection:", error);
-            }
-          }
-  
-        }
       }
 
 
