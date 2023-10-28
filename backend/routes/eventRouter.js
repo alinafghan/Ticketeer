@@ -1,29 +1,22 @@
 const express = require("express");
 const { getConnection } = require('../config/connection');
 const router = express.Router();
-//const eventController = require("../controller/eventController.js");
+const eventController = require("../controller/eventController.js");
 
-router.get("/", async function (req, res) { // Use a function here
-    let connection;
-    try {
-        connection = await getConnection();
-        const result = await connection.execute("SELECT * from events");
-        const data = result.rows;
-        res.status(200).json(data);
-    } catch (error) {
-        console.error('Error executing SQL query:', error);
-        res.status(500).send('Internal Server Error');
-    } finally {
-        if (connection) {
-            try {
-                await connection.close();
-            } catch (error) {
-                console.error('Error closing database connection:', error);
-            }
-        }
-    }
-});
+router.get("/", eventController.GetWholeTable);
 
-// Add other routes as needed
+//router.delete("/", event_categoryController.removeAllevent_category);
+
+//router.post("/populateevent_categorys", event_categoryController.populateevent_category);
+
+//router.get("/getevent_categorywithCondition", event_categoryController.getevent_categorywithCondition);
+
+//router.post("/AddNewevent_category",event_categoryController.AddNewevent_category);
+
+//router.put("/Updateevent_category",event_categoryController.Updateevent_category);
+
+//router.delete("/Deleteevent_categoryAtID",event_categoryController.Deleteevent_categoryAtID);
+
+//router.delete("/Deleteevent_categoryAtID",event_categoryController.Deleteevent_categoryWithCondition);
 
 module.exports = router;
