@@ -1,133 +1,196 @@
-create table events(
-event_id int primary key,
-event_name varchar(255),
-venue_id int,
-event_date timestamp,
-start_time timestamp,
-end_time timestamp,
-organizer_id int,
-performer_id int,
-event_category_id int,
-num_of_tickets int,
-constraint venue_fk foreign key(venue_id) references Venues(venue_id),
-constraint organizer_fk foreign key(organizer_id) references Organizers(organizer_id),
-constraint performer_fk foreign key(performer_id) references Performers(performer_id),
-constraint event_category_fk foreign key(event_category_id) references event_category(event_category_id)
-)
+SELECT 'DROP TABLE ' || table_name || ' CASCADE CONSTRAINTS;' 
+FROM user_tables;
 
+drop table organizers  CASCADE CONSTRAINTS;
+drop table performer_type  CASCADE CONSTRAINTS;
+drop table countries  CASCADE CONSTRAINTS;
+drop table locations  CASCADE CONSTRAINTS;
+drop table venues  CASCADE CONSTRAINTS;
+drop table performers  CASCADE CONSTRAINTS;
+drop table event_category  CASCADE CONSTRAINTS;
+drop table events cascade constraints;
+drop table tickets cascade constraints;
+drop table seats cascade constraints;
+drop table users cascade constraints;
+drop table transactions cascade constraints;
 
-create table venues(
-venue_id int primary key,
-venue_name varchar(255),
-venue_capacity int,
-location_id int,
-constraint locations_fk foreign key(location_id) references locations(location_id)
+CREATE TABLE event_category (
+  event_category_id INT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY,
+  event_category_name VARCHAR2(255) NOT NULL
 );
 
-create table event_category(
-event_category_id int primary key
+CREATE TABLE organizers (
+  organizer_id INT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY,
+  organizer_name VARCHAR2(255) NOT NULL
 );
 
-create table organizers(
-organizer_id int primary key
+CREATE TABLE performer_type (
+  performer_type INT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY,
+  type_name VARCHAR2(255) NOT NULL
 );
 
-create table performers(
-performer_id int primary key,
-performer_name varchar(255),
-performer_type int,
-constraint type_fk foreign key(performer_type) references performer_type(performer_type)
+CREATE TABLE countries (
+  country_id INT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY,
+  country_name VARCHAR(255) NOT NULL
 );
 
-create table performer_type(
-performer_type int primary key,
-type_name varchar(255)
-)
-
-create table performer_type_A(
-performer_type_A int,
-performer_type int,
-desc varchar(255),
-primary key(performer_type_A,performer_type),
-constraint performer_type_fk foreign key (performer_type) references performer_type(performer_type)
-)
-
-create table performer_type_B(
-performer_type_B int,
-performer_type int,
-desc varchar(255),
-primary key(performer_type_B,performer_type),
-constraint performer_type_B_fk foreign key (performer_type) references performer_type(performer_type)
-)
-
-create table locations(
-location_id int primary key,
-country_id int,
-constraint country_fk foreign key(country_id) references countries(country_id)
-)
-
-create table countries(
-country_id int primary key
-)
+CREATE TABLE locations (
+  location_id INT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY,
+  location_name varchar(255) NOT NULL,
+  country_id INT NOT NULL,
+  CONSTRAINT country_fk FOREIGN KEY (country_id) REFERENCES countries (country_id)
+);
 
 
-create sequence ticket_count
-start with 1
-increment by 1;
 
-create or replace trigger ticket_id_trigger
-before insert on tickets for each row
+CREATE TABLE venues (
+  venue_id INT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY,
+  venue_name VARCHAR(255) NOT NULL,
+  venue_capacity INT NOT NULL,
+  location_id INT NOT NULL,
+  CONSTRAINT location_fk FOREIGN KEY (location_id) REFERENCES locations (location_id)
+);
+
+CREATE TABLE performers (
+  performer_id INT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY,
+  performer_name VARCHAR(255),
+  performer_type INT,
+  CONSTRAINT performer_type_fk FOREIGN KEY (performer_type) REFERENCES performer_type (performer_type)
+);
+
+CREATE TABLE events (
+  event_id INT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY,
+  event_name VARCHAR(255) NOT NULL,
+  venue_id INT NOT NULL,
+  event_date DATE NOT NULL,
+  start_time TIMESTAMP(0) NOT NULL,
+  end_time TIMESTAMP(0),
+  organizer_id INT NOT NULL,
+  performer_id INT NOT NULL,
+  event_category_id INT NOT NULL,
+  num_of_tickets INT NOT NULL,
+  CONSTRAINT venue_fk FOREIGN KEY (venue_id) REFERENCES venues (venue_id),
+  CONSTRAINT organizer_fk FOREIGN KEY (organizer_id) REFERENCES organizers (organizer_id),
+  CONSTRAINT performer_fk FOREIGN KEY (performer_id) REFERENCES performers (performer_id),
+  CONSTRAINT event_category_fk FOREIGN KEY (event_category_id) REFERENCES event_category (event_category_id)
+);
+
+create table ticket_type(
+ticket_type INT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY,
+  ticket_type_name VARCHAR2(255) NOT NULL
+);
+
+insert into ticket_type (ticket_type_name) values ('cool');
+
+
+create sequence ticket_id_seq;
+
+create or replace trigger ticket_id_auto_increment before insert on tickets for each row 
 begin
-  select ticket_id_seq.nextval
-  into :NEW.ticket_id
-  from dual;
-end;
+  SELECT NVL(MAX(ticket_id), -1) + 1
+  INTO :NEW.ticket_id
+  FROM tickets
+  WHERE event_id = :NEW.event_id;
+END;
 /
+
 
 create table tickets(
 ticket_id int,
-event_id int,
-ticket_type int,
-seat_num int,
+event_id int NOT NULL,
+ticket_type int NOT NULL,
+seat_num int NOT NULL,
 primary key(ticket_id,event_id),
-constraint event_fk foreign key (event_id) references events(event_id)
-)
+constraint event_fk foreign key (event_id) references events(event_id),
+CONSTRAINT ticket_type_fk foreign key (ticket_type) references ticket_type(ticket_type)
+);
 
---insert into tickets(ticket_id,event_id,ticket_type,seat_num) values (ticket_count.nextval,1,2,3)
-
-create table users(
-user_id int primary key, 
-username varchar(255),
-email varchar(255) check (email like '%@%'),
-phone_number int check (length(phone_number)<16),
-pass_word varchar(255) check (length(pass_word)>5),
-city_state_country varchar(255),
-num_of_tickets_booked int
-)
-
-drop table users;
-
-create table seats(
-seat_num int primary key,
-seat_type varchar(255),
-venue_id int,
-constraint seatvenue_fk foreign key (venue_id) references venues(venue_id)
-)
-
-create table transactions(
-user_id int,
-ticket_id int,
-event_id int,
-amt_paid decimal,
-transaction_time timestamp,
-primary key (user_id,ticket_id),
-constraint user_id_fk foreign key (user_id) references users(user_id),
-constraint ticket_id_fk foreign key (ticket_id,event_id) references tickets(ticket_id,event_id)
-)
+insert into tickets (event_id,ticket_type,seat_num) values (1,1,1);
+insert into tickets (event_id,ticket_type,seat_num) values (1,1,2);
+insert into tickets (event_id,ticket_type,seat_num) values (1,1,3);
+insert into tickets (event_id,ticket_type,seat_num) values (1,1,4);
+insert into tickets (event_id,ticket_type,seat_num) values (2,1,1);
+insert into tickets (event_id,ticket_type,seat_num) values (2,1,2);
+insert into tickets (event_id,ticket_type,seat_num) values (2,1,3);
+insert into tickets (event_id,ticket_type,seat_num) values (2,1,4);
+select * from tickets;
 
 
+CREATE TABLE seats (
+  seat_num INT,
+  seat_type VARCHAR(255),
+  venue_id INT,
+  PRIMARY KEY (seat_num,venue_id),
+  CONSTRAINT seatvenue_fk FOREIGN KEY (venue_id) REFERENCES venues(venue_id)
+);
 
+CREATE SEQUENCE seat_num_seq;
 
+CREATE OR REPLACE TRIGGER seats_autoincrement
+BEFORE INSERT ON seats
+FOR EACH ROW
+BEGIN
+  SELECT NVL(MAX(seat_num), -1) + 1
+  INTO :NEW.seat_num
+  FROM seats
+  WHERE venue_id = :NEW.venue_id;
+END;
+/
 
+-- Insert seats for venue 1
+INSERT INTO seats (seat_type, venue_id)
+VALUES ('Regular', 1);
 
+INSERT INTO seats (seat_type, venue_id)
+VALUES ('VIP', 1);
 
+INSERT INTO venues (venue_name, location_id, venue_capacity)
+values('yankee', 1, 70);
+
+-- Insert seats for venue 2
+INSERT INTO seats (seat_type, venue_id)
+VALUES ('Regular', 2);
+
+INSERT INTO seats (seat_type, venue_id)
+VALUES ('VIP', 2);
+
+insert into seats(seat_type,venue_id) values ('VIP',1);
+insert into seats(seat_type,venue_id) values ('VIP',1);
+insert into seats(seat_type,venue_id) values ('VIP',2);
+insert into seats(seat_type,venue_id) values ('VIP',2);
+insert into seats(seat_type,venue_id) values ('VIP',1);
+
+select * from seats;
+
+INSERT INTO event_category (event_category_name)
+VALUES ('Concert');
+INSERT INTO event_category (event_category_name)
+VALUES ('Sports Event');
+select * from event_category;
+
+INSERT INTO performer_type(type_name)
+VALUES('Musician');
+select * from performer_type;
+
+INSERT INTO performers (performer_name, performer_type) VALUES ('The Strokes', 1);
+
+INSERT INTO organizers (organizer_name) VALUES ('Sample Organizer');
+
+INSERT INTO countries (country_name) VALUES ('USA');
+
+INSERT INTO locations (location_name,country_id) VALUES ('new york',1);
+
+INSERT INTO venues (venue_name, venue_capacity, location_id) VALUES ('yankee stadium', 7000, 1);
+
+select * from locations;
+select * from event_category;
+select * from organizers;
+select * from performers;
+select * from venues;
+select * from events;
+
+INSERT INTO events (event_name, venue_id, event_date, start_time, end_time, organizer_id, performer_id, event_category_id, num_of_tickets)
+VALUES ('Random Concert', 1, TO_DATE('2023-10-31', 'YYYY-MM-DD'), TO_TIMESTAMP('15:00:00', 'HH24:MI:SS'), TO_TIMESTAMP('18:00:00', 'HH24:MI:SS'), 1, 1, 1, 7000);
+
+INSERT INTO events (event_name, venue_id, event_date, start_time, end_time, organizer_id, performer_id, event_category_id, num_of_tickets)
+VALUES ('Strokes Concert', 1, TO_DATE('2023-10-31', 'YYYY-MM-DD'), TO_TIMESTAMP('15:00:00', 'HH24:MI:SS'), TO_TIMESTAMP('18:00:00', 'HH24:MI:SS'), 1, 1, 1, 7000);

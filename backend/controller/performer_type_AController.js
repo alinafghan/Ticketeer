@@ -1,11 +1,11 @@
 const {getConnection} = require('../config/connection');
 
 module.exports = {
-    removeAlltransactions: async function (req, res){
+    removeAllperformer_type_A: async function (req, res){
         let connection ;
         try {
             connection = await getConnection();
-            const query = "TRUNCATE TABLE transactions";
+            const query = "TRUNCATE TABLE performer_type_A";
             const options={
                 autoCommit: true, // Commit each insert immediately
             }
@@ -26,25 +26,25 @@ module.exports = {
             }
         }
     },
-    populatetransactions: async function (req, res){
+    populateperformer_type_A: async function (req, res){
 
         let connection ;
         try {
 
             
             connection = await getConnection();
-            const datatransactions = [
-                [1,3,2,5.00,'8:00'],[2,1,1,56.00,'8:00'],[3,2,3,45.45,'8:00'],[4,1,2,99.99,'8:00']
+            const dataperformer_type_A = [
+                [1,"Pakistan"],[2,"Alaska"],[3,"Canada"],[4,"Germany"]
             ];
             
-            for (const transactionsData of datatransactions) {
-                const querytransactions = `INSERT INTO transactions (user_id,ticket_id,event_id,amt_paid,transaction_time) VALUES (:1, :2, :3, :4, :5)`;
-                const bindstransactions = transactionsData; // Bind the transactionsData array directly
-                const optionstransactions = {
+            for (const performer_type_AData of dataperformer_type_A) {
+                const queryperformer_type_A = `INSERT INTO performer_type_A (performer_type_A,type_name) VALUES (:1, :2)`;
+                const bindsperformer_type_A = performer_type_AData; // Bind the performer_type_AData array directly
+                const optionsperformer_type_A = {
                   autoCommit: true, // Commit each insert immediately
                 };
                 // console.log(query , "aaa----------->>>>")
-                await connection.execute(querytransactions,bindstransactions,optionstransactions);
+                await connection.execute(queryperformer_type_A,bindsperformer_type_A,optionsperformer_type_A);
               }
 
               res.status(202).send("Populated");
@@ -70,7 +70,7 @@ module.exports = {
         let connection ;
         try {
             connection = await getConnection();
-            const table = await connection.execute("select * from transactions");
+            const table = await connection.execute("select * from performer_type_A");
             // console.log(table.rows);
             res.status(200).send(table);
           } catch (error) {
@@ -89,12 +89,12 @@ module.exports = {
         // return table;
     },
 
-    gettransactionswithCondition: async function (req, res){
+    getperformer_type_AwithCondition: async function (req, res){
         let connection ;
         try {
             
             connection = await getConnection();
-            const query = `SELECT transactions.*,transactions.user_id, transactions.ticket_id, transactions.event_id, transactions.amt_paid, transactions.transaction_time FROM transactions WHERE ${req.body.condition}`;
+            const query = `SELECT performer_type_A.*,performer_type_A.performer_type_A, performer_type_A.type_name FROM performer_type_A WHERE ${req.body.condition}`;
           
             const table = await connection.execute(query);
             // console.log(table.rows);
@@ -114,12 +114,12 @@ module.exports = {
         } 
     },
 
-    AddNewtransactions: async function (req, res){
+    AddNewperformer_type_A: async function (req, res){
         let connection ;
         try {
             connection = await getConnection();
-            const query = `INSERT INTO transactions (user_id,ticket_id,event_id,amt_paid,transaction_time) VALUES (:1, :2,:3,:4,:5)`;
-            const binds = [req.body.user_id,req.body.ticket_id,req.body.event_id,req.body.amt_paid,req.body.transaction_time];
+            const query = `INSERT INTO performer_type_A (performer_type_A,type_name) VALUES (:1, :2)`;
+            const binds = [req.body.performer_type_A, req.body.type_name];
             const options = {
               autoCommit: true, 
             };
@@ -144,7 +144,7 @@ module.exports = {
         }
     },
 
-    UpdateTransactions: async function (req, res) {
+    Updateperformer_type_A: async function (req, res) {
         let connection;
         try {
           connection = await getConnection();
@@ -154,7 +154,7 @@ module.exports = {
           ];
       
           console.log("binds -> ", binds);
-          const query = `UPDATE transactions SET user_id = :1, ticket_id= :2, event_id =:3, amt_paid =:4, transaction_time =:5 WHERE ${req.body.condition}`;
+          const query = `UPDATE performer_type_A SET performer_type_A = :1, type_name= :2 WHERE ${req.body.condition}`;
           const options = {
             autoCommit: true, // Commit each insert immediately
           }
@@ -177,45 +177,15 @@ module.exports = {
           }
         }
       },
-
-      DeleteTransactionAtTicketID : async function (req, res){
+  
+  
+      Deleteperformer_type_AAtID : async function (req, res){
   
         let connection ;
         try{
           connection = await getConnection();
-          const query = `Delete from transactions WHERE ticket_id = :1`;
-          const binds = [req.body.countries_id];
-          const options = {
-            autoCommit: true, // Commit each insert immediately
-          };
-  
-          await connection.execute(query,binds,options);
-          res.status(202).send("Deleted");
-        }
-        catch(error){
-          console.log("Error executing SQL query:" ,error)
-          res.status(500).send('Internal Server Error');
-        }
-        finally{
-          if(connection){
-            try{
-              await connection.close();
-            }
-            catch(error){
-              console.log("Error closing database connection:", error);
-            }
-          }
-  
-        }
-  
-      },
-      DeleteTransactionAtUserID : async function (req, res){
-  
-        let connection ;
-        try{
-          connection = await getConnection();
-          const query = `Delete from transactions WHERE user_id = :1`;
-          const binds = [req.body.countries_id];
+          const query = `Delete from performer_type_A WHERE performer_type_A = :1`;
+          const binds = [req.body.performer_type_A];
           const options = {
             autoCommit: true, // Commit each insert immediately
           };
@@ -241,13 +211,11 @@ module.exports = {
   
       },
 
-      
-
-      DeleteTransactionsWithCondition : async function (req,res) {
+      Deleteperformer_type_AWithCondition : async function (req,res) {
         let connection;
         try{
           connection = await getConnection();
-          const query = `Delete from transactions WHERE ${req.body.condition}`;
+          const query = `Delete from performer_type_A WHERE ${req.body.condition}`;
           
           await connection.execute(query);
           res.status(202).send("Deleted");
