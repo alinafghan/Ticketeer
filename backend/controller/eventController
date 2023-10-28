@@ -1,30 +1,4 @@
-/*const eventController = (req,res) => {
-  async (req, res) => {
-    try {
-      const listOfEvents = await event.findAll();
-      res.json(listOfEvents);
-    } catch (error) {
-      console.error("Error retrieving events:", error);
-      res.status(500).json({ error: "Internal Server Error" });
-    }
-    finally {
-        if (connection) {
-          try {
-            // Release the connection when done
-            await connection.close();
-          } catch (error) {
-            console.error('Error closing database connection:', error);
-          }
-        }
-    } 
-  },
 
-    return res.status(200).json({message: "fjdsfsk"});
- 
-};
-
-module.exports = {eventController};
-*/
 const {getConnection} = require('../config/connection');
 
 
@@ -59,6 +33,7 @@ module.exports = {
         let connection ;
         try {
 
+<<<<<<< Updated upstream
             // INSERT INTO Orders (person_id, desert_id, order_date, quantity)
             // VALUES (1, 1, '2023/09/15', 2); 
 
@@ -97,11 +72,36 @@ module.exports = {
               } catch (error) {
                 console.error('Error closing database connection:', error);
               }
+=======
+          connection = await getConnection();
+          const dataOrder = [
+              // eventid,eventname,venueid,date,starttime,endtime,organizrid,performerid,eventcategoryid,numoftickets
+             
+              ['Strokes Concert', 1,'2023-10-31', '15:00:00', '18:00:00', 1, 1, 1, 7000]
+
+             /* [1,'Bachelorette Party',2, '01-Oct-2010','9:00','6:00',3,4,1,500], 
+              [2,'Met Gala',2, '01-Oct-2010', '9:00','6:00',3,4,2,500],
+              [3,'Coachella',2, '01-Oct-2010','9:00','6:00',3,4,1,500],
+              [2,'Kashmir Concert',2, '01-Oct-2010', '9:00','6:00',3,2,500],
+              [4,'Eras Tour',2, '01-Oct-2010', '9:00','6:00',3,3,500],
+              [5,'Lollapalooza',2, '01-Oct-2010', '9:00','6:00',3,3,500], */
+          ];
+          
+          for (const EventData of dataOrder) {
+              const queryEvent = `INSERT INTO events (event_id, event_name, venue_id,event_date,start_time,end_date,organizer_id,performer_id,event_category_id,num_of_tickets) VALUES (:1, :2, :3, :4, :5,:6, :7, :8, :9, :10)`;
+              const bindsOrder = EventData; 
+              const optionsOrder = {
+                autoCommit: true, // Commit each insert immediately
+              };
+              // console.log(query , "aaa----------->>>>")
+              await connection.execute(queryEvent,bindsOrder,optionsOrder);
+>>>>>>> Stashed changes
             }
         }
     },
 
-    GetWholeTable: async function  (req, res){
+    /*GetWholeTable: async function  (req, res){
+      
         let connection ;
         try {
             connection = await getConnection();
@@ -122,8 +122,33 @@ module.exports = {
               }
             }
         } 
-        // return table;
-    },
+        // return table; 
+    
+      }, */
+
+      GetWholeTable: async function (req, res) {
+        let connection;
+        try {
+          connection = await getConnection();
+          const result = await connection.execute("SELECT * from events");
+          const data = result.rows; // Get the data from the result
+      
+          res.status(200).send(data); // Send the data as the response
+        } catch (error) {
+          console.error('Error executing SQL query:', error);
+          res.status(500).send('Internal Server Error');
+        } finally {
+          if (connection) {
+            try {
+              // Release the connection when done
+              await connection.close();
+            } catch (error) {
+              console.error('Error closing database connection:', error);
+            }
+          }
+        }
+      },
+      
 
     getEventwithCondition: async function (req, res) {
         let connection;
