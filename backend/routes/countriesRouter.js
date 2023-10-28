@@ -16,7 +16,7 @@ router.put("/Updatecountries",countriesController.Updatecountries);
 
 router.delete("/DeletecountriesAtID",countriesController.DeleteCountriesAtID);
 
-router.delete("/DeletecountriesAtID",countriesController.DeleteCountriesWithCondition);
+router.delete("/DeletecountrieswithCondition",countriesController.DeleteCountriesWithCondition);
 
 
 module.exports = router;
