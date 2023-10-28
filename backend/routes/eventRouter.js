@@ -11,6 +11,7 @@ router.get("/GetWholeTable", eventController.GetWholeTable);
 router.get("/getEventwithCondition", eventController.getEventwithCondition);
 
 router.post("/AddNewEvent",eventController.AddNewEvent);
+
 router.put("/UpdateEvent",eventController.UpdateEvent);
 
 router.delete("/DeleteEventAtID",eventController.DeleteEventAtID);

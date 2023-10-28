@@ -1,4 +1,4 @@
-const {getConnection} = require('../connection');
+const {getConnection} = require('../config/connection');
 
 module.exports = {
     removeAllorganizers: async function (req, res){
@@ -236,8 +236,6 @@ module.exports = {
   
         }
       }
-
-
 
 
 }

@@ -1,4 +1,4 @@
-const {getConnection} = require('../connection');
+const {getConnection} = require('../config/connection');
 
 module.exports = {
     removeAllusers: async function (req, res){
