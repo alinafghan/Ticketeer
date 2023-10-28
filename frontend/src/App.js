@@ -7,7 +7,7 @@ function App() {
   const [listOfEvents, setListofEvents] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/event").then((response) => {
+    axios.get("http://localhost:8000/event").then((response) => {
       setListofEvents(response.data);
     });
   }, []);
