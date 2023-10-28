@@ -11,6 +11,11 @@ function App() {
       setListofEvents(response.data);
     });
   }, []);
+  useEffect(() => {
+    axios.get("http://localhost:8000/eventcategory").then((response) => {
+      setListofEvents(response.data);
+    });
+  }, []);
 
   return 
   <div className="App"> 

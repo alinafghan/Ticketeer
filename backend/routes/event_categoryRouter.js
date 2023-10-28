@@ -1,12 +1,13 @@
 const express = require("express");
+const { getConnection } = require('../config/connection');
 const router = express.Router();
 const event_categoryController = require("../controller/event_categoryController.js");
+
+router.get("/", event_categoryController.GetWholeTable);
 
 //router.delete("/", event_categoryController.removeAllevent_category);
 
 //router.post("/populateevent_categorys", event_categoryController.populateevent_category);
-
-router.get("/GetWholeTable", event_categoryController.GetWholeTable);
 
 //router.get("/getevent_categorywithCondition", event_categoryController.getevent_categorywithCondition);
 
@@ -17,6 +18,5 @@ router.get("/GetWholeTable", event_categoryController.GetWholeTable);
 //router.delete("/Deleteevent_categoryAtID",event_categoryController.Deleteevent_categoryAtID);
 
 //router.delete("/Deleteevent_categoryAtID",event_categoryController.Deleteevent_categoryWithCondition);
-
 
 module.exports = router;

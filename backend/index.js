@@ -22,6 +22,9 @@ app.get("/", (req, res) => {
 const eventRouter = require("./routes/eventRouter");
 app.use("/events", eventRouter);
 
+const event_categoryRouter = require("./routes/event_categoryRouter");
+app.use("/eventcategory", event_categoryRouter);
+
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
