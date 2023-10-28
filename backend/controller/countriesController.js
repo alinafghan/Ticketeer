@@ -1,11 +1,11 @@
 const {getConnection} = require('../connection');
 
 module.exports = {
-    removeAllPerformers: async function (req, res){
+    removeAllCountries: async function (req, res){
         let connection ;
         try {
             connection = await getConnection();
-            const query = "TRUNCATE TABLE Performers";
+            const query = "TRUNCATE TABLE countries";
             const options={
                 autoCommit: true, // Commit each insert immediately
             }
@@ -26,30 +26,25 @@ module.exports = {
             }
         }
     },
-    populatePerformers: async function (req, res){
+    populateCountries: async function (req, res){
 
         let connection ;
         try {
 
             
             connection = await getConnection();
-            const dataPerformers = [
-                [1,'Beyonce','beyonce@gmail.com',3028898756,'beybey2828','Colorado', 1],
-                [2,'TSwizzle', 'taylorswift@gmail.com',3028898756,'password1','Colorado',1],
-                [3,'Jayz','jayzbayz@gmail.com',3028898756,'password1', 'Colorado',1],
-                [2,'Spongebob Squarepants','squidwardfan@gmail.com',3028898756,'password1','Colorado', 3],
-                [4,'the Strokes','roomonfire@hotmail.com',3028898756, 'password1','Colorado',1],
-                [5,'Nasty Nas','theking@gmail.com',3028898756,'password1','Colorado', 1],
+            const datacountries = [
+                [1,"Pakistan"],[2,"Alaska"],[3,"Canada"],[4,"Germany"]
             ];
             
-            for (const PerformersData of dataPerformers) {
-                const queryPerformers = `INSERT INTO Performers (performer_id, performer_name, email, phone_number,password, city_state_country, performer_type) VALUES (:1, :2, :3)`;
-                const bindsPerformers = PerformersData; // Bind the PerformersData array directly
-                const optionsPerformers = {
+            for (const countriesData of datacountries) {
+                const querycountries = `INSERT INTO countries (country_id, country_name) VALUES (:1, :2)`;
+                const bindscountries = countriesData; // Bind the countriesData array directly
+                const optionscountries = {
                   autoCommit: true, // Commit each insert immediately
                 };
                 // console.log(query , "aaa----------->>>>")
-                await connection.execute(queryPerformers,bindsPerformers,optionsPerformers);
+                await connection.execute(querycountries,bindscountries,optionscountries);
               }
 
               res.status(202).send("Populated");
@@ -75,7 +70,7 @@ module.exports = {
         let connection ;
         try {
             connection = await getConnection();
-            const table = await connection.execute("select * from Performers");
+            const table = await connection.execute("select * from countries");
             // console.log(table.rows);
             res.status(200).send(table);
           } catch (error) {
@@ -94,12 +89,12 @@ module.exports = {
         // return table;
     },
 
-    getPerformerswithCondition: async function (req, res){
+    getCountrieswithCondition: async function (req, res){
         let connection ;
         try {
             
             connection = await getConnection();
-            const query = `SELECT Performers.*,Performers.performer_id, Performers.performer_name,Performers.email, Performers.phone_number,Performers.password, Performers.city_state_country, Performers.performer_type FROM Performers WHERE ${req.body.condition}`;
+            const query = `SELECT countries.*,countries.country_id, countries.country_name FROM countries WHERE ${req.body.condition}`;
           
             const table = await connection.execute(query);
             // console.log(table.rows);
@@ -119,12 +114,12 @@ module.exports = {
         } 
     },
 
-    AddNewPerformer: async function (req, res){
+    AddNewCountries: async function (req, res){
         let connection ;
         try {
             connection = await getConnection();
-            const query = `INSERT INTO Performers (performer_id, performer_name,email, phone_number,password, city_state_country, performer_type) VALUES (:1, :2, :3, :4)`;
-            const binds = [req.body.performer_id, req.body.performer_name,req.body.email, req.body.phone_number,req.body.password, req.body.city_state_country, req.body.performer_type];
+            const query = `INSERT INTO countries (country_id, country_name) VALUES (:1, :2)`;
+            const binds = [req.body.country_id, req.body.country_name];
             const options = {
               autoCommit: true, 
             };
@@ -149,22 +144,17 @@ module.exports = {
         }
     },
 
-    UpdatePerformers: async function (req, res) {
+    Updatecountries: async function (req, res) {
         let connection;
         try {
           connection = await getConnection();
           const binds = [
-            req.body.performer_id,
-            req.body.performer_name,
-            req.body.email, 
-            req.body.phone_number,
-            req.body.password,
-             req.body.city_state_country,
-            req.body.performer_type,
+            req.body.country_id,
+            req.body.country_name,
           ];
       
           console.log("binds -> ", binds);
-          const query = `UPDATE Performers SET performer_id = :1, performer_name= :2,email =:3, phone_number =: 4,password =: 5, city_state_country =:6, performer_type = :7 WHERE ${req.body.condition}`;
+          const query = `UPDATE countries SET country_id = :1, country_name= :2 WHERE ${req.body.condition}`;
           const options = {
             autoCommit: true, // Commit each insert immediately
           }
@@ -189,13 +179,13 @@ module.exports = {
       },
   
   
-      DeletePerformerAtID : async function (req, res){
+      DeleteCountriesAtID : async function (req, res){
   
         let connection ;
         try{
           connection = await getConnection();
-          const query = `Delete from Performers WHERE performer_id = :1`;
-          const binds = [req.body.performer_id];
+          const query = `Delete from countries WHERE country_id = :1`;
+          const binds = [req.body.countries_id];
           const options = {
             autoCommit: true, // Commit each insert immediately
           };
@@ -221,25 +211,13 @@ module.exports = {
   
       },
 
-      DeletePerformerWithCondition : async function (req,res) {
+      DeleteCountriesWithCondition : async function (req,res) {
         let connection;
         try{
           connection = await getConnection();
-          const query = `Delete from Performers WHERE ${req.body.condition}`;
-          const binds = [
-            req.body.performer_id,
-            req.body.performer_name,
-            req.body.email,
-             req.body.phone_number,
-             req.body.password, 
-             req.body.city_state_country,
-            req.body.performer_type,
-          ];
-          const options = {
-            autoCommit: true, // Commit each insert immediately
-          };
-  
-          await connection.execute(query,binds,options);
+          const query = `Delete from countries WHERE ${req.body.condition}`;
+          
+          await connection.execute(query);
           res.status(202).send("Deleted");
         }
 
