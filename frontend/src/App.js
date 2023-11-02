@@ -17,6 +17,63 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    axios.get("http://localhost:8000/countries").then((response) => {
+      setListofEvents(response.data);
+    });
+  }, []);
+  useEffect(() => {
+    axios.get("http://localhost:8000/locations").then((response) => {
+      setListofEvents(response.data);
+    });
+  }, []);
+  useEffect(() => {
+    axios.get("http://localhost:8000/organizers").then((response) => {
+      setListofEvents(response.data);
+    });
+  }, []);
+  useEffect(() => {
+    axios.get("http://localhost:8000/performer_type_ARouter").then((response) => {
+      setListofEvents(response.data);
+    });
+  }, []);
+  useEffect(() => {
+    axios.get("http://localhost:8000/performer_type_BRouter").then((response) => {
+      setListofEvents(response.data);
+    });
+  }, []);
+  useEffect(() => {
+    axios.get("http://localhost:8000/performerRouter").then((response) => {
+      setListofEvents(response.data);
+    });
+  }, []);
+  useEffect(() => {
+    axios.get("http://localhost:8000/seats").then((response) => {
+      setListofEvents(response.data);
+    });
+  }, []);
+  useEffect(() => {
+    axios.get("http://localhost:8000/tickets").then((response) => {
+      setListofEvents(response.data);
+    });
+  }, []);
+  useEffect(() => {
+    axios.get("http://localhost:8000/transactions").then((response) => {
+      setListofEvents(response.data);
+    });
+  }, []);
+  useEffect(() => {
+    axios.get("http://localhost:8000/users").then((response) => {
+      setListofEvents(response.data);
+    });
+  }, []);
+  useEffect(() => {
+    axios.get("http://localhost:8000/venues").then((response) => {
+      setListofEvents(response.data);
+    });
+  }, []);
+ 
+
   return 
   <div className="App"> 
   {listOfEvents.map((value, key) => {

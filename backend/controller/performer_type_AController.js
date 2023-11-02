@@ -1,6 +1,26 @@
 const {getConnection} = require('../config/connection');
 
 module.exports = {
+  GetWholeTable: async function (req, res) {
+    let connection;
+    try {
+        connection = await getConnection();
+        const result = await connection.execute("SELECT * from event_category");
+        const data = result.rows;
+        res.status(200).json(data);
+    } catch (error) {
+        console.error('Error executing SQL query:', error);
+        res.status(500).send('Internal Server Error');
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (error) {
+                console.error('Error closing database connection:', error);
+            }
+        }
+    }
+},
     removeAllperformer_type_A: async function (req, res){
         let connection ;
         try {
@@ -66,29 +86,7 @@ module.exports = {
         }
     },
 
-    GetWholeTable: async function  (req, res){
-        let connection ;
-        try {
-            connection = await getConnection();
-            const table = await connection.execute("select * from performer_type_A");
-            // console.log(table.rows);
-            res.status(200).send(table);
-          } catch (error) {
-            console.error('Error executing SQL query:', error);
-            res.status(500).send('Internal Server Error');
-          } finally {
-            if (connection) {
-              try {
-                // Release the connection when done
-                await connection.close();
-              } catch (error) {
-                console.error('Error closing database connection:', error);
-              }
-            }
-        } 
-        // return table;
-    },
-
+  
     getperformer_type_AwithCondition: async function (req, res){
         let connection ;
         try {

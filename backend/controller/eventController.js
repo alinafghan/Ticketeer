@@ -2,26 +2,27 @@ const { getConnection } = require('../config/connection');
 const ticketController = require('./ticketController');
 
 module.exports = {
-    GetWholeTable: async function (req, res) {
-        let connection;
-        try {
-            connection = await getConnection();
-            const result = await connection.execute("SELECT * from events");
-            const data = result.rows;
-            res.status(200).json(data);
-        } catch (error) {
-            console.error('Error executing SQL query:', error);
-            res.status(500).send('Internal Server Error');
-        } finally {
-            if (connection) {
-                try {
-                    await connection.close();
-                } catch (error) {
-                    console.error('Error closing database connection:', error);
-                }
+  GetWholeTable: async function (req, res) {
+    let connection;
+    try {
+        connection = await getConnection();
+        const result = await connection.execute("SELECT * from event_category");
+        const data = result.rows;
+       
+        res.status(200).json(data);
+    } catch (error) {
+        console.error('Error executing SQL query:', error);
+        res.status(500).send('Internal Server Error');
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (error) {
+                console.error('Error closing database connection:', error);
             }
         }
-    },
+    }
+},
     removeAllEvents: async function (req, res){
       let connection ;
       try {
