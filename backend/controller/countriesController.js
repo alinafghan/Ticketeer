@@ -70,7 +70,7 @@ module.exports = {
       let connection;
       try {
           connection = await getConnection();
-          const result = await connection.execute("SELECT * from event_category");
+          const result = await connection.execute("SELECT * from countries");
           const data = result.rows;
           res.status(200).json(data);
       } catch (error) {

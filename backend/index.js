@@ -16,9 +16,6 @@ app.get("/", (req, res) => {
 });
 
 
-  
-
-// Import and use the event router
 const eventRouter = require("./routes/eventRouter");
 app.use("/events", eventRouter);
 
@@ -60,9 +57,6 @@ app.use('/users', userRouter);
 
 const venueRouter = require('./routes/venueRouter');
 app.use('/venues', venueRouter);
-
-
-
 
 
 app.listen(port, () => {
