@@ -19,21 +19,11 @@ app.get("/", (req, res) => {
 
 
 const eventRouter = require("./routes/eventRouter");
-/*const userRouter = require('./router/desertRouter.js');
-const venueRouter = require('./router/personRouter.js');
-const ticketRouter = require('./router/orderRouter.js');
-const transactionRouter = require('./router/tableCreationRouter.js');*/
-const event_categoryRouter = require("./routes/event_categoryRouter");
-
-
-
 app.use("/event", eventRouter);
+
+const event_categoryRouter = require("./routes/event_categoryRouter");
 app.use("/eventcategory", event_categoryRouter);
-/*app.use("/user", userRouter);
-app.use("/venue", venueRouter);
-app.use("/ticket", ticketRouter);
-app.use("/transaction", transactionRouter);
-*/
+
 
 const countriesRouter = require('./routes/countriesRouter');
 app.use('/countries', countriesRouter);
