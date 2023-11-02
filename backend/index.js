@@ -1,31 +1,42 @@
-const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+
+//routers
+
+const express = require('express');
+
 const app = express();
 const port = 8000;
 
-// Middleware setup
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cors());
 
-// Define the root route
 app.get("/", (req, res) => {
-    console.log("DB APP WORKING!");
-    res.send("DB APP WORKING!");
+    console.log("MESSAGE PRINTED");
+    return res.send("DB APP WORKING!");
 });
 
 
-  
-
-// Import and use the event router
 const eventRouter = require("./routes/eventRouter");
-app.use("/events", eventRouter);
-
+/*const userRouter = require('./router/desertRouter.js');
+const venueRouter = require('./router/personRouter.js');
+const ticketRouter = require('./router/orderRouter.js');
+const transactionRouter = require('./router/tableCreationRouter.js');*/
 const event_categoryRouter = require("./routes/event_categoryRouter");
+
+
+
+app.use("/event", eventRouter);
 app.use("/eventcategory", event_categoryRouter);
+/*app.use("/user", userRouter);
+app.use("/venue", venueRouter);
+app.use("/ticket", ticketRouter);
+app.use("/transaction", transactionRouter);
+*/
 
 
-app.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
+app.listen(8000, () => {
+    console.log("Server listening on port 8000");
 });
+

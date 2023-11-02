@@ -1,22 +1,15 @@
-const express = require("express");
-const { getConnection } = require('../config/connection');
+const express = require('express');
+
+const eventController = require("../controller/eventController");
+ 
 const router = express.Router();
-const eventController = require("../controller/eventController.js");
 
-router.get("/", eventController.GetWholeTable);
-
-//router.delete("/", event_categoryController.removeAllevent_category);
-
-//router.post("/populateevent_categorys", event_categoryController.populateevent_category);
-
-//router.get("/getevent_categorywithCondition", event_categoryController.getevent_categorywithCondition);
-
-//router.post("/AddNewevent_category",event_categoryController.AddNewevent_category);
-
-//router.put("/Updateevent_category",event_categoryController.Updateevent_category);
-
-//router.delete("/Deleteevent_categoryAtID",event_categoryController.Deleteevent_categoryAtID);
-
-//router.delete("/Deleteevent_categoryAtID",event_categoryController.Deleteevent_categoryWithCondition);
+router.get("/", eventController.GetWholeTable); // Use lowercase 'e'
+//router.post("/populate", eventController.populateEvents); // Use lowercase 'e'
+//router.delete("/deleteAll", eventController.removeAllEvents); // Use lowercase 'e'
+router.get("/getEventwithConditions", eventController.getEventwithCondition); // Use lowercase 'e'
+//router.post("/addEvent", eventController.AddNewEvent); // Use lowercase 'e'
+router.put('/updateEvent', eventController.UpdateEvent); // Use lowercase 'e'
+//router.delete('/deleteEvent', eventController.DeleteEventAtID); // Use lowercase 'e'
 
 module.exports = router;
