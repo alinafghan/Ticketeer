@@ -69,8 +69,6 @@ insert into ticket_type (ticket_type_name) values ('cool');
 
 create sequence ticket_id_seq;
 
-
-
 create table tickets(
 ticket_id int,
 event_id int NOT NULL,
@@ -115,9 +113,6 @@ END;
 
 
 
-
-
-
 INSERT INTO event_category (event_category_name) VALUES ('Concert');
 INSERT INTO event_category (event_category_name) VALUES ('Sports Event');
 select * from event_category;
@@ -152,7 +147,7 @@ VALUES ('Random Concert', 1, TO_DATE('2023-10-31', 'YYYY-MM-DD'), TO_TIMESTAMP('
 INSERT INTO events (event_name, venue_id, event_date, start_time, end_time, organizer_id, performer_id, event_category_id, num_of_tickets)
 VALUES ('Strokes Concert', 1, TO_DATE('2023-10-31', 'YYYY-MM-DD'), TO_TIMESTAMP('15:00:00', 'HH24:MI:SS'), TO_TIMESTAMP('18:00:00', 'HH24:MI:SS'), 1, 1, 1, 7000);
 
-
+/*
 insert into tickets (event_id,ticket_type,seat_num) values (1,1,1);
 insert into tickets (event_id,ticket_type,seat_num) values (1,1,2);
 insert into tickets (event_id,ticket_type,seat_num) values (1,1,3);
@@ -162,7 +157,7 @@ insert into tickets (event_id,ticket_type,seat_num) values (2,1,2);
 insert into tickets (event_id,ticket_type,seat_num) values (2,1,3);
 insert into tickets (event_id,ticket_type,seat_num) values (2,1,4);
 insert into tickets (event_id,ticket_type,seat_num) values (2,1,4);
-select * from tickets;
+select * from tickets; */
 
 select * from locations;
 select * from event_category;

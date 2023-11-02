@@ -71,28 +71,26 @@ module.exports = {
         }
     },
 
-    GetWholeTable: async function  (req, res){
-        let connection ;
-        try {
-            connection = await getConnection();
-            const table = await connection.execute("select * from Performers");
-            // console.log(table.rows);
-            res.status(200).send(table);
-          } catch (error) {
-            console.error('Error executing SQL query:', error);
-            res.status(500).send('Internal Server Error');
-          } finally {
-            if (connection) {
+    GetWholeTable: async function (req, res) {
+      let connection;
+      try {
+          connection = await getConnection();
+          const result = await connection.execute("SELECT * from event_category");
+          const data = result.rows;
+          res.status(200).json(data);
+      } catch (error) {
+          console.error('Error executing SQL query:', error);
+          res.status(500).send('Internal Server Error');
+      } finally {
+          if (connection) {
               try {
-                // Release the connection when done
-                await connection.close();
+                  await connection.close();
               } catch (error) {
-                console.error('Error closing database connection:', error);
+                  console.error('Error closing database connection:', error);
               }
-            }
-        } 
-        // return table;
-    },
+          }
+      }
+  },
 
     getPerformerswithCondition: async function (req, res){
         let connection ;
