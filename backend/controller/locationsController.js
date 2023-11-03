@@ -117,8 +117,8 @@ module.exports = {
         let connection ;
         try {
             connection = await getConnection();
-            const query = `INSERT INTO locations (location_id, location_name, country_id) VALUES (:1, :2, :3)`;
-            const binds = [req.body.location_id, req.body.location_name,req.body.country_id];
+            const query = `INSERT INTO locations (location_name, country_id) VALUES (:1, :2)`;
+            const binds = [req.body.location_name,req.body.country_id];
             const options = {
               autoCommit: true, 
             };

@@ -11,7 +11,7 @@ router.get("/", event_categoryController.GetWholeTable);
 
 //router.get("/getevent_categorywithCondition", event_categoryController.getevent_categorywithCondition);
 
-//router.post("/AddNewevent_category",event_categoryController.AddNewevent_category);
+router.post("/AddNewevent_category",event_categoryController.AddNewevent_category);
 
 //router.put("/Updateevent_category",event_categoryController.Updateevent_category);
 

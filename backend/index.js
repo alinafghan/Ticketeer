@@ -1,20 +1,24 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+//const cors = require('cors');
 const app = express();
 const port = 8000;
 
 // Middleware setup
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(cors());
+app.use(
+    bodyParser.urlencoded({
+      extended: true,
+    }),
+  );
+//app.use(cors());
 
 // Define the root route
 app.get("/", (req, res) => {
     console.log("DB APP WORKING!");
     res.send("DB APP WORKING!");
 });
-
 
 const eventRouter = require("./routes/eventRouter");
 app.use("/events", eventRouter);

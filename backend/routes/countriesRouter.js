@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const countriesController = require("../controller/countriesController.js");
+const bodyParser = require('body-parser');
 
 // router.delete("/", countriesController.removeAllCountries);
 
@@ -10,7 +11,7 @@ router.get("/GetWholeTable", countriesController.GetWholeTable);
 
 // router.get("/getcountrieswithCondition", countriesController.getCountrieswithCondition);
 
-// router.post("/AddNewcountries",countriesController.AddNewCountries);
+router.post("/AddNewcountry",countriesController.AddNewCountry);
 
 // router.put("/Updatecountries",countriesController.Updatecountries);
 

@@ -112,12 +112,12 @@ module.exports = {
         } 
     },
 
-    AddNewCountries: async function (req, res){
+    AddNewCountry: async function (req, res){
         let connection ;
         try {
             connection = await getConnection();
-            const query = `INSERT INTO countries (country_id, country_name) VALUES (:1, :2)`;
-            const binds = [req.body.country_id, req.body.country_name];
+            const query = `INSERT INTO countries ( country_name) VALUES (:1)`;
+            const binds = [req.body.country_name];
             const options = {
               autoCommit: true, 
             };
@@ -140,7 +140,10 @@ module.exports = {
               }
             }
         }
-    },
+    }, 
+    
+  
+    
 
     Updatecountries: async function (req, res) {
         let connection;

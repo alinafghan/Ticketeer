@@ -119,8 +119,8 @@ module.exports = {
         let connection ;
         try {
             connection = await getConnection();
-            const query = `INSERT INTO event_category (event_category_id, event_category_name) VALUES (:1, :2)`;
-            const binds = [req.body.event_category_id, req.body.event_category_name];
+            const query = `INSERT INTO event_category (event_category_name) VALUES (:1)`;
+            const binds = [req.body.event_category_name];
             const options = {
               autoCommit: true, 
             };

@@ -10,7 +10,7 @@ router.get("/GetWholeTable", locationsController.GetWholeTable);
 
 router.get("/getlocationswithCondition", locationsController.getlocationswithCondition);
 
-router.post("/AddNewlocations",locationsController.AddNewlocations);
+router.post("/AddNewlocation",locationsController.AddNewlocations);
 
 router.put("/Updatelocations",locationsController.Updatelocations);
 
