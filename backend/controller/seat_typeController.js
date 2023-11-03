@@ -34,11 +34,11 @@ module.exports = {
             
             connection = await getConnection();
             const dataseat_type = [
-                [1,"Pit"],[2,"General"],[3,"Balcony"]
+                ["Pit"],["General"],["Balcony"]
             ];
             
             for (const seat_typeData of dataseat_type) {
-                const queryseat_type = `INSERT INTO seat_type ( seat_type_name) VALUES (:1)`;
+                const queryseat_type = `INSERT INTO seat_type (seat_type_name) VALUES (:1)`;
                 const bindsseat_type = seat_typeData; // Bind the seat_typeData array directly
                 const optionsseat_type = {
                   autoCommit: true, // Commit each insert immediately
@@ -116,7 +116,7 @@ module.exports = {
         let connection ;
         try {
             connection = await getConnection();
-            const query = `INSERT INTO seat_type ( seat_type_name) VALUES (:1)`;
+            const query = `INSERT INTO seat_type (seat_type_name) VALUES (:1)`;
             const binds = [req.body.seat_type_name];
             const options = {
               autoCommit: true, 

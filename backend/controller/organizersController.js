@@ -34,11 +34,11 @@ module.exports = {
             
             connection = await getConnection();
             const dataorganizers = [
-                [1,"Alina"],[2,"Hiba"],[3,"Maaz"],[4,"Bilal"]
+                ["Alina"],["Hiba"],["Maaz"],["Bilal"]
             ];
             
             for (const organizersData of dataorganizers) {
-                const queryorganizers = `INSERT INTO organizers (organizer_id, organizer_name) VALUES (:1, :2)`;
+                const queryorganizers = `INSERT INTO organizers ( organizer_name) VALUES (:1)`;
                 const bindsorganizers = organizersData; // Bind the organizersData array directly
                 const optionsorganizers = {
                   autoCommit: true, // Commit each insert immediately
@@ -116,7 +116,7 @@ module.exports = {
         let connection ;
         try {
             connection = await getConnection();
-            const query = `INSERT INTO organizers ( organizer_name) VALUES ( :2)`;
+            const query = `INSERT INTO organizers (organizer_name) VALUES ( :2)`;
             const binds = [ req.body.organizer_name];
             const options = {
               autoCommit: true, 

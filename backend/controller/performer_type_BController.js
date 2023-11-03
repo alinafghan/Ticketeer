@@ -54,11 +54,11 @@ module.exports = {
             
             connection = await getConnection();
             const dataperformer_type_B = [
-                [1,"Pakistan"],[2,"Alaska"],[3,"Canada"],[4,"Germany"]
+                ["Sports Team"]
             ];
             
             for (const performer_type_BData of dataperformer_type_B) {
-                const queryperformer_type_B = `INSERT INTO performer_type_B (performer_type_B,type_name) VALUES (:1, :2)`;
+                const queryperformer_type_B = `INSERT INTO performer_type_B (performer_type_B_name) VALUES (:1)`;
                 const bindsperformer_type_B = performer_type_BData; // Bind the performer_type_BData array directly
                 const optionsperformer_type_B = {
                   autoCommit: true, // Commit each insert immediately
@@ -93,7 +93,7 @@ module.exports = {
         try {
             
             connection = await getConnection();
-            const query = `SELECT performer_type_B.*,performer_type_B.performer_type_B, performer_type_B.type_name FROM performer_type_B WHERE ${req.body.condition}`;
+            const query = `SELECT performer_type_B.*,performer_type_B.performer_type_B_id, performer_type_B.performer_type_B_name FROM performer_type_B WHERE ${req.body.condition}`;
           
             const table = await connection.execute(query);
             // console.log(table.rows);
@@ -117,7 +117,7 @@ module.exports = {
         let connection ;
         try {
             connection = await getConnection();
-            const query = `INSERT INTO performer_type_B (performer_type_B,type_name) VALUES (:1, :2)`;
+            const query = `INSERT INTO performer_type_B (performer_type_B_name) VALUES (:1)`;
             const binds = [req.body.performer_type_B, req.body.type_name];
             const options = {
               autoCommit: true, 
@@ -153,7 +153,7 @@ module.exports = {
           ];
       
           console.log("binds -> ", binds);
-          const query = `UPDATE performer_type_B SET performer_type_B = :1, type_name= :2 WHERE ${req.body.condition}`;
+          const query = `UPDATE performer_type_B SET performer_type_B_id = :1, performer_type_B_name= :2 WHERE ${req.body.condition}`;
           const options = {
             autoCommit: true, // Commit each insert immediately
           }

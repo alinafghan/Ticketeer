@@ -54,11 +54,11 @@ module.exports = {
             
             connection = await getConnection();
             const datalocations = [
-                [1,"Khi", 1],[2,"Edmonton", 3],[3,"Toronto",3],[4,"Berlin", 4]
+                ["Khi", 1],["Edmonton", 3],["Toronto",3],["Berlin", 4]
             ];
             
             for (const locationsData of datalocations) {
-                const querylocations = `INSERT INTO locations (location_id, location_name, country_id) VALUES (:1, :2, :3)`;
+                const querylocations = `INSERT INTO locations (location_name, country_id) VALUES (:1, :2, :3)`;
                 const bindslocations = locationsData; // Bind the locationsData array directly
                 const optionslocations = {
                   autoCommit: true, // Commit each insert immediately
@@ -117,8 +117,8 @@ module.exports = {
         let connection ;
         try {
             connection = await getConnection();
-            const query = `INSERT INTO locations (location_id, location_name, country_id) VALUES (:1, :2, :3)`;
-            const binds = [req.body.location_id, req.body.location_name,req.body.country_id];
+            const query = `INSERT INTO locations (location_name, country_id) VALUES (:1, :2)`;
+            const binds = [ req.body.location_name,req.body.country_id];
             const options = {
               autoCommit: true, 
             };

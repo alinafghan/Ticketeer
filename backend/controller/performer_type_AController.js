@@ -54,11 +54,11 @@ module.exports = {
             
             connection = await getConnection();
             const dataperformer_type_A = [
-                [1,"Pakistan"],[2,"Alaska"],[3,"Canada"],[4,"Germany"]
+                ["Musician"],["Comedian"],["Influencer"]
             ];
             
             for (const performer_type_AData of dataperformer_type_A) {
-                const queryperformer_type_A = `INSERT INTO performer_type_A (performer_type_A,type_name) VALUES (:1, :2)`;
+                const queryperformer_type_A = `INSERT INTO performer_type_A (performer_type_A_name) VALUES (:1)`;
                 const bindsperformer_type_A = performer_type_AData; // Bind the performer_type_AData array directly
                 const optionsperformer_type_A = {
                   autoCommit: true, // Commit each insert immediately
@@ -92,7 +92,7 @@ module.exports = {
         try {
             
             connection = await getConnection();
-            const query = `SELECT performer_type_A.*,performer_type_A.performer_type_A, performer_type_A.type_name FROM performer_type_A WHERE ${req.body.condition}`;
+            const query = `SELECT performer_type_A.*,performer_type_A.performer_type_A_id, performer_type_A.performer_type_A_name FROM performer_type_A WHERE ${req.body.condition}`;
           
             const table = await connection.execute(query);
             // console.log(table.rows);
@@ -116,7 +116,7 @@ module.exports = {
         let connection ;
         try {
             connection = await getConnection();
-            const query = `INSERT INTO performer_type_A (performer_type_A,type_name) VALUES (:1, :2)`;
+            const query = `INSERT INTO performer_type_A (performer_type_A_name) VALUES (:1)`;
             const binds = [req.body.performer_type_A, req.body.type_name];
             const options = {
               autoCommit: true, 

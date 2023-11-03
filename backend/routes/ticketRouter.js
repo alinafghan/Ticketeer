@@ -16,7 +16,5 @@ router.put("/Updateticket",ticketController.UpdateTickets);
 router.delete("/DeleteticketAtID",ticketController.DeleteTicketsAtID);
 router.delete("/DeleteticketWithCondition", ticketController.DeleteTicketsWithCondition);
 
-router.post("/addTicksForEvent", ticketController.AddTicketsForEvent);
-
 
 module.exports = router;

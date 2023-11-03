@@ -2,6 +2,11 @@ const {getConnection} = require('../config/connection');
 
 // Path: Tickets/....
 
+// event_id int NOT NULL,
+// ticket_type int NOT NULL,
+// seat_num int NOT NULL,
+// venue_id int NOT NULL,
+// booked char(1),
 module.exports = {
     removeAllTickets: async function (req, res){
         let connection ;
@@ -35,15 +40,15 @@ module.exports = {
             connection = await getConnection();
 
             const dataTickets = [
-              [1,1,1],
-              [2,2,2],
-              [3,3,3],
-              [4,4,4],
+              [1,1,1,1, 'n'],
+              [2,2,2,1,'n'],
+              [3,3,3,1,'n'],
+              [4,4,4,1,'n'],
               
             ];
             
             for (const TicketsData of dataTickets) {
-                const queryTickets = `INSERT INTO Tickets (event_id, ticket_type,seat_num) VALUES (:1, :2, :3)`;
+                const queryTickets = `INSERT INTO Tickets (event_id, ticket_type,seat_num, venue_id, booked) VALUES (:1, :2, :3, :4, :5)`;
                 const bindsTickets = TicketsData; // Bind the TicketsData array directly, ticket_id not req bc autoincrement
                 const optionsTickets = {
                   autoCommit: true, // Commit each insert immediately
@@ -121,8 +126,8 @@ module.exports = {
         let connection ;
         try {
             connection = await getConnection();
-            const query = `INSERT INTO Tickets ( event_id, ticket_type,seat_num, booked) VALUES (:1, :2, :3, '0')`;
-            const binds = [req.body.event_id, req.body.ticket_type, req.body.seat_num];
+            const query = `INSERT INTO Tickets (event_id, ticket_type,seat_num, venue_id,booked) VALUES (:1, :2, :3,:4, 'n')`;
+            const binds = [req.body.event_id, req.body.ticket_type, req.body.seat_num,req.body.venue_id];
             const options = {
               autoCommit: true, // Commit each insert immediately
             };
@@ -209,39 +214,6 @@ module.exports = {
   
         }
   
-      },
-
-
-      AddTicketsForEvent: async function (req, res, count) {
-        let connection;
-        try {
-          connection = await getConnection();
-          const binds = [req.body.event_id, req.body.ticket_type, req.body.seat_num];
-      
-          console.log("binds -> ", binds);
-          const options = {
-            autoCommit: true, 
-          }
-
-          for(let i = 0;i < (count+1);i++){
-          const query = `INSERT INTO Tickets (event_id, ticket_type,seat_num) VALUES (:1, :2, :3)`;
-          const respnse = await connection.execute(query, binds, options);
-           }  
-      
-          res.status(202).send("Tickets created.");
-        } catch (error) {
-          console.error("Error executing SQL query:", error);
-          res.status(500).send('Internal Server Error');
-        } finally {
-          if (connection) {
-            try {
-              // Release the connection when done
-              await connection.close();
-            } catch (error) {
-              console.error('Error closing database connection:', error);
-            }
-          }
-        }
       },
 
       DeleteTicketsWithCondition : async function (req,res) {

@@ -34,16 +34,16 @@ module.exports = {
             
             connection = await getConnection();
             const dataPerformers = [
-                [1,'Beyonce','beyonce@gmail.com',3028898756,'beybey2828','Colorado', 1],
-                [2,'TSwizzle', 'taylorswift@gmail.com',3028898756,'password1','Colorado',1],
-                [3,'Jayz','jayzbayz@gmail.com',3028898756,'password1', 'Colorado',1],
-                [2,'Spongebob Squarepants','squidwardfan@gmail.com',3028898756,'password1','Colorado', 3],
-                [4,'the Strokes','roomonfire@hotmail.com',3028898756, 'password1','Colorado',1],
-                [5,'Nasty Nas','theking@gmail.com',3028898756,'password1','Colorado', 1],
+                ['Beyonce','beyonce@gmail.com',3028898756,'beybey2828','Colorado', 1],
+                ['TSwizzle', 'taylorswift@gmail.com',3028898756,'password1','Colorado',1],
+                ['Jayz','jayzbayz@gmail.com',3028898756,'password1', 'Colorado',1],
+                ['Spongebob Squarepants','squidwardfan@gmail.com',3028898756,'password1','Colorado', 3],
+                ['the Strokes','roomonfire@hotmail.com',3028898756, 'password1','Colorado',1],
+                ['Nasty Nas','theking@gmail.com',3028898756,'password1','Colorado', 1],
             ];
             
             for (const PerformersData of dataPerformers) {
-                const queryPerformers = `INSERT INTO Performers (performer_id, performer_name, email, phone_number,password, city_state_country, performer_type) VALUES (:1, :2, :3)`;
+                const queryPerformers = `INSERT INTO Performers ( performer_name, email, phone_number,password, city_state_country, performer_type) VALUES (:1, :2, :3, :4, :5, :6)`;
                 const bindsPerformers = PerformersData; // Bind the PerformersData array directly
                 const optionsPerformers = {
                   autoCommit: true, // Commit each insert immediately
@@ -121,8 +121,8 @@ module.exports = {
         let connection ;
         try {
             connection = await getConnection();
-            const query = `INSERT INTO Performers (performer_id, performer_name,email, phone_number,password, city_state_country, performer_type) VALUES (:1, :2, :3, :4)`;
-            const binds = [req.body.performer_id, req.body.performer_name,req.body.email, req.body.phone_number,req.body.password, req.body.city_state_country, req.body.performer_type];
+            const query = `INSERT INTO Performers (performer_name,email, phone_number,password, city_state_country, performer_type) VALUES (:1, :2, :3, :4, :5, :6)`;
+            const binds = [req.body.performer_name,req.body.email, req.body.phone_number,req.body.password, req.body.city_state_country, req.body.performer_type];
             const options = {
               autoCommit: true, 
             };
