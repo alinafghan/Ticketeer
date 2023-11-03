@@ -116,8 +116,8 @@ module.exports = {
         let connection ;
         try {
             connection = await getConnection();
-            const query = `INSERT INTO organizers (organizer_id, organizer_name) VALUES (:1, :2)`;
-            const binds = [req.body.organizer_id, req.body.organizer_name,req.body.country_id];
+            const query = `INSERT INTO organizers ( organizer_name) VALUES ( :2)`;
+            const binds = [ req.body.organizer_name];
             const options = {
               autoCommit: true, 
             };

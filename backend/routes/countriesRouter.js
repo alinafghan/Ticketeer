@@ -4,7 +4,7 @@ const countriesController = require("../controller/countriesController.js");
 
 // router.delete("/", countriesController.removeAllCountries);
 
-// router.post("/populatecountriess", countriesController.populateCountries);
+router.post("/populatecountries", countriesController.populateCountries);
 
 router.get("/GetWholeTable", countriesController.GetWholeTable);
 

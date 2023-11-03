@@ -57,11 +57,11 @@ module.exports = {
             
             connection = await getConnection();
             const dataevent_category = [
-                [1,"Sports Event"],[2,"Musical Event"],[3,"Theatre Event"],[4,"Comedy Event"]
+                ["Sports Event"],["Musical Event"],["Theatre Event"],["Comedy Event"]
             ];
             
             for (const event_categoryData of dataevent_category) {
-                const queryevent_category = `INSERT INTO event_category (event_category_id, event_category_name) VALUES (:1, :2)`;
+                const queryevent_category = `INSERT INTO event_category ( event_category_name) VALUES (:1)`;
                 const bindsevent_category = event_categoryData; // Bind the event_categoryData array directly
                 const optionsevent_category = {
                   autoCommit: true, // Commit each insert immediately
@@ -119,8 +119,8 @@ module.exports = {
         let connection ;
         try {
             connection = await getConnection();
-            const query = `INSERT INTO event_category (event_category_id, event_category_name) VALUES (:1, :2)`;
-            const binds = [req.body.event_category_id, req.body.event_category_name];
+            const query = `INSERT INTO event_category ( event_category_name) VALUES (:1)`;
+            const binds = [ req.body.event_category_name];
             const options = {
               autoCommit: true, 
             };

@@ -1,11 +1,11 @@
 const {getConnection} = require('../config/connection');
 
 module.exports = {
-    removeAllCountries: async function (req, res){
+    removeAllseat_type: async function (req, res){
         let connection ;
         try {
             connection = await getConnection();
-            const query = "TRUNCATE TABLE countries";
+            const query = "TRUNCATE TABLE seat_type";
             const options={
                 autoCommit: true, // Commit each insert immediately
             }
@@ -26,25 +26,25 @@ module.exports = {
             }
         }
     },
-    populateCountries: async function (req, res){
+    populateseat_type: async function (req, res){
 
         let connection ;
         try {
 
             
             connection = await getConnection();
-            const datacountries = [
-                ["Pakistan"],["Alaska"],["Canada"],["Germany"]
+            const dataseat_type = [
+                [1,"Pit"],[2,"General"],[3,"Balcony"]
             ];
             
-            for (const countriesData of datacountries) {
-                const querycountries = `INSERT INTO countries ( country_name) VALUES (:1)`;
-                const bindscountries = countriesData; // Bind the countriesData array directly
-                const optionscountries = {
+            for (const seat_typeData of dataseat_type) {
+                const queryseat_type = `INSERT INTO seat_type ( seat_type_name) VALUES (:1)`;
+                const bindsseat_type = seat_typeData; // Bind the seat_typeData array directly
+                const optionsseat_type = {
                   autoCommit: true, // Commit each insert immediately
                 };
                 // console.log(query , "aaa----------->>>>")
-                await connection.execute(querycountries,bindscountries,optionscountries);
+                await connection.execute(queryseat_type,bindsseat_type,optionsseat_type);
               }
 
               res.status(202).send("Populated");
@@ -70,7 +70,7 @@ module.exports = {
       let connection;
       try {
           connection = await getConnection();
-          const result = await connection.execute("SELECT * from countries");
+          const result = await connection.execute("SELECT * from seat_type");
           const data = result.rows;
           res.status(200).json(data);
       } catch (error) {
@@ -87,12 +87,12 @@ module.exports = {
       }
   },
 
-    getCountrieswithCondition: async function (req, res){
+    getseat_typewithCondition: async function (req, res){
         let connection ;
         try {
             
             connection = await getConnection();
-            const query = `SELECT countries.*,countries.country_id, countries.country_name FROM countries WHERE ${req.body.condition}`;
+            const query = `SELECT seat_type.*,seat_type.seat_type_id, seat_type.seat_type_name FROM seat_type WHERE ${req.body.condition}`;
           
             const table = await connection.execute(query);
             // console.log(table.rows);
@@ -112,12 +112,12 @@ module.exports = {
         } 
     },
 
-    AddNewCountries: async function (req, res){
+    AddNewseat_type: async function (req, res){
         let connection ;
         try {
             connection = await getConnection();
-            const query = `INSERT INTO countries ( country_name) VALUES (:1)`;
-            const binds = [req.body.country_name];
+            const query = `INSERT INTO seat_type ( seat_type_name) VALUES (:1)`;
+            const binds = [req.body.seat_type_name];
             const options = {
               autoCommit: true, 
             };
@@ -142,17 +142,17 @@ module.exports = {
         }
     },
 
-    Updatecountries: async function (req, res) {
+    Updateseat_type: async function (req, res) {
         let connection;
         try {
           connection = await getConnection();
           const binds = [
-            req.body.country_id,
-            req.body.country_name,
+            req.body.seat_type_id,
+            req.body.seat_type_name,
           ];
       
           console.log("binds -> ", binds);
-          const query = `UPDATE countries SET country_id = :1, country_name= :2 WHERE ${req.body.condition}`;
+          const query = `UPDATE seat_type SET seat_type_id = :1, seat_type_name= :2 WHERE ${req.body.condition}`;
           const options = {
             autoCommit: true, // Commit each insert immediately
           }
@@ -177,13 +177,13 @@ module.exports = {
       },
   
   
-      DeleteCountriesAtID : async function (req, res){
+      Deleteseat_typeAtID : async function (req, res){
   
         let connection ;
         try{
           connection = await getConnection();
-          const query = `Delete from countries WHERE country_id = :1`;
-          const binds = [req.body.countries_id];
+          const query = `Delete from seat_type WHERE seat_type_id = :1`;
+          const binds = [req.body.seat_type_id];
           const options = {
             autoCommit: true, // Commit each insert immediately
           };
@@ -209,11 +209,11 @@ module.exports = {
   
       },
 
-      DeleteCountriesWithCondition : async function (req,res) {
+      Deleteseat_typeWithCondition : async function (req,res) {
         let connection;
         try{
           connection = await getConnection();
-          const query = `Delete from countries WHERE ${req.body.condition}`;
+          const query = `Delete from seat_type WHERE ${req.body.condition}`;
           
           await connection.execute(query);
           res.status(202).send("Deleted");

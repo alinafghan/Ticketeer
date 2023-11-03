@@ -121,8 +121,8 @@ module.exports = {
         let connection ;
         try {
             connection = await getConnection();
-            const query = `INSERT INTO users (user_id, username,email, phone_number,password, city_state_country, user_type) VALUES (:1, :2, :3, :4)`;
-            const binds = [req.body.user_id, req.body.username,req.body.email, req.body.phone_number,req.body.password, req.body.city_state_country, req.body.user_type];
+            const query = `INSERT INTO users ( username,email, phone_number,password, city_state_country, user_type) VALUES (:1, :2, :3)`;
+            const binds = [ req.body.username,req.body.email, req.body.phone_number,req.body.password, req.body.city_state_country, req.body.user_type];
             const options = {
               autoCommit: true, 
             };
@@ -152,7 +152,7 @@ module.exports = {
         try {
           connection = await getConnection();
           const binds = [
-            req.body.user_id,
+            
             req.body.username,
             req.body.email, 
             req.body.phone_number,
@@ -162,7 +162,7 @@ module.exports = {
           ];
       
           console.log("binds -> ", binds);
-          const query = `UPDATE users SET user_id = :1, username= :2,email =:3, phone_number =: 4,password =: 5, city_state_country =:6, user_type = :7 WHERE ${req.body.condition}`;
+          const query = `UPDATE users SET  username= :1,email =:2, phone_number =: 3,password =: 4, city_state_country =:5, user_type = :6 WHERE ${req.body.condition}`;
           const options = {
             autoCommit: true, // Commit each insert immediately
           }
