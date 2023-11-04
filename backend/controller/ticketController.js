@@ -157,10 +157,10 @@ module.exports = {
         try {
           connection = await getConnection();
           const binds = [
-            req.body.ticket_id, req.body.event_id, req.body.ticket_type, req.body.seat_num, req.body.booked];
+            req.body.event_id, req.body.ticket_type, req.body.seat_num, req.body.booked];
       
           console.log("binds -> ", binds);
-          const query = `UPDATE Tickets SET ticket_id = :1, event_id = :2, ticket_type = :3, seat_num = :4, booked = :5 WHERE ${req.body.condition}`;
+          const query = `UPDATE Tickets SET event_id = :1, ticket_type = :2, seat_num = :3, booked = :4 WHERE ${req.body.condition}`;
           const options = {
             autoCommit: true, // Commit each insert immediately
           }

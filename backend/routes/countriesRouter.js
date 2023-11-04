@@ -4,17 +4,17 @@ const countriesController = require("../controller/countriesController.js");
 
 // router.delete("/", countriesController.removeAllCountries);
 
-router.post("/populatecountries", countriesController.populateCountries);
+router.post("/populatecountries", countriesController.populateCountries); //WORKING
 
-router.get("/GetWholeTable", countriesController.GetWholeTable);
+router.get("/GetWholeTable", countriesController.GetWholeTable); //WORKING
 
 // router.get("/getcountrieswithCondition", countriesController.getCountrieswithCondition);
 
-// router.post("/AddNewcountries",countriesController.AddNewCountries);
+router.post("/AddNewcountries",countriesController.AddNewCountries); //WORKING
 
-// router.put("/Updatecountries",countriesController.Updatecountries);
+router.put("/Updatecountries",countriesController.Updatecountries);
 
-// router.delete("/DeletecountriesAtID",countriesController.DeleteCountriesAtID);
+router.delete("/DeletecountriesAtID",countriesController.DeleteCountriesAtID); //WORKING
 
 // router.delete("/DeletecountrieswithCondition",countriesController.DeleteCountriesWithCondition);
 

@@ -152,7 +152,6 @@ module.exports = {
         try {
           connection = await getConnection();
           const binds = [
-            req.body.user_id,
             req.body.username,
             req.body.email, 
             req.body.phone_number,
@@ -162,7 +161,7 @@ module.exports = {
           ];
       
           console.log("binds -> ", binds);
-          const query = `UPDATE users SET  user_id = :1, username= :2,email =:3, phone_number =: 4,password =: 5, city_state_country =:6, user_type = :7 WHERE ${req.body.condition}`;
+          const query = `UPDATE users SET  username= :1,email =:2, phone_number =: 3,password =: 4, city_state_country =:5, user_type = :6 WHERE ${req.body.condition}`;
           const options = {
             autoCommit: true, // Commit each insert immediately
           }

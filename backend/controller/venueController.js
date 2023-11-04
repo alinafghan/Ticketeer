@@ -167,14 +167,13 @@ module.exports = {
         try {
           connection = await getConnection();
           const binds = [
-            req.body.venue_id,
             req.body.venue_name,
             req.body.venue_capacity,
             req.body.location_id,
           ];
       
           console.log("binds -> ", binds);
-          const query = `UPDATE Venues SET venue_id = :1, venue_name= :2, venue_capacity = :3, num_of_pit_seats = :4, num_of_general_seats = :5,num_of_balcony_seats = :6, location_id = :7 WHERE ${req.body.condition}`;
+          const query = `UPDATE Venues SET  venue_name= :1, venue_capacity = :2, num_of_pit_seats = :3, num_of_general_seats = :4,num_of_balcony_seats = :5, location_id = :6 WHERE ${req.body.condition}`;
           const options = {
             autoCommit: true, // Commit each insert immediately
           }

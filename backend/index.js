@@ -9,8 +9,6 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(cors());
 
-//lets make a change in code to see if any test occurs
-
 // Define the root route
 app.get("/", (req, res) => {
     console.log("DB APP WORKING!");
