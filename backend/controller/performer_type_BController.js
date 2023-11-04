@@ -148,12 +148,11 @@ module.exports = {
         try {
           connection = await getConnection();
           const binds = [
-            req.body.country_id,
-            req.body.country_name,
+            req.body.performer_type_B_name,
           ];
       
           console.log("binds -> ", binds);
-          const query = `UPDATE performer_type_B SET  performer_type_B_name= :1 WHERE ${req.body.condition}`;
+          const query = `UPDATE performer_type_B SET performer_type_B_name= :1 WHERE ${req.body.condition}`;
           const options = {
             autoCommit: true, // Commit each insert immediately
           }

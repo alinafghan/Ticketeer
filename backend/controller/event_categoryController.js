@@ -154,7 +154,7 @@ module.exports = {
           ];
       
           console.log("binds -> ", binds);
-          const query = `UPDATE event_category SET  event_category_name= :2 WHERE ${req.body.condition}`;
+          const query = `UPDATE event_category SET  event_category_name= :1 WHERE ${req.body.condition}`;
           const options = {
             autoCommit: true, // Commit each insert immediately
           }

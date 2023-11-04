@@ -169,11 +169,15 @@ module.exports = {
           const binds = [
             req.body.venue_name,
             req.body.venue_capacity,
+            req.body.num_of_pit_seats,
+            req.body.num_of_general_seats,
+            req.body.num_of_balcony_seats,
             req.body.location_id,
           ];
+
       
           console.log("binds -> ", binds);
-          const query = `UPDATE Venues SET  venue_name= :1, venue_capacity = :2, num_of_pit_seats = :3, num_of_general_seats = :4,num_of_balcony_seats = :5, location_id = :6 WHERE ${req.body.condition}`;
+          const query = `UPDATE Venues SET  venue_name= :1, venue_capacity = :2, num_of_pit_seats = :3, num_of_general_seats = :4, num_of_balcony_seats = :5, location_id = :6 WHERE ${req.body.condition}`;
           const options = {
             autoCommit: true, // Commit each insert immediately
           }

@@ -49,6 +49,16 @@ CREATE TABLE locations (
   CONSTRAINT country_fk FOREIGN KEY (country_id) REFERENCES countries (country_id)
 );
 
+create table users(
+user_id int generated always as identity (start with 1 increment by 1) primary key, 
+username varchar(255),
+email varchar(255) check (email like '%@%'),
+phone_number int check (length(phone_number)<16),
+password varchar(255) check (length(password)>5),
+city_state_country varchar(255),
+num_of_tickets_booked int
+);
+
 
 CREATE TABLE performers (
   performer_id INT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY,

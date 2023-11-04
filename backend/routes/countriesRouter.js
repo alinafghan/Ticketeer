@@ -8,15 +8,15 @@ router.post("/populatecountries", countriesController.populateCountries); //WORK
 
 router.get("/GetWholeTable", countriesController.GetWholeTable); //WORKING
 
-// router.get("/getcountrieswithCondition", countriesController.getCountrieswithCondition);
+router.get("/getcountrieswithCondition", countriesController.getCountrieswithCondition); //working
 
 router.post("/AddNewcountries",countriesController.AddNewCountries); //WORKING
 
-router.put("/Updatecountries",countriesController.Updatecountries);
+router.put("/Updatecountries",countriesController.Updatecountries); //WORKING
 
 router.delete("/DeletecountriesAtID",countriesController.DeleteCountriesAtID); //WORKING
 
-// router.delete("/DeletecountrieswithCondition",countriesController.DeleteCountriesWithCondition);
+router.delete("/DeletecountrieswithCondition",countriesController.DeleteCountriesWithCondition);
 
 
 module.exports = router;

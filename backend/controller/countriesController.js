@@ -148,9 +148,8 @@ module.exports = {
           connection = await getConnection();
           const binds = [
             req.body.country_name,
-            req.body.country_id
           ];
-          const query = `UPDATE countries SET  country_name= :1 WHERE country_id = :2`;
+          const query = `UPDATE countries SET  country_name= :1 WHERE ${req.body.condition}`;
       
           // console.log("binds -> ", binds);
           

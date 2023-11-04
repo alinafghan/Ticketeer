@@ -152,7 +152,7 @@ module.exports = {
           ];
       
           console.log("binds -> ", binds);
-          const query = `UPDATE locations SET location_name= :2, country_id =:3 WHERE ${req.body.condition}`;
+          const query = `UPDATE locations SET location_name= :1, country_id =:2 WHERE ${req.body.condition}`;
           const options = {
             autoCommit: true, // Commit each insert immediately
           }
