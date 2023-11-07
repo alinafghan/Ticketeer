@@ -1,6 +1,11 @@
 const { getConnection } = require('../config/connection');
 const ticketController = require('./ticketController');
 
+
+
+
+
+
 module.exports = {
   GetWholeTable: async function (req, res) {
     let connection;
@@ -55,9 +60,9 @@ module.exports = {
 
         connection = await getConnection();
         const dataEvent = [
-            // eventid,eventname,venueid,date,starttime,endtime,organizrid,performerid,eventcategoryid,numoftickets
+            // eventname,venueid,date,starttime,endtime,organizrid,performerid,eventcategoryid,numoftickets,numo_of_VIP_tickets,num_of_general_tickets
 
-            ['Strokes Concert', 1, '2023-10-31', '15:00:00', '18:00:00', 1, 1, 1, 7000]
+            ['Strokes Concert', 1, '2023-10-31', '15:00:00', '18:00:00', 1, 1, 1, 10,5,5]
 
            /* [1,'Bachelorette Party',2, '01-Oct-2010','9:00','6:00',3,4,1,500], 
             [2,'Met Gala',2, '01-Oct-2010', '9:00','6:00',3,4,2,500],
@@ -68,7 +73,7 @@ module.exports = {
         ];
         
         for (const EventData of dataEvent) {
-            const queryEvent = `INSERT INTO events (event_name, venue_id, event_date, start_time, end_time, organizer_id, performer_id, event_category_id, num_of_tickets) VALUES (:1, :2, :3, :4, :5,:6, :7, :8, :9)`;
+            const queryEvent = `INSERT INTO events (event_name, venue_id, event_date, start_time, end_time, organizer_id, performer_id, event_category_id, num_of_tickets, num_of_VIP_tickets,num_of_general_tickets) VALUES (:1, :2, :3, :4, :5,:6, :7, :8, :9, :10, :11)`;
             const bindsEvent = EventData; 
             const optionsEvent = {
               autoCommit: true, // Commit each insert immediately
@@ -146,8 +151,8 @@ module.exports = {
       let connection ;
       try {
           connection = await getConnection();
-          const query = `INSERT INTO events (event_name, venue_id, event_date, start_time, end_time, organizer_id, performer_id, event_category_id, num_of_tickets) VALUES (:1, :2, :3, :4, :5,:6, :7, :8, :9)`;
-          const binds = [req.body.event_name, req.body.venue_id,req.body.event_date,req.body.start_time,req.body.end_time,req.body.organizer_id,req.body.performer_id,req.body.event_category_id,req.bod.num_of_tickets];
+          const query = `INSERT INTO events (event_name, venue_id, event_date, start_time, end_time, organizer_id, performer_id, event_category_id, num_of_tickets) VALUES (:1, :2, :3, :4, :5,:6, :7, :8, :9, :10, :11)`;
+          const binds = [req.body.event_name, req.body.venue_id,req.body.event_date,req.body.start_time,req.body.end_time,req.body.organizer_id,req.body.performer_id,req.body.event_category_id,req.body.num_of_tickets, req.body.num_of_VIP_tickets, req.body.num_of_general_tickets];
           const options = {
             autoCommit: true, // Commit each insert immediately
           };
@@ -188,11 +193,12 @@ module.exports = {
             req.body.organizer_id,
             req.body.performer_id,
             req.body.event_category_id,
-            req.bod.num_of_tickets
+            req.bod.num_of_tickets,
+            req.body.num_of_VIP_tickets, req.body.num_of_general_tickets
         ];
     
         console.log("binds -> ", binds);
-        const query = `update events set event_name = :1, venue_id = :2 , event_date =:3, start_time = :4, end_time =:5 , organizer_id =:6, performer_id = :7, event_cateogory_id =:8, num_of_tickets =:9 where ${req.body.condition}`;
+        const query = `update events set event_name = :1, venue_id = :2 , event_date =:3, start_time = :4, end_time =:5 , organizer_id =:6, performer_id = :7, event_cateogory_id =:8, num_of_tickets =:9, num_of_VIP_tickets =:10, num_of_general_tickets = :11 where ${req.body.condition}`;
         const options = {
           // is there an error in the req.body.condition?
           autoCommit: true, // Commit each insert immediately

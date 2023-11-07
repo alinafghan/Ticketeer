@@ -1,31 +1,11 @@
 const {getConnection} = require('../config/connection');
 
 module.exports = {
-  GetWholeTable: async function (req, res) {
-    let connection;
-    try {
-        connection = await getConnection();
-        const result = await connection.execute("SELECT * from performer_type_A");
-        const data = result.rows;
-        res.status(200).json(data);
-    } catch (error) {
-        console.error('Error executing SQL query:', error);
-        res.status(500).send('Internal Server Error');
-    } finally {
-        if (connection) {
-            try {
-                await connection.close();
-            } catch (error) {
-                console.error('Error closing database connection:', error);
-            }
-        }
-    }
-},
-    removeAllperformer_type_A: async function (req, res){
+    removeAllseat_type: async function (req, res){
         let connection ;
         try {
             connection = await getConnection();
-            const query = "TRUNCATE TABLE performer_type_A";
+            const query = "TRUNCATE TABLE seat_type";
             const options={
                 autoCommit: true, // Commit each insert immediately
             }
@@ -46,25 +26,25 @@ module.exports = {
             }
         }
     },
-    populateperformer_type_A: async function (req, res){
+    populateseat_type: async function (req, res){
 
         let connection ;
         try {
 
             
             connection = await getConnection();
-            const dataperformer_type_A = [
-                ["Musician"],["Comedian"],["Influencer"]
+            const dataseat_type = [
+                ["Pit"],["General"],["Balcony"]
             ];
             
-            for (const performer_type_AData of dataperformer_type_A) {
-                const queryperformer_type_A = `INSERT INTO performer_type_A (performer_type_A_name) VALUES (:1)`;
-                const bindsperformer_type_A = performer_type_AData; // Bind the performer_type_AData array directly
-                const optionsperformer_type_A = {
+            for (const seat_typeData of dataseat_type) {
+                const queryseat_type = `INSERT INTO seat_type (seat_type_name) VALUES (:1)`;
+                const bindsseat_type = seat_typeData; // Bind the seat_typeData array directly
+                const optionsseat_type = {
                   autoCommit: true, // Commit each insert immediately
                 };
                 // console.log(query , "aaa----------->>>>")
-                await connection.execute(queryperformer_type_A,bindsperformer_type_A,optionsperformer_type_A);
+                await connection.execute(queryseat_type,bindsseat_type,optionsseat_type);
               }
 
               res.status(202).send("Populated");
@@ -86,13 +66,33 @@ module.exports = {
         }
     },
 
-  
-    getperformer_type_AwithCondition: async function (req, res){
+    GetWholeTable: async function (req, res) {
+      let connection;
+      try {
+          connection = await getConnection();
+          const result = await connection.execute("SELECT * from seat_type");
+          const data = result.rows;
+          res.status(200).json(data);
+      } catch (error) {
+          console.error('Error executing SQL query:', error);
+          res.status(500).send('Internal Server Error');
+      } finally {
+          if (connection) {
+              try {
+                  await connection.close();
+              } catch (error) {
+                  console.error('Error closing database connection:', error);
+              }
+          }
+      }
+  },
+
+    getseat_typewithCondition: async function (req, res){
         let connection ;
         try {
             
             connection = await getConnection();
-            const query = `SELECT performer_type_A.*,performer_type_A.performer_type_A_id, performer_type_A.performer_type_A_name FROM performer_type_A WHERE ${req.body.condition}`;
+            const query = `SELECT seat_type.*,seat_type.seat_type_id, seat_type.seat_type_name FROM seat_type WHERE ${req.body.condition}`;
           
             const table = await connection.execute(query);
             // console.log(table.rows);
@@ -112,12 +112,12 @@ module.exports = {
         } 
     },
 
-    AddNewperformer_type_A: async function (req, res){
+    AddNewseat_type: async function (req, res){
         let connection ;
         try {
             connection = await getConnection();
-            const query = `INSERT INTO performer_type_A (performer_type_A_name) VALUES (:1)`;
-            const binds = [req.body.performer_type_A, req.body.type_name];
+            const query = `INSERT INTO seat_type (seat_type_name) VALUES (:1)`;
+            const binds = [req.body.seat_type_name];
             const options = {
               autoCommit: true, 
             };
@@ -142,16 +142,16 @@ module.exports = {
         }
     },
 
-    Updateperformer_type_A: async function (req, res) {
+    Updateseat_type: async function (req, res) {
         let connection;
         try {
           connection = await getConnection();
           const binds = [
-            req.body.performer_type_A_name,
+            req.body.seat_type_name,
           ];
       
           console.log("binds -> ", binds);
-          const query = `UPDATE performer_type_A SET  performer_type_A_name= :1 WHERE ${req.body.condition}`;
+          const query = `UPDATE seat_type SET seat_type_name= :1 WHERE ${req.body.condition}`;
           const options = {
             autoCommit: true, // Commit each insert immediately
           }
@@ -176,13 +176,13 @@ module.exports = {
       },
   
   
-      Deleteperformer_type_AAtID : async function (req, res){
+      Deleteseat_typeAtID : async function (req, res){
   
         let connection ;
         try{
           connection = await getConnection();
-          const query = `Delete from performer_type_A WHERE performer_type_A = :1`;
-          const binds = [req.body.performer_type_A];
+          const query = `Delete from seat_type WHERE seat_type_id = :1`;
+          const binds = [req.body.seat_type_id];
           const options = {
             autoCommit: true, // Commit each insert immediately
           };
@@ -208,11 +208,11 @@ module.exports = {
   
       },
 
-      Deleteperformer_type_AWithCondition : async function (req,res) {
+      Deleteseat_typeWithCondition : async function (req,res) {
         let connection;
         try{
           connection = await getConnection();
-          const query = `Delete from performer_type_A WHERE ${req.body.condition}`;
+          const query = `Delete from seat_type WHERE ${req.body.condition}`;
           
           await connection.execute(query);
           res.status(202).send("Deleted");

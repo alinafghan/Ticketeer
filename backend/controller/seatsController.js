@@ -1,5 +1,6 @@
 const {getConnection} = require('../config/connection');
 
+
 module.exports = {
     removeAllseats: async function (req, res){
         let connection ;
@@ -34,11 +35,11 @@ module.exports = {
             
             connection = await getConnection();
             const dataseats = [
-                [1,"Upper", 1],[2,"Upper", 3],[3,"Lower",3],[4,"Lower", 4]
+                [1,1,'n'],[1,3,'n'],[1,3,'n'],[1,4,'n']
             ];
             
             for (const seatsData of dataseats) {
-                const queryseats = `INSERT INTO seats (seat_num, seat_type, venue_id) VALUES (:1, :2, :3)`;
+                const queryseats = `INSERT INTO seats (seat_type, venue_id, booked) VALUES (:1, :2,:3)`;
                 const bindsseats = seatsData; // Bind the seatsData array directly
                 const optionsseats = {
                   autoCommit: true, // Commit each insert immediately
@@ -92,7 +93,7 @@ module.exports = {
         try {
             
             connection = await getConnection();
-            const query = `SELECT seats.*,seats.seat_num, seats.seat_type, seats.venue_id FROM seats WHERE ${req.body.condition}`;
+            const query = `SELECT seats.*,seats.seat_num, seats.seat_type, seats.venue_id, seats.booked FROM seats WHERE ${req.body.condition}`;
           
             const table = await connection.execute(query);
             // console.log(table.rows);
@@ -116,8 +117,8 @@ module.exports = {
         let connection ;
         try {
             connection = await getConnection();
-            const query = `INSERT INTO seats (seat_num, seat_type, venue_id) VALUES (:1, :2, :3)`;
-            const binds = [req.body.seat_num, req.body.seat_type,req.body.venue_id];
+            const query = `INSERT INTO seats (seat_type, venue_id, booked) VALUES (:1, :2, :3)`;
+            const binds = [ req.body.seat_type,req.body.venue_id,req.body.booked];
             const options = {
               autoCommit: true, 
             };
@@ -147,11 +148,11 @@ module.exports = {
         try {
           connection = await getConnection();
           const binds = [
-            req.body.seat_num, req.body.seat_type,req.body.venue_id
+             req.body.seat_type,req.body.venue_id, req.body.booked
           ];
       
           console.log("binds -> ", binds);
-          const query = `UPDATE seats SET seat_num = :1, seat_type= :2, venue_id =:3 WHERE ${req.body.condition}`;
+          const query = `UPDATE seats SET  seat_type= :1, venue_id =:2, booked = :3 WHERE ${req.body.condition}`;
           const options = {
             autoCommit: true, // Commit each insert immediately
           }
@@ -231,11 +232,8 @@ module.exports = {
               console.log("Error closing database connection:", error);
             }
           }
-  
         }
       }
-
-
 
 
 }

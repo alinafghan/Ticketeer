@@ -38,7 +38,7 @@ module.exports = {
             ];
             
             for (const performer_typeData of dataperformer_type) {
-                const queryperformer_type = `INSERT INTO performer_type (performer_type,type_name) VALUES (:1, :2)`;
+                const queryperformer_type = `INSERT INTO performer_type (type_name) VALUES (:1)`;
                 const bindsperformer_type = performer_typeData; // Bind the performer_typeData array directly
                 const optionsperformer_type = {
                   autoCommit: true, // Commit each insert immediately
@@ -92,7 +92,7 @@ module.exports = {
         try {
             
             connection = await getConnection();
-            const query = `SELECT performer_type.*,performer_type.performer_type, performer_type.type_name FROM performer_type WHERE ${req.body.condition}`;
+            const query = `SELECT performer_type.*,performer_type.performer_type_id, performer_type.type_name FROM performer_type WHERE ${req.body.condition}`;
           
             const table = await connection.execute(query);
             // console.log(table.rows);
@@ -116,7 +116,7 @@ module.exports = {
         let connection ;
         try {
             connection = await getConnection();
-            const query = `INSERT INTO performer_type (performer_type,type_name) VALUES (:1, :2)`;
+            const query = `INSERT INTO performer_type (type_name) VALUES (:1)`;
             const binds = [req.body.performer_type, req.body.type_name];
             const options = {
               autoCommit: true, 
@@ -147,12 +147,11 @@ module.exports = {
         try {
           connection = await getConnection();
           const binds = [
-            req.body.country_id,
-            req.body.country_name,
+            req.body.type_name,
           ];
       
           console.log("binds -> ", binds);
-          const query = `UPDATE performer_type SET performer_type = :1, type_name= :2 WHERE ${req.body.condition}`;
+          const query = `UPDATE performer_type SET type_name= :1 WHERE ${req.body.condition}`;
           const options = {
             autoCommit: true, // Commit each insert immediately
           }

@@ -34,11 +34,11 @@ module.exports = {
             
             connection = await getConnection();
             const dataorganizers = [
-                [1,"Alina"],[2,"Hiba"],[3,"Maaz"],[4,"Bilal"]
+                ["Alina"],["Hiba"],["Maaz"],["Bilal"]
             ];
             
             for (const organizersData of dataorganizers) {
-                const queryorganizers = `INSERT INTO organizers (organizer_id, organizer_name) VALUES (:1, :2)`;
+                const queryorganizers = `INSERT INTO organizers ( organizer_name) VALUES (:1)`;
                 const bindsorganizers = organizersData; // Bind the organizersData array directly
                 const optionsorganizers = {
                   autoCommit: true, // Commit each insert immediately
@@ -116,8 +116,8 @@ module.exports = {
         let connection ;
         try {
             connection = await getConnection();
-            const query = `INSERT INTO organizers (organizer_id, organizer_name) VALUES (:1, :2)`;
-            const binds = [req.body.organizer_id, req.body.organizer_name,req.body.country_id];
+            const query = `INSERT INTO organizers (organizer_name) VALUES ( :2)`;
+            const binds = [ req.body.organizer_name];
             const options = {
               autoCommit: true, 
             };
@@ -147,11 +147,11 @@ module.exports = {
         try {
           connection = await getConnection();
           const binds = [
-            req.body.organizer_id, req.body.organizer_name,req.body.country_id
+             req.body.organizer_name
           ];
       
           console.log("binds -> ", binds);
-          const query = `UPDATE organizers SET organizer_id = :1, organizer_name= :2 WHERE ${req.body.condition}`;
+          const query = `UPDATE organizers SET  organizer_name= :1 WHERE ${req.body.condition}`;
           const options = {
             autoCommit: true, // Commit each insert immediately
           }

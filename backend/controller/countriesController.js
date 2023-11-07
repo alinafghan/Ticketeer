@@ -34,11 +34,11 @@ module.exports = {
             
             connection = await getConnection();
             const datacountries = [
-                [1,"Pakistan"],[2,"Alaska"],[3,"Canada"],[4,"Germany"]
+                ["Pakistan"],["Alaska"],["Canada"],["Germany"]
             ];
             
             for (const countriesData of datacountries) {
-                const querycountries = `INSERT INTO countries (country_id, country_name) VALUES (:1, :2)`;
+                const querycountries = `INSERT INTO countries ( country_name) VALUES (:1)`;
                 const bindscountries = countriesData; // Bind the countriesData array directly
                 const optionscountries = {
                   autoCommit: true, // Commit each insert immediately
@@ -150,17 +150,17 @@ module.exports = {
         try {
           connection = await getConnection();
           const binds = [
-            req.body.country_id,
             req.body.country_name,
           ];
+          const query = `UPDATE countries SET  country_name= :1 WHERE ${req.body.condition}`;
       
-          console.log("binds -> ", binds);
-          const query = `UPDATE countries SET country_id = :1, country_name= :2 WHERE ${req.body.condition}`;
+          // console.log("binds -> ", binds);
+          
           const options = {
             autoCommit: true, // Commit each insert immediately
           }
     
-          const respnse = await connection.execute(query, binds, options);
+          await connection.execute(query, binds, options);
   
       
           res.status(202).send("Updated");
@@ -177,8 +177,7 @@ module.exports = {
             }
           }
         }
-      },
-  
+      },  
   
       DeleteCountriesAtID : async function (req, res){
   
@@ -186,7 +185,7 @@ module.exports = {
         try{
           connection = await getConnection();
           const query = `Delete from countries WHERE country_id = :1`;
-          const binds = [req.body.countries_id];
+          const binds = [req.body.country_id];
           const options = {
             autoCommit: true, // Commit each insert immediately
           };
