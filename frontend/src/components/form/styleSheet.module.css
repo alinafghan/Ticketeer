@@ -1,0 +1,21 @@
+.boxClass{
+    margin : 10px;
+    background-color: rgba(156, 248, 255, 0.5);
+    border-radius: 30px;
+    padding: 20px 7px;
+}
+
+.textFieldClass{
+    width : 100%;
+    border-radius: 30px;
+    /* border-bottom:  solid white 1px !important; */
+}
+
+
+.css-1ff8729-MuiInputBase-root-MuiFilledInput-root:after{
+    border-bottom: 2px solid green;
+}
+
+.css-1ff8729-MuiInputBase-root-MuiFilledInput-root{
+    border-bottom: 2px solid green;
+}
