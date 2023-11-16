@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-//const cors = require('cors');
+const cors = require('cors');
 const app = express();
 const port = 8000;
 
@@ -12,7 +12,7 @@ app.use(
       extended: true,
     }),
   );
-//app.use(cors());
+app.use(cors());
 
 // Define the root route
 app.get("/", (req, res) => {

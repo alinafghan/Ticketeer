@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 
 // router.post("/populatecountriess", countriesController.populateCountries);
 
-router.get("/GetWholeTable", countriesController.GetWholeTable);
+router.get("/", countriesController.GetWholeTable);
 
 // router.get("/getcountrieswithCondition", countriesController.getCountrieswithCondition);
 
