@@ -59,7 +59,6 @@ city_state_country varchar(255),
 num_of_tickets_booked int
 );
 
-
 CREATE TABLE performers (
   performer_id INT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY,
   performer_name VARCHAR(255),
@@ -116,6 +115,43 @@ insert into tickets (event_id,ticket_type, venue_id, booked) values (:new.event_
 n := n +1;
 end loop;
 end;
+
+create or replace trigger ticket_updation_trigger before update on events for each row
+declare
+cursor num_of_ticks is select ticket_id from tickets where event_id = :new.event_id order by ticket_id desc; --all ticks for that event
+n1 int :=0;
+delete_count int;
+insert_count int;
+diff int;
+begin
+select count(*) into n1 from tickets where event_id = :new.event_id;--number of tickets already in tickets table for this event
+diff := abs(:old.num_of_tickets - :new.num_of_tickets);
+
+if n1>:new.num_of_tickets then
+
+for ticket in num_of_ticks loop
+delete from tickets where ticket_id = ticket;
+delete_count := delete_count+1;
+exit when delete_count = diff;
+end loop;
+end if;
+
+if n1<:new.num_of_tickets then
+
+loop
+insert into tickets (event_id,ticket_type, venue_id, booked) values (:new.event_id,1,:new.venue_id,'n');
+insert_count := insert_count +1;
+exit when insert_count = diff;
+end loop;
+end if;
+end;
+
+
+
+
+
+
+
 
 --preemptively gives the first seat of the venue that hasnt been given to a ticket already and assigns that value to a ticket.
 create or replace trigger ticket_seat_num before insert on tickets for each row 
