@@ -1,8 +1,9 @@
 import React from 'react';
-import {Typography,AppBar,Button,TextField,Card,CardActions,CardContent,CardMedia,CssBaseline,Grid,Toolbar, Container} from '@material-ui/core';
+import {Typography,AppBar,Button,IconButton,TextField,Card,CardActions,CardContent,CardMedia,CssBaseline,Grid,Toolbar, Container} from '@material-ui/core';
 import {PhotoCamera} from '@material-ui/icons';
 import{Search} from '@material-ui/icons';
 import useStyles from './styles';
+import {Menu} from '@material-ui/icons';
 
 const App = () => {
 
@@ -11,14 +12,25 @@ const App = () => {
     return(
 
         <>
-         
 
         <CssBaseline>
 
             <AppBar className = {classes.Appbar}>
 
                 <Toolbar style = {{display : 'flex', justifyContent : 'center'}}>
-                <Typography variant = "h3"> Ticketeer</Typography>
+
+                <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <Menu/>
+          </IconButton>
+
+
+                <Typography className = {classes.header} variant = "h4">    Ticketeer</Typography>
 
                 <div style = {{ marginLeft: 'auto' }}>
     
@@ -49,7 +61,19 @@ const App = () => {
 
                             Happening soon at a location near you! <a href = "/"> Change location</a>
 
+                             <Typography className = {classes.filter} variant = 'p'>Filter by:</Typography> <a href = "/"> date</a>
+
                         </Typography>
+
+                        {/* <div className = {classes.right2}>
+                            
+                            <div className = {classes.date}> 
+                            <Typography variant = 'p'>Filter by:</Typography> <a href = "/"> date</a>
+                            </div></div> */}
+            
+          
+            
+            
                     </Container>
 
 
