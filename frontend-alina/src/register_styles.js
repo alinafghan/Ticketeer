@@ -1,16 +1,16 @@
 import { makeStyles } from "@material-ui/core";
 
-const loginStyles = makeStyles((theme) => ({
+const RegisterStyles = makeStyles((theme) => ({
 
 
 
-        Login_mainDiv: {
+        Register_mainDiv: {
           height: '100%',
           width: '100%',
           fontSize: 0,
           display: 'flex', 
         },
-        Login_LeftDiv: {
+        Register_LeftDiv: {
           display: 'inline-block',
           zoom: 1,
           verticalAlign: 'top',
@@ -25,7 +25,7 @@ const loginStyles = makeStyles((theme) => ({
           backgroundRepeat: 'no-repeat',
         },
 
-        Login_RightDiv: {
+        Register_RightDiv: {
           display: 'flex', 
           flexDirection: 'column',
           alignItems: 'center',
@@ -43,23 +43,24 @@ const loginStyles = makeStyles((theme) => ({
             alignItems: 'center',
             justifyContent: 'center',
             width: '70%', 
-            height: '95%', 
+            height: '120%', 
           },
 
-          LoginCard:{
-            height: 500,
+          RegisterCard:{
+            height: 540,
           },
 
-          LoginCardText:{
+          RegisterCardText:{
             fontFamily: 'Krona one',
           },
 
           textField: {
             width: '100%', // Adjust the width as needed
             marginBottom: theme.spacing(2), // Adjust the margin as needed
+            height: '20%',
         },
 
-        LoginCheckBoxDiv:{
+        RegisterCheckBoxDiv:{
           marginTop: 0,
           marginLeft:5,
           marginBottom: -18,
@@ -73,12 +74,13 @@ const loginStyles = makeStyles((theme) => ({
           display: 'inline-block',
         },
 
-        LoginButtonDiv:{
+        RegisterButtonDiv:{
           display: 'flex',
           justifyContent: 'center',
+          marginTop:10,
         },
 
-        LoginButton:{
+        RegisterButton:{
           backgroundColor:'#000000',
           color:'#FCFBF4',
           fontFamily: "Krona one",
@@ -92,12 +94,22 @@ const loginStyles = makeStyles((theme) => ({
 
       },
 
+      LinksDiv:{
+        display: 'flex', 
+        justifyContent: 'space-between'
+
+      },
+
       ForgotPassDiv:{
-        marginRight: 0,
+        display: 'inline-block',
+      },
+
+      AlrAccDiv:{
+        display: 'inline-block',
       }
 
 
 
 }));
 
-export default loginStyles;
+export default RegisterStyles;

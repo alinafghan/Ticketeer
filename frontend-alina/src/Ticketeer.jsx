@@ -27,7 +27,7 @@ const Ticketeer = () => {
 
             </div>
 
-            <Divider></Divider>
+            <Divider variant = 'middle'></Divider>
 
             <div className = {classes.bodyDiv}>
 

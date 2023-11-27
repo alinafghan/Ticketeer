@@ -1,4 +1,4 @@
-import { makeStyles, rgbToHex } from "@material-ui/core";
+import { makeStyles} from "@material-ui/core";
 
 const frontpageStyles = makeStyles((theme) => ({
 
@@ -50,7 +50,6 @@ const frontpageStyles = makeStyles((theme) => ({
 
     bodyDiv:{
         marginBottom: 40,
-        
     },
 
     ButtonsDiv:{
