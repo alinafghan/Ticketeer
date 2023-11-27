@@ -8,10 +8,9 @@ import Login from './LoginPage';
 import Register from './RegisterPage';
 import HomePage from './HomePage';
 import Ticketeer from './Ticketeer';
+import EventPage from './EventPage';
 
 const App = () => {
-
-
 
     return(
 
@@ -33,6 +32,10 @@ const App = () => {
 
               <Routes>
               <Route path="/front" element={<Ticketeer/>} />
+              </Routes>
+
+              <Routes>
+              <Route path="/event" element={<EventPage/>} />
               </Routes>
       
 

@@ -92,10 +92,19 @@ const loginStyles = makeStyles((theme) => ({
 
       },
 
-      ForgotPassDiv:{
-        marginRight: 0,
-      }
+      LinksDiv:{
+        display: 'flex', 
+        justifyContent: 'space-between'
 
+      },
+
+      ForgotPassDiv:{
+        display: 'inline-block',
+      },
+
+      AlrAccDiv:{
+        display: 'inline-block',
+      }
 
 
 }));

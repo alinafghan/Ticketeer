@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
+const EventPage_styles = makeStyles((theme) => ({
 
     typography: {
         fontFamily: [
@@ -17,10 +17,6 @@ const useStyles = makeStyles((theme) => ({
           '"Krona one"',
         ].join(','),
       },
-
-      FontSet:{
-        fontFamily: 'Krona one'
-      }
    
 
 
@@ -30,4 +26,4 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default useStyles;
+export default EventPage_styles;

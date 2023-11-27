@@ -36,8 +36,20 @@ const Login = () => {
                                     {/* <Typography>Password : </Typography> */}
                                     <TextField required id="outlined-required-2" variant='outlined' label="Password..."className={classes.textField} />
                                 </div>
-                                <div className = {classes.ForgotPassDiv}>
-                                <a href = "/">Forgot Password?</a>
+                                
+
+
+                                <div className = {classes.LinksDiv}>
+
+                                    <div className = {classes.ForgotPassDiv}>
+                                <a href = "/">Forgot Password? </a>
+                                </div>
+
+                                <div className = {classes.AlrAccDiv}>
+
+                                <a href = '/'>Already have an account?</a>
+
+                                </div>
                                 </div>
 
                                 <div className={classes.LoginCheckBoxDiv}>

@@ -21,12 +21,12 @@ const frontpageStyles = makeStyles((theme) => ({
       //ticketeer page 
 
       top:{
-        opacity: '95%',
+
       },
 
     headerDiv:{
         paddingTop: 1,
-        backgroundImage: 'url(/the_strokes.jpg)',
+        // backgroundImage: 'url(sample.jpg)',
         backgroundSize: 'cover',
         textAlign: 'center',
     },
@@ -79,7 +79,7 @@ const frontpageStyles = makeStyles((theme) => ({
 
     middleDiv:{
         marginTop: 40,
-        marginLeft: '40%',
+        marginLeft: '45%',
         marginBottom: 40,
 
     },
@@ -125,23 +125,33 @@ const frontpageStyles = makeStyles((theme) => ({
 
     middle2midwriting:{
         fontFamily: 'Krona one',
-
     },
+
+    middle2midbottomwriting:{
+        fontFamily: 'Krona one',
+        marginTop: '150%',
+
+    }, 
     middle2Left:{
         display: 'inline-block',
-        //  *display: 'inline',
          zoom: 1, 
          verticalAlign: 'top',
          fontSize: '12px',
          width: '33%',
          backgroundColor: '#0E2038',
          height: '100vh',
-
+         backgroundImage: 'url(use_this.jpg)'
     },
 
     middle2Leftwriting:{
         fontFamily: 'Krona one',
+        marginTop: 140,
+        marginLeft: 50,
     },
+
+      middle2LeftHoverwriting:{
+        fontFamily: 'Krona one',
+       }
 
 }));
 
