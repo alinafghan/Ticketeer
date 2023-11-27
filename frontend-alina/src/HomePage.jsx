@@ -11,23 +11,27 @@ import {
   CssBaseline,
   Grid,
   Toolbar,
-  Container,
   CardActionArea
 } from '@material-ui/core';
-import { Search } from '@material-ui/icons';
-import useStyles from './styles';
 import Sidebar from './Sidebar';
+import { Search } from '@material-ui/icons';
+import HomePage_styles from './HomePage_styles';
+import useStyles from './styles';
 
 const HomePage = () => {
-  const classes = useStyles();
+
+  const classes = HomePage_styles();
+  const commonclasses = useStyles();
 
   return (
     <>
       <CssBaseline>
-        <AppBar className={classes.Appbar}>
+
+        <div>
+        <AppBar className={commonclasses.Appbar}>
           <Toolbar style={{ display: 'flex', justifyContent: 'center' }}>
             <Sidebar></Sidebar>
-            <Typography className={classes.header} variant="h4">Ticketeer</Typography>
+            <Typography variant="h4">Ticketeer</Typography>
             <div style={{ marginLeft: 'auto' }}>
               <Search></Search>
             </div>
@@ -44,18 +48,43 @@ const HomePage = () => {
           </Toolbar>
         </AppBar>
 
+        </div>
+
         <br></br>
         <br></br>
         <br></br>
 
         <main className={classes.main}>
-          <div>
-            <Container style={{ display: 'flex' }}>
+
+          <div className = {classes.HomeTop}>
+
+        
+           
+
+              <div className={classes.parent}>
+
+              <div className = {classes.one}>
+
+
               <Typography variant='h5' color='textPrimary' gutterBottom>
                 Happening soon at a location near you! <a href="/"> Change location</a>
               </Typography>
+
+              </div>
+
+              <div className = {classes.two}>
+
+
               <Typography className={classes.filter} variant='p'>Filter by: <a href="/"> date</a></Typography>
-            </Container>
+
+               </div>
+
+               </div>
+
+
+  
+
+            </div>
 
             <br></br>
             <br></br>
@@ -211,7 +240,7 @@ const HomePage = () => {
                 </Grid>
               </Grid>
             </div>
-          </div>
+         
         </main>
 
         <footer align='center'>

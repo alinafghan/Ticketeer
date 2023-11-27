@@ -19,8 +19,12 @@ const useStyles = makeStyles((theme) => ({
       },
 
       FontSet:{
-        fontFamily: 'Krona one'
-      }
+        fontFamily: 'Krona one',
+      },
+
+      Appbar:{
+        backgroundColor: '#5EA3B3',
+      },
    
 
 

@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 
-const EventPage_styles = makeStyles((theme) => ({
+const HomePage_styles = makeStyles((theme) => ({
 
     typography: {
         fontFamily: [
@@ -17,9 +17,36 @@ const EventPage_styles = makeStyles((theme) => ({
           '"Krona one"',
         ].join(','),
       },
-   
+
+      HomeTop:{
+        marginTop: 50,
+      },
+
+      parent:{
+        display: 'flex',
+        justifyContent: 'space-between'
+
+      },
+
+      one:{
+        display: 'inline-block',
+        marginLeft: 30,
+      },
+
+      two:{
+        display: 'inline-block',
+        marginRight: 50,
+      }
+
+
+
 
 }));
 
 
-export default EventPage_styles;
+export default HomePage_styles;
+
+
+
+
+   
