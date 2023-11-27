@@ -194,7 +194,8 @@ module.exports = {
             req.body.performer_id,
             req.body.event_category_id,
             req.bod.num_of_tickets,
-            req.body.num_of_VIP_tickets, req.body.num_of_general_tickets
+            req.body.num_of_VIP_tickets, 
+            req.body.num_of_general_tickets
         ];
     
         console.log("binds -> ", binds);

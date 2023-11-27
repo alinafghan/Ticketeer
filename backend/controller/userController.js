@@ -34,16 +34,16 @@ module.exports = {
             
             connection = await getConnection();
             const datausers = [
-                [1,'Beyonce','beyonce@gmail.com',3028898756,'beybey2828','Colorado', 1],
-                [2,'TSwizzle', 'taylorswift@gmail.com',3028898756,'password1','Colorado',1],
-                [3,'Jayz','jayzbayz@gmail.com',3028898756,'password1', 'Colorado',1],
-                [2,'Spongebob Squarepants','squidwardfan@gmail.com',3028898756,'password1','Colorado', 3],
-                [4,'the Strokes','roomonfire@hotmail.com',3028898756, 'password1','Colorado',1],
-                [5,'Nasty Nas','theking@gmail.com',3028898756,'password1','Colorado', 1],
+                ['Beyonce','beyonce@gmail.com',3028898756,'beybey2828','Colorado', 1],
+                ['TSwizzle', 'taylorswift@gmail.com',3028898756,'password1','Colorado',1],
+                ['Jayz','jayzbayz@gmail.com',3028898756,'password1', 'Colorado',1],
+                ['Spongebob Squarepants','squidwardfan@gmail.com',3028898756,'password1','Colorado', 3],
+                ['the Strokes','roomonfire@hotmail.com',3028898756, 'password1','Colorado',1],
+                ['Nasty Nas','theking@gmail.com',3028898756,'password1','Colorado', 1],
             ];
             
             for (const usersData of datausers) {
-                const queryusers = `INSERT INTO users (user_id, username, email, phone_number,password, city_state_country, user_type) VALUES (:1, :2, :3)`;
+                const queryusers = `INSERT INTO users (username, email, phone_number,password, city_state_country, user_type) VALUES (:1, :2, :3)`;
                 const bindsusers = usersData; // Bind the usersData array directly
                 const optionsusers = {
                   autoCommit: true, // Commit each insert immediately

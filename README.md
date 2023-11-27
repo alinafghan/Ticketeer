@@ -1,26 +1,34 @@
-# Ticketeer - Databases Project 
+# Ticketeer - Databases Project
+
 ## Alina Afghan (24491) & Hiba Mallick (24015)
 
+##<3
+
 ### Business Scenario
-With the rise in ticketed events, it can be difficult to buy tickets for each event from individual venues/performers. A ticket management system, like Ticketeer, aims to solve this problem by allowing users to book tickets for all types of ticketed events on one platform. 
-Users can book and purchase tickets for a variety of event categories, from their favorite performers and organizations in the venue and timing of their choice. 
+
+With the rise in ticketed events, it can be difficult to buy tickets for each event from individual venues/performers. A ticket management system, like Ticketeer, aims to solve this problem by allowing users to book tickets for all types of ticketed events on one platform.
+Users can book and purchase tickets for a variety of event categories, from their favorite performers and organizations in the venue and timing of their choice.
+
 ### Business Rules
+
 Explanation of the core business rules and use cases:
-Performers of varying types can create and schedule different types of events on the site for users to buy tickets for. 
-They can also connect with venues in different regions and locations, see their availability   and schedule their events there.
+Performers of varying types can create and schedule different types of events on the site for users to buy tickets for.
+They can also connect with venues in different regions and locations, see their availability and schedule their events there.
 Users can browse through events.
 Users can filter events by date, venues, performers, organizers and event categories.
 Users can view events for each date, venue, performer, organizer and event category.
 Users can book tickets and perform transactions
 An event can only be scheduled for one day. For a multiple-day event, book multiple events
-can register as user, or performer. performer can only organize their own events, user can only book tickets. if a performer wants to book tickets they need to register as a user
-
+can register as user, or performer. performer can only organize their own events, user can only book tickets. if a performer wants to book tickets they need to register a performer account with a different set of priveleges
+An event must have a number of tickets assigned at creation
+Number of tickets can be updated later
 
 ### Entities, Attributes, and Relationships
+
 Detailed description of entities, attributes, and relationships including multiplicity constraints:
 
 Events
-event_id(int, primary key),event_name(varchar(255),venue_id(int, foreign key),event_date(date),event_start_time(time),event_end_time(time),performer(int, foreign key),organizer_id(int, foreign key),event_category_id(int, foreign key),num_of_tickets(int)
+event_id(int, primary key),event_name (varchar(255)),venue_id(int, foreign key),event_date(date),event_start_time(time),event_end_time(time),performer(int, foreign key),organizer_id(int, foreign key),event_category_id(int, foreign key),num_of_tickets(int)
 venues, performers, organizers, event_category
 many (events) to many (venues)
 
@@ -63,7 +71,6 @@ password varchar(255)
 city_state_country varchar(255)
 performer_type int foreign key
 
-
 events, performer_type
 many (performers) to many (events)
 
@@ -71,7 +78,6 @@ one (performer) to one (performer_type)
 performer type
 performer_type_id(primary key int)
 type_name(varchar255)
-
 
 performer
 one (performer) to one (performer_type)
@@ -90,7 +96,6 @@ one-to-one
 musician
 performer_A_type (int primary key foreign key)
 performer_type (int primary key foreign key)
-
 
 performer_type_A
 one-to-one
@@ -118,7 +123,6 @@ password varchar(255)
 city_state_country varchar(255)
 num_of_tickets_booked int
 
-
 transaction
 one(user) to many (transactions)
 Seat
@@ -133,7 +137,6 @@ user_id (int primary key foreign key)
 amt_paid (decimal)
 transaction_time (datetime)
 
-
 user
 ticket
 many (transactions) to one (user)
@@ -143,12 +146,9 @@ ticket_id (int primary key), event_id (int foreign key)
 ticket_type (varchar255)
 seat_num (int foreign key)
 
-
 seat
 transaction
 event
 one (ticket) to one (seat)
 many (tickets) to one (transaction)
 many (tickets) to one (event)
-
-
