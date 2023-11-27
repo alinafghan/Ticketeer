@@ -1,17 +1,6 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import SettingsIcon from '@mui/icons-material/Settings';
-import LogoutIcon from '@mui/icons-material/Logout';
-import {Menu} from '@material-ui/icons';
-import {IconButton} from '@material-ui/core';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import {Menu,Settings,ExitToApp} from '@material-ui/icons';
+import {IconButton,Box,Drawer,List,Divider,ListItem,ListItemIcon,ListItemText} from '@material-ui/core';
 
 export default function TemporaryDrawer() {
 
@@ -44,51 +33,51 @@ export default function TemporaryDrawer() {
       <ListItem key = 'someTask' disablePadding>
 
 
-<ListItemButton>
+{/* <ListItemButton> */}
 
   <ListItemIcon>
-  <AddCircleOutlineIcon></AddCircleOutlineIcon>
+  <Menu></Menu>
   </ListItemIcon>
 
   <ListItemText primary='Task1' />
-</ListItemButton>
+{/* </ListItemButton> */}
 
 </ListItem>
 
 <ListItem key = 'Task2' disablePadding>
 
-<ListItemButton>
+{/* <ListItemButton> */}
 
   <ListItemIcon>
-  <AddCircleOutlineIcon></AddCircleOutlineIcon>
+  <Menu></Menu>
   </ListItemIcon>
 
   <ListItemText primary='Task2'/>
-</ListItemButton>
+{/* </ListItemButton> */}
 
 </ListItem>
 <ListItem key = 'Task3' disablePadding>
 
-<ListItemButton>
+{/* <ListItemButton> */}
 
   <ListItemIcon>
-  <AddCircleOutlineIcon></AddCircleOutlineIcon>
+  <Menu></Menu>
   </ListItemIcon>
 
   <ListItemText primary='Task3'/>
-</ListItemButton>
+{/* </ListItemButton> */}
 
 </ListItem>
 <ListItem key = 'Task4' disablePadding>
 
-<ListItemButton>
+{/* <ListItemButton> */}
 
   <ListItemIcon>
-  <AddCircleOutlineIcon></AddCircleOutlineIcon>
+  <Menu></Menu>
   </ListItemIcon>
 
   <ListItemText primary='Task4'/>
-</ListItemButton>
+{/* </ListItemButton> */}
 
 </ListItem>
 
@@ -109,27 +98,27 @@ export default function TemporaryDrawer() {
           <ListItem key = 'settings' disablePadding>
 
 
-            <ListItemButton>
+            {/* <ListItemButton> */}
 
               <ListItemIcon>
-                <SettingsIcon /> 
+                <Settings /> 
               </ListItemIcon>
 
               <ListItemText primary='Settings' />
-            </ListItemButton>
+            {/* </ListItemButton> */}
 
             </ListItem>
 
             <ListItem key = 'logout' disablePadding>
 
-            <ListItemButton>
+            {/* <ListItemButton> */}
 
               <ListItemIcon>
-                <LogoutIcon /> 
+                <ExitToApp /> 
               </ListItemIcon>
 
               <ListItemText primary='Log out'/>
-            </ListItemButton>
+            {/* </ListItemButton> */}
 
           </ListItem>
 

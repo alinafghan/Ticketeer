@@ -1,9 +1,6 @@
 import React from "react";
-import { Typography, TextField, CssBaseline } from '@material-ui/core';
+import { Typography, TextField, CssBaseline,Card,CardActions,CardContent } from '@material-ui/core';
 import loginStyles from './login_styles';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 
 const Login = () => {
     const classes = loginStyles();

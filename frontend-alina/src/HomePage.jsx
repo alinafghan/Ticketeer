@@ -1,12 +1,8 @@
 import React from 'react';
-import {Typography,AppBar,Button,TextField,CssBaseline,Grid,Toolbar, Container, CardActionArea} from '@material-ui/core';
+import {Typography,Card,CardActions,CardContent,CardMedia,AppBar,Button,TextField,CssBaseline,Grid,Toolbar, Container, CardActionArea} from '@material-ui/core';
 import{Search} from '@material-ui/icons';
 import useStyles from './styles';
 import Sidebar from './Sidebar'
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 
 const HomePage = () => {
 

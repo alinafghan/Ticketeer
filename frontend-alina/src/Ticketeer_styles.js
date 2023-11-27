@@ -1,6 +1,6 @@
 import { makeStyles, rgbToHex } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
+const frontpageStyles = makeStyles((theme) => ({
 
     typography: {
         fontFamily: [
@@ -144,29 +144,7 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: 'Krona one',
     },
 
-    //homepage
-
-    Appbar:{
-        backgroundColor :  '#008080',
-        position : 'relative'
-    },
-        
-    header:{
-        fontFamily: "Krona one",
-        padding : 15,
-    },
-
-    filter:{
-        marginLeft: 'auto',
-    },
-
-   
-
-
 }));
 
+export default frontpageStyles;
 
-
-
-
-export default useStyles;
