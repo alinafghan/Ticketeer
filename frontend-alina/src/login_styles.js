@@ -95,7 +95,6 @@ const loginStyles = makeStyles((theme) => ({
       LinksDiv:{
         display: 'flex', 
         justifyContent: 'space-between'
-
       },
 
       ForgotPassDiv:{

@@ -20,9 +20,6 @@ const frontpageStyles = makeStyles((theme) => ({
 
       //ticketeer page 
 
-      top:{
-
-      },
 
     headerDiv:{
         paddingTop: 1,

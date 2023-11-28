@@ -4,12 +4,12 @@ const eventController = require("../controller/eventController");
  
 const router = express.Router();
 
-router.get("/", eventController.GetWholeTable); // Use lowercase 'e'
-//router.post("/populate", eventController.populateEvents); // Use lowercase 'e'
-//router.delete("/deleteAll", eventController.removeAllEvents); // Use lowercase 'e'
-router.get("/getEventwithConditions", eventController.getEventwithCondition); // Use lowercase 'e'
-//router.post("/addEvent", eventController.AddNewEvent); // Use lowercase 'e'
-router.put('/updateEvent', eventController.UpdateEvent); // Use lowercase 'e'
-//router.delete('/deleteEvent', eventController.DeleteEventAtID); // Use lowercase 'e'
+router.get("/GetWholeTable", eventController.GetWholeTable); 
+//router.post("/populate", eventController.populateEvents); 
+//router.delete("/deleteAll", eventController.removeAllEvents); 
+router.get("/getEventwithConditions", eventController.getEventwithCondition); 
+//router.post("/addEvent", eventController.AddNewEvent); 
+router.put('/updateEvent', eventController.UpdateEvent); 
+//router.delete('/deleteEvent', eventController.DeleteEventAtID);
 
 module.exports = router;

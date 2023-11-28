@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
-const port = 8000;
+const path = require('path');
+const port = 3005;
 
 // Middleware setup
 app.use(express.json());
@@ -13,6 +14,15 @@ app.use(
     }),
   );
 app.use(cors());
+
+
+// app.use(express.static(path.join(__dirname, 'client/build')));
+
+// Handle all other routes by serving the React app
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'client/build', 'index.js'));
+// });
+
 
 // Define the root route
 app.get("/", (req, res) => {

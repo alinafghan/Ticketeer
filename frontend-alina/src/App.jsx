@@ -4,11 +4,14 @@ import {
   Routes,
   Route,
 } from 'react-router-dom';
+import { useEffect } from 'react';
 import Login from './LoginPage';
 import Register from './RegisterPage';
 import HomePage from './HomePage';
 import Ticketeer from './Ticketeer';
 import EventPage from './EventPage';
+import api from './api';
+
 
 const App = () => {
 

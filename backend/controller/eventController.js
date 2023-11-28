@@ -28,6 +28,9 @@ module.exports = {
         }
     }
 },
+
+
+
     removeAllEvents: async function (req, res){
       let connection ;
       try {
@@ -106,7 +109,10 @@ module.exports = {
       try {
           connection = await getConnection();
           const table = await connection.execute("SELECT * from events");
-          res.status(200).send(table);
+          const data = table.rows;
+          res.status(200).send(data);
+
+          
         } catch (error) {
           console.error('Error executing SQL query:', error);
           res.status(500).send('Internal Server Error');
