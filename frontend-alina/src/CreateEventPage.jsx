@@ -1,157 +1,153 @@
-import { CssBaseline,TextField,Typography,AppBar,Toolbar,Card,CardActions,CardContent,CardMedia } from "@material-ui/core";
+import {
+  CssBaseline,
+  FormControl,
+  OutlinedInput,
+  MenuItem,
+  Select,
+  InputLabel,
+  Button,
+  TextField,
+  Typography,
+  AppBar,
+  Toolbar,
+  Card,
+  CardContent,
+} from "@material-ui/core";
 import React from "react";
-import { Search } from '@material-ui/icons';
+import { Search } from "@material-ui/icons";
 import Sidebar from "./Sidebar";
 import CreateEventPage_styles from "./CreateEventPage_styles";
-import useStyles from './styles';
+import useStyles from "./styles";
 
 const CreateEventPage = () => {
-  
   const classes = CreateEventPage_styles();
   const commonclasses = useStyles();
 
-    return(
+  const [age, setAge] = React.useState("");
 
-      <CssBaseline>
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
 
-        <div>
-
-<AppBar className={commonclasses.Appbar}>
-          <Toolbar style={{ display: 'flex', justifyContent: 'center' }}>
+  return (
+    <CssBaseline>
+      <div>
+        <AppBar className={commonclasses.Appbar}>
+          <Toolbar style={{ display: "flex", justifyContent: "center" }}>
             <Sidebar></Sidebar>
-            <Typography className={classes.header} variant="h4">Ticketeer</Typography>
-            <div style={{ marginLeft: 'auto' }}>
+            <Typography className={classes.header} variant="h4">
+              Ticketeer
+            </Typography>
+            <div style={{ marginLeft: "auto" }}>
               <Search></Search>
             </div>
             <TextField
-              label='Search...'
-              variant='outlined'
+              label="Search..."
+              variant="outlined"
               InputProps={{
                 style: {
                   borderRadius: "30px",
-                  backgroundColor: '#FFFFFF',
-                }
+                  backgroundColor: "#FFFFFF",
+                },
               }}
             ></TextField>
           </Toolbar>
         </AppBar>
+      </div>
 
+      <div className={classes.middleDiv}>
+        <div className={classes.cardContainer}>
+          <Card className={classes.EventCard} sx={{ maxWidth: 500 }}>
+            <CardContent>
+              <div className={classes.formField}>
+                <TextField
+                  required
+                  id="outlined-required-1"
+                  variant="outlined"
+                  label="Name of Event"
+                  className={classes.textField}
+                />
+              </div>
+              <br></br>
+              <div className={classes.formField}>
+                <FormControl style={{ width: "100%" }}>
+                  <InputLabel
+                    id="demo-simple-select-helper-label"
+                    style={{ textAlign: "center" ,marginLeft : 15 }}
+                  >
+                    Venue for event
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    value={age}
+                    label="Venue"
+                    onChange={handleChange}
+                    input={
+                      <OutlinedInput label="Name"></OutlinedInput>
+                    }
+                    style={{ width: "100%" }}
+                  >
+                    <MenuItem value=""></MenuItem>
+                    <MenuItem value={10}>V1</MenuItem>
+                    <MenuItem value={20}>V2</MenuItem>
+                    <MenuItem value={30}>V3</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+              <br></br>
+              <div className={classes.formField}>
+                <TextField
+                  required
+                  id="outlined-required-2"
+                  variant="outlined"
+                  label="Date of Event"
+                  className={classes.textField}
+                />
+              </div>
+              <br></br>
+              <div className={classes.formField}>
+                <TextField
+                  required
+                  id="outlined-required-2"
+                  variant="outlined"
+                  label="Date of Event"
+                  className={classes.textField}
+                />
+              </div>
+              <br></br>
+              <div
+                className={classes.CreateEventButtonDiv}
+                display="flex"
+                justifyContent="center"
+              >
+                <div>
+                  {" "}
+                  <Button
+                    variant="outlined"
+                    onClick=""
+                    className={classes.CreateEventButton}
+                  >
+                    Continue
+                  </Button>
+                </div>
+              </div>
+              <br></br>
+            </CardContent>
+          </Card>
         </div>
+      </div>
 
-        <div className = {classes.middleDiv}>
-
-        
-
-         
-
-          <Card className = {classes.Card} sx={{ maxWidth: 150, height: 200}} elevation={9} >
-
-            <div className = {classes.CardLeft}>
-                   
-                      <CardMedia
-                        component="img"
-                        sx={{ height: 100, width: 200 }}
-                        src="/the_strokes.jpg"
-                        title="event_icon"
-                      />
-                           </div>
-
-                           <div className = {classes.CardRight}>
-
-                      <CardContent>
-                        <CardActions>
-
-                        <div className={classes.formField}>
-                                    
-                                    <TextField required id="outlined-required-1" variant='outlined' label='Event Name'className={classes.textField} />
-                                </div>
-
-                                <Select>
-
-                                </Select>
-
-                                <div className={classes.formField}>
-                                    
-                                <FormControl fullWidth>
-  <InputLabel id="demo-simple-select-label">Venue</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    value={Venue_id}
-    label="Venue"
-    onChange={handleChange}
-  >
-    <MenuItem value={10}>Venue 1 name</MenuItem>
-    <MenuItem value={20}>venue 2 name</MenuItem>
-    <MenuItem value={30}>venue3</MenuItem>
-  </Select>
-</FormControl>
-                                </div>
-
-                                <div className={classes.formField}>
-                                    
-                                    <TextField required id="outlined-required-1" variant='outlined' label='Event Name'className={classes.textField} />
-                                </div>
-
-                                <div className={classes.formField}>
-                                    
-                                    <TextField required id="outlined-required-1" variant='outlined' label='Event Name'className={classes.textField} />
-                                </div>
-                          
-                        </CardActions>
-                        <Typography variant="body" color="text.secondary">
-                          short event here
-                        </Typography>
-                      </CardContent>
-
-                      </div>
-                   
-                  </Card>
-
-
-
-
-
-
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <footer align='center'>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <Typography variant='h5'>  copyright © Ticketeer 2023 </Typography>
-          <p>Alina Afghan 24491</p>
-        </footer>
-
-        
-
-        
-
-      </CssBaseline>
-       
-      
-    )
-}
+      <footer align="center">
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <Typography variant="h5"> copyright © Ticketeer 2023 </Typography>
+        <p>Alina Afghan 24491</p>
+      </footer>
+    </CssBaseline>
+  );
+};
 
 export default CreateEventPage;

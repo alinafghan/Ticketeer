@@ -26,7 +26,7 @@ const EventPage_styles = makeStyles((theme) => ({
       },
 
       Card:{
-        display: 'flex',
+        // display: 'flex',
         width: '75%',
       },
 

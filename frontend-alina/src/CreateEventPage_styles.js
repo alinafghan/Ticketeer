@@ -20,29 +20,35 @@ const CreateEventPage_styles = makeStyles((theme) => ({
 
 
       middleDiv:{
-        marginTop: 100,
-        display: 'flex',
+        marginTop: 200,
         justifyContent: 'center',
+
+
+        display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
       },
 
       Card:{
         display: 'flex',
-        width: '75%',
+        width: '70%',
+        height: '90%',
+        // alignItems: 'center',
       },
 
-
-      CardLeft:{
-        display: 'inline-block',
-        width: '33%',
-      },
+      // CardLeft:{
+      //   display: 'inline-block',
+      //   width: '44%',
+      //   verticalAlign: 'top',
+      // },
 
       CardRight:{
-        display: 'inline-block',
-        width: '66%',
-
-      }
-   
-
+        // display: 'inline-block',
+        // width: '100%',
+        // verticalAlign: 'top',
+        // alignItems: 'center',
+      },
+      
 }));
 
 

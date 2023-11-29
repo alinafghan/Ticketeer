@@ -9,7 +9,7 @@ import Register from './RegisterPage';
 import HomePage from './HomePage';
 import Ticketeer from './Ticketeer';
 import EventPage from './EventPage';
-import CreateEventPage from './EventPage';
+import CreateEventPage from './CreateEventPage';
 
 
 const App = () => {
