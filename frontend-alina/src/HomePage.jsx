@@ -97,8 +97,9 @@ const HomePage = () => {
                   <Card sx={{ maxWidth: 340 }}>
                     <CardActionArea>
                       <CardMedia
+                        component="img"
                         sx={{ height: 180 }}
-                        image="/the_strokes.jpg"
+                        src="/sample.jpg"
                         title="event_icon"
                       />
                       <CardContent>

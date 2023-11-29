@@ -29,8 +29,6 @@ module.exports = {
     }
 },
 
-
-
     removeAllEvents: async function (req, res){
       let connection ;
       try {

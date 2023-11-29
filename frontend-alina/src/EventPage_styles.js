@@ -17,6 +17,30 @@ const EventPage_styles = makeStyles((theme) => ({
           '"Krona one"',
         ].join(','),
       },
+
+
+      middleDiv:{
+        marginTop: 100,
+        display: 'flex',
+        justifyContent: 'center',
+      },
+
+      Card:{
+        display: 'flex',
+        width: '75%',
+      },
+
+
+      CardLeft:{
+        display: 'inline-block',
+        width: '33%',
+      },
+
+      CardRight:{
+        display: 'inline-block',
+        width: '66%',
+
+      }
    
 
 }));
