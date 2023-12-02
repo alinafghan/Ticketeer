@@ -31,6 +31,7 @@ const Ticketeer = () => {
 
   return (
     <CssBaseline>
+      <div className={classes.Ticketeer}>
       <div className={classes.headerDiv}>
         <div className={classes.FrontSidebar}>
           <FrontSideBar></FrontSideBar>
@@ -44,10 +45,14 @@ const Ticketeer = () => {
       </div>
       <div className={classes.bodyDiv}>
         <div className={classes.ButtonsDiv}>
+          <a href = "/login">
           <Button className={classes.LoginButton}>LOGIN</Button>
+          </a>
           <br></br>
           <br></br>
+          <a href = "/register">
           <Button className={classes.RegisterButton}>REGISTER</Button>
+          </a>
         </div>
       </div>
       <Divider variant='middle'></Divider>
@@ -58,8 +63,8 @@ const Ticketeer = () => {
       </div>
       <div className={classes.middle2Div}>
         <div className={classes.middle2Left}>
-          <Typography variant={isHoveringLeft ? 'h3' : 'h5'} className={classes.middle2Leftwriting} onMouseOver={handleMouseOverLeft} onMouseOut={handleMouseOutLeft}>
-            {isHoveringLeft ? 'something special when you hover!' : 'lovely caption for the left side!'}
+          <Typography variant={isHoveringLeft ? 'h3' : 'h3'} className={classes.middle2Leftwriting} onMouseOver={handleMouseOverLeft} onMouseOut={handleMouseOutLeft}>
+            {isHoveringLeft ? 'purchase tickets online and save yourself a spot!' : 'TICKETEER'}
           </Typography>
         </div>
         <div className={classes.middle2Mid}>
@@ -75,6 +80,24 @@ const Ticketeer = () => {
           <Typography className={classes.middle2Rightwriting}>rightside</Typography>
         </div>
       </div>
+
+
+
+      <footer align='center'>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <Typography variant='h5'> copyright © Ticketeer 2023 </Typography>
+          <p>Alina Afghan 24491</p>
+        </footer>
+
+        
+      </div>
+
+
+
+
     </CssBaseline>
   );
 };

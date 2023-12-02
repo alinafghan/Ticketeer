@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import {
   CssBaseline,
   FormControl,
@@ -13,21 +14,53 @@ import {
   Card,
   CardContent,
 } from "@material-ui/core";
-import React from "react";
 import { Search } from "@material-ui/icons";
 import Sidebar from "./Sidebar";
 import CreateEventPage_styles from "./CreateEventPage_styles";
 import useStyles from "./styles";
+import api from './api';
 
 const CreateEventPage = () => {
   const classes = CreateEventPage_styles();
   const commonclasses = useStyles();
 
-  const [age, setAge] = React.useState("");
+  const [venues, setVenues] = useState([]);
+  const [selectedVenue, setSelectedVenue] = useState("");
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  useEffect(() => {
+    api.get('/venues/GetWholeTable')
+      .then(response => {
+        console.log('API Data:', response.data);
+        setVenues(response.data);
+      })
+      .catch(error => {
+        console.error('API Error:', error);
+      });
+  }, []);
+
+  const handleChange = (venue) => {
+    setSelectedVenue(venue.target.value);
   };
+
+  const [performers, setPerformers] = useState([]);
+  const [selectedPerformer, setSelectedPerformer] = useState("");
+
+  useEffect(() => {
+    api.get('/performer/GetWholeTable')
+      .then(response => {
+        console.log('API Data:', response.data);
+        setPerformers(response.data);
+      })
+      .catch(error => {
+        console.error('API Error:', error);
+      });
+  }, []);
+
+  const handleChange2 = (performer) => {
+    setSelectedPerformer(performer.target.value);
+  };
+
+
 
   return (
     <CssBaseline>
@@ -73,25 +106,24 @@ const CreateEventPage = () => {
                 <FormControl style={{ width: "100%" }}>
                   <InputLabel
                     id="demo-simple-select-helper-label"
-                    style={{ textAlign: "center" ,marginLeft : 15 }}
+                    style={{ textAlign: "center", marginLeft: 15 }}
                   >
                     Venue for event
                   </InputLabel>
                   <Select
                     labelId="demo-simple-select-helper-label"
                     id="demo-simple-select-helper"
-                    value={age}
+                    value={selectedVenue}
                     label="Venue"
                     onChange={handleChange}
-                    input={
-                      <OutlinedInput label="Name"></OutlinedInput>
-                    }
+                    input={<OutlinedInput label="Name"></OutlinedInput>}
                     style={{ width: "100%" }}
                   >
-                    <MenuItem value=""></MenuItem>
-                    <MenuItem value={10}>V1</MenuItem>
-                    <MenuItem value={20}>V2</MenuItem>
-                    <MenuItem value={30}>V3</MenuItem>
+                    {venues.map((venue) => (
+                      <MenuItem key={venue[0]} value={venue[0]}>
+                        {venue[1]}
+                      </MenuItem>
+                    ))}
                   </Select>
                 </FormControl>
               </div>
@@ -107,13 +139,29 @@ const CreateEventPage = () => {
               </div>
               <br></br>
               <div className={classes.formField}>
-                <TextField
-                  required
-                  id="outlined-required-2"
-                  variant="outlined"
-                  label="Date of Event"
-                  className={classes.textField}
-                />
+                <FormControl style={{ width: "100%" }}>
+                  <InputLabel
+                    id="demo-simple-select-helper-label"
+                    style={{ textAlign: "center", marginLeft: 15 }}
+                  >
+                    Performer for event
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    value={selectedPerformer}
+                    label="Performer"
+                    onChange={handleChange2}
+                    input={<OutlinedInput label="Name"></OutlinedInput>}
+                    style={{ width: "100%" }}
+                  >
+                    {performers.map((performer) => (
+                      <MenuItem key={performer[0]} value={performer[0]}>
+                        {performer[1]}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
               </div>
               <br></br>
               <div
@@ -123,13 +171,15 @@ const CreateEventPage = () => {
               >
                 <div>
                   {" "}
+                  <a href="/create/event/page2">
                   <Button
                     variant="outlined"
-                    onClick=""
+                    onClick="/page2"
                     className={classes.CreateEventButton}
                   >
                     Continue
                   </Button>
+                  </a>
                 </div>
               </div>
               <br></br>

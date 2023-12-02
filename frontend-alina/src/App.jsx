@@ -10,6 +10,7 @@ import HomePage from './HomePage';
 import Ticketeer from './Ticketeer';
 import EventPage from './EventPage';
 import CreateEventPage from './CreateEventPage';
+import CreateEventPage2 from './CreateEventPage2';
 
 
 const App = () => {
@@ -42,6 +43,10 @@ const App = () => {
 
               <Routes>
               <Route path="/create/event" element={<CreateEventPage/>} />
+              </Routes>
+
+              <Routes>
+              <Route path="/create/event/page2" element={<CreateEventPage2/>} />
               </Routes>
       
 

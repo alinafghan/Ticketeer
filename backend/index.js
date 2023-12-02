@@ -16,7 +16,6 @@ app.use(
   
 app.use(cors());
 
-
 // app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Handle all other routes by serving the React app
@@ -35,7 +34,7 @@ const eventRouter = require("./routes/eventRouter");
 app.use("/events", eventRouter);
 
 const event_categoryRouter = require("./routes/event_categoryRouter");
-app.use("/eventcategory", event_categoryRouter);
+app.use("/event_category", event_categoryRouter);
 
 const countriesRouter = require('./routes/countriesRouter');
 app.use('/countries', countriesRouter);

@@ -3,7 +3,7 @@ const { getConnection } = require('../config/connection');
 const router = express.Router();
 const event_categoryController = require("../controller/event_categoryController.js");
 
-router.get("/", event_categoryController.GetWholeTable);
+router.get("/GetWholeTable", event_categoryController.GetWholeTable);
 
 router.delete("/delete", event_categoryController.removeAllevent_category);
 

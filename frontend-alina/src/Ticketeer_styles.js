@@ -19,13 +19,17 @@ const frontpageStyles = makeStyles((theme) => ({
       },
 
       //ticketeer page 
+    Ticketeer:{
+        backgroundColor: theme.palette.background.paper,
+    },
 
 
     headerDiv:{
         paddingTop: 1,
-        // backgroundImage: 'url(sample.jpg)',
+        backgroundImage: 'url(sample.jpg)',
         backgroundSize: 'cover',
         textAlign: 'center',
+        backgroundColor: theme.palette.background.paper,
     },
 
     FrontSidebar:{
@@ -43,10 +47,13 @@ const frontpageStyles = makeStyles((theme) => ({
     frontpageLine:{
         fontFamily: "Krona one",
         color:'#000000',
+        padding: 15,
+        marginBottom: 30,
     },
 
     bodyDiv:{
         marginBottom: 40,
+        backgroundColor: theme.palette.background.paper,
     },
 
     ButtonsDiv:{
@@ -54,6 +61,7 @@ const frontpageStyles = makeStyles((theme) => ({
         alignContent: 'center',
         align: 'center',
         textAlign: 'center',
+        backgroundColor: theme.palette.background.paper,
     },
 
     LoginButton:{
@@ -78,6 +86,7 @@ const frontpageStyles = makeStyles((theme) => ({
         marginTop: 40,
         marginLeft: '45%',
         marginBottom: 40,
+        backgroundColor: theme.palette.background.paper,
 
     },
 
@@ -90,11 +99,11 @@ const frontpageStyles = makeStyles((theme) => ({
         height: '100%',
         width:'100%',
         fontSize: 0,
-
     },
+    
     middle2Right:{
         display: 'inline-block',
-        //  *display: 'inline',
+        
          zoom: 1, 
          verticalAlign: 'top',
          fontSize: '12px',
@@ -110,13 +119,14 @@ const frontpageStyles = makeStyles((theme) => ({
 
     middle2Mid:{
         display: 'inline-block',
-        //  *display: 'inline',
+        
          zoom: 1, 
          verticalAlign: 'top',
          fontSize: '12px',
          width: '33%',
          height: '100vh',
          backgroundColor: '#FFD580',
+         justifyContent: 'center'
 
     },
 
@@ -143,7 +153,7 @@ const frontpageStyles = makeStyles((theme) => ({
     middle2Leftwriting:{
         fontFamily: 'Krona one',
         marginTop: 140,
-        marginLeft: 50,
+        marginLeft: 40,
     },
 
       middle2LeftHoverwriting:{
