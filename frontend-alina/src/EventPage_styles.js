@@ -1,49 +1,42 @@
 import { makeStyles } from "@material-ui/core";
 
 const EventPage_styles = makeStyles((theme) => ({
+  typography: {
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+      '"Krona one"',
+    ].join(","),
+  },
 
-    typography: {
-        fontFamily: [
-          '-apple-system',
-          'BlinkMacSystemFont',
-          '"Segoe UI"',
-          'Roboto',
-          '"Helvetica Neue"',
-          'Arial',
-          'sans-serif',
-          '"Apple Color Emoji"',
-          '"Segoe UI Emoji"',
-          '"Segoe UI Symbol"',
-          '"Krona one"',
-        ].join(','),
-      },
+  middleDiv: {
+    marginTop: 100,
+    display: "flex",
+    justifyContent: "center",
+  },
 
+  Card: {
+    display: "flex",
+    width: "75%",
+  },
 
-      middleDiv:{
-        marginTop: 100,
-        display: 'flex',
-        justifyContent: 'center',
-      },
+  CardLeft: {
+    display: "inline-block",
+    width: "33%",
+  },
 
-      Card:{
-        // display: 'flex',
-        width: '75%',
-      },
-
-
-      CardLeft:{
-        display: 'inline-block',
-        width: '33%',
-      },
-
-      CardRight:{
-        display: 'inline-block',
-        width: '66%',
-
-      }
-   
-
+  CardRight: {
+    display: "inline-block",
+    width: "66%",
+  },
 }));
-
 
 export default EventPage_styles;

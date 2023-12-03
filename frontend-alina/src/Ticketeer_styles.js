@@ -1,166 +1,158 @@
-import { makeStyles} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 
 const frontpageStyles = makeStyles((theme) => ({
+  typography: {
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+      '"Krona one"',
+    ].join(","),
+  },
 
-    typography: {
-        fontFamily: [
-          '-apple-system',
-          'BlinkMacSystemFont',
-          '"Segoe UI"',
-          'Roboto',
-          '"Helvetica Neue"',
-          'Arial',
-          'sans-serif',
-          '"Apple Color Emoji"',
-          '"Segoe UI Emoji"',
-          '"Segoe UI Symbol"',
-          '"Krona one"',
-        ].join(','),
-      },
+  //ticketeer page
+  Ticketeer: {
+    backgroundColor: theme.palette.background.paper,
+  },
 
-      //ticketeer page 
-    Ticketeer:{
-        backgroundColor: theme.palette.background.paper,
-    },
+  headerDiv: {
+    paddingTop: 1,
+    backgroundImage: "url(jueki.jpg)",
+    backgroundSize: "cover",
+    textAlign: "center",
+    backgroundColor: theme.palette.background.paper,
+    height: "100vh",
+  },
 
+  FrontSidebar: {
+    marginLeft: "94%",
+    marginTop: 15,
+  },
 
-    headerDiv:{
-        paddingTop: 1,
-        backgroundImage: 'url(sample.jpg)',
-        backgroundSize: 'cover',
-        textAlign: 'center',
-        backgroundColor: theme.palette.background.paper,
-    },
+  logintitle: {
+    fontFamily: "Krona one",
+    color: "#000000",
+    marginTop: "36%",
+  },
 
-    FrontSidebar:{
-        marginLeft: '94%',
-        marginTop: 15,
-    },
+  frontpageLine: {
+    fontFamily: "Krona one",
+    color: "#000000",
+    padding: 15,
+    marginBottom: 30,
+  },
 
+  bodyDiv: {
+    marginBottom: 40,
+    backgroundColor: theme.palette.background.paper,
+  },
 
-    logintitle:{
-        fontFamily: "Krona one",
-        color:'#000000',
-        marginTop: '30%',
-    },
+  ButtonsDiv: {
+    marginTop: "2%",
+    alignContent: "center",
+    align: "center",
+    textAlign: "center",
+    backgroundColor: theme.palette.background.paper,
+  },
 
-    frontpageLine:{
-        fontFamily: "Krona one",
-        color:'#000000',
-        padding: 15,
-        marginBottom: 30,
-    },
+  LoginButton: {
+    backgroundColor: "#000000",
+    color: "#FCFBF4",
+    fontFamily: "Krona one",
+    borderRadius: 30,
+    padding: 20,
+    position: "relative",
+  },
 
-    bodyDiv:{
-        marginBottom: 40,
-        backgroundColor: theme.palette.background.paper,
-    },
+  RegisterButton: {
+    backgroundColor: "#000000",
+    color: "#FCFBF4",
+    fontFamily: "Krona one",
+    borderRadius: 30,
+    padding: 20,
+    position: "relative",
+  },
 
-    ButtonsDiv:{
-        marginTop: '2%',
-        alignContent: 'center',
-        align: 'center',
-        textAlign: 'center',
-        backgroundColor: theme.palette.background.paper,
-    },
+  middleDiv: {
+    marginTop: 40,
+    marginLeft: "45%",
+    marginBottom: 40,
+    backgroundColor: theme.palette.background.paper,
+  },
 
-    LoginButton:{
-        backgroundColor:'#000000',
-        color:'#FCFBF4',
-        fontFamily: "Krona one",
-        borderRadius: 30,
-        padding: 20,
-        position: 'relative'
-    },
+  middleDivWriting: {
+    fontFamily: "Krona one",
+    marginBottom: 20,
+  },
 
-    RegisterButton:{
-        backgroundColor:'#000000',
-        color:'#FCFBF4',
-        fontFamily: "Krona one",
-        borderRadius: 30,
-        padding:20,
-        position: 'relative'
-    },
+  middle2Div: {
+    height: "100%",
+    width: "100%",
+    fontSize: 0,
+  },
 
-    middleDiv:{
-        marginTop: 40,
-        marginLeft: '45%',
-        marginBottom: 40,
-        backgroundColor: theme.palette.background.paper,
+  middle2Right: {
+    display: "inline-block",
 
-    },
+    zoom: 1,
+    verticalAlign: "top",
+    fontSize: "12px",
+    width: "33%",
+    backgroundColor: "#C1E1D2",
+    height: "100vh",
+  },
 
-    middleDivWriting:{
-        fontFamily: 'Krona one',
-        marginBottom: 20,
-    },
+  middle2Rightwriting: {
+    fontFamily: "Krona one",
+  },
 
-    middle2Div:{
-        height: '100%',
-        width:'100%',
-        fontSize: 0,
-    },
-    
-    middle2Right:{
-        display: 'inline-block',
-        
-         zoom: 1, 
-         verticalAlign: 'top',
-         fontSize: '12px',
-         width: '33%',
-         backgroundColor: '#C1E1D2',
-         height: '100vh',
+  middle2Mid: {
+    display: "inline-block",
 
-    },
+    zoom: 1,
+    verticalAlign: "top",
+    fontSize: "12px",
+    width: "33%",
+    height: "100vh",
+    backgroundColor: "#FFD580",
+    justifyContent: "center",
+  },
 
-    middle2Rightwriting:{
-        fontFamily: 'Krona one',
-    },
+  middle2midwriting: {
+    fontFamily: "Krona one",
+  },
 
-    middle2Mid:{
-        display: 'inline-block',
-        
-         zoom: 1, 
-         verticalAlign: 'top',
-         fontSize: '12px',
-         width: '33%',
-         height: '100vh',
-         backgroundColor: '#FFD580',
-         justifyContent: 'center'
+  middle2midbottomwriting: {
+    fontFamily: "Krona one",
+    marginTop: "150%",
+  },
+  middle2Left: {
+    display: "inline-block",
+    zoom: 1,
+    verticalAlign: "top",
+    fontSize: "12px",
+    width: "33%",
+    backgroundColor: "#0E2038",
+    height: "100vh",
+    backgroundImage: "url(use_this.jpg)",
+  },
 
-    },
+  middle2Leftwriting: {
+    fontFamily: "Krona one",
+    marginTop: 140,
+    marginLeft: 40,
+  },
 
-    middle2midwriting:{
-        fontFamily: 'Krona one',
-    },
-
-    middle2midbottomwriting:{
-        fontFamily: 'Krona one',
-        marginTop: '150%',
-
-    }, 
-    middle2Left:{
-        display: 'inline-block',
-         zoom: 1, 
-         verticalAlign: 'top',
-         fontSize: '12px',
-         width: '33%',
-         backgroundColor: '#0E2038',
-         height: '100vh',
-         backgroundImage: 'url(use_this.jpg)'
-    },
-
-    middle2Leftwriting:{
-        fontFamily: 'Krona one',
-        marginTop: 140,
-        marginLeft: 40,
-    },
-
-      middle2LeftHoverwriting:{
-        fontFamily: 'Krona one',
-       }
-
+  middle2LeftHoverwriting: {
+    fontFamily: "Krona one",
+  },
 }));
 
 export default frontpageStyles;
-
