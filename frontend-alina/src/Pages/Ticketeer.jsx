@@ -1,9 +1,9 @@
 import React from "react";
 import { Typography, CssBaseline, Button, Divider } from "@material-ui/core";
-import frontpageStyles from "./Ticketeer_styles";
-import FrontSideBar from "./FrontSidebar";
+import frontpageStyles from "../Styling/Ticketeer_styles";
+import FrontSideBar from "../FrontSidebar";
 import { useState } from "react";
-import useStyles from "./styles";
+import useStyles from "../Styling/styles";
 
 const Ticketeer = () => {
   const classes = frontpageStyles();

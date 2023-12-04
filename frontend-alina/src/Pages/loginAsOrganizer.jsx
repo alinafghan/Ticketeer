@@ -8,7 +8,7 @@ import {
   Card,
   CardContent,
 } from "@material-ui/core";
-import loginStyles from "./login_styles";
+import loginStyles from "../Styling/login_styles";
 
 const LoginAsOrganizer = () => {
   const classes = loginStyles();
@@ -20,7 +20,7 @@ const LoginAsOrganizer = () => {
         <div className={classes.Login_LeftDiv}>
           <Typography className={classes.Login_Leftwriting} variant="h2">
             {" "}
-            Login to our awesome website please Amama poopy
+            Login to our awesome website please
           </Typography>
         </div>
         <div className={classes.Login_RightDiv}>

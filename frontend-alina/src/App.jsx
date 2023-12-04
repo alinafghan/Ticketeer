@@ -1,13 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./LoginPage";
-import Register from "./RegisterPage";
-import HomePage from "./HomePage";
-import Ticketeer from "./Ticketeer";
-import EventPage from "./EventPage";
-import CreateEventPage from "./CreateEventPage";
-import LoginAsOrganizer from "./loginAsOrganizer";
-import RegisterAsOrganizer from "./RegisterAsOrganizer";
+import Login from "./Pages/LoginPage";
+import Register from "./Pages/RegisterPage";
+import HomePage from "./Pages/HomePage";
+import Ticketeer from "./Pages/Ticketeer";
+import EventPage from "./Pages/EventPage";
+import CreateEventPage from "./Pages/CreateEventPage";
+import LoginAsOrganizer from "./Pages/loginAsOrganizer";
+import RegisterAsOrganizer from "./Pages/RegisterAsOrganizer";
+import BookTicketPage from "./Pages/BookTicketPage";
 
 const App = () => {
   return (
@@ -42,6 +43,10 @@ const App = () => {
 
       <Routes>
         <Route path="/registerOrg" element={<RegisterAsOrganizer />} />
+      </Routes>
+
+      <Routes>
+        <Route path="/book" element={<BookTicketPage />} />
       </Routes>
     </Router>
   );

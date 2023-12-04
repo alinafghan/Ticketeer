@@ -8,7 +8,7 @@ import {
   Card,
   CardContent,
 } from "@material-ui/core";
-import RegisterStyles from "./register_styles";
+import RegisterStyles from "../Styling/register_styles";
 import { useNavigate } from "react-router-dom";
 
 const RegisterAsOrganizer = () => {

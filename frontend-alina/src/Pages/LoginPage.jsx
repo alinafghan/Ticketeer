@@ -8,7 +8,7 @@ import {
   Card,
   CardContent,
 } from "@material-ui/core";
-import loginStyles from "./login_styles";
+import loginStyles from "../Styling/login_styles";
 
 const Login = () => {
   const classes = loginStyles();

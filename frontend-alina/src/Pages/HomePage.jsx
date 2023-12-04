@@ -13,11 +13,11 @@ import {
   Toolbar,
   CardActionArea,
 } from "@material-ui/core";
-import Sidebar from "./Sidebar";
+import Sidebar from "../Sidebar";
 import { Search } from "@material-ui/icons";
-import HomePage_styles from "./HomePage_styles";
-import useStyles from "./styles";
-import api from "./api";
+import HomePage_styles from "../Styling/HomePage_styles";
+import useStyles from "../Styling/styles";
+import api from "../api";
 
 const HomePage = () => {
   const classes = HomePage_styles();

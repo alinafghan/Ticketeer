@@ -11,9 +11,9 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { Search } from "@material-ui/icons";
-import Sidebar from "./Sidebar";
-import EventPage_styles from "./EventPage_styles";
-import useStyles from "./styles";
+import Sidebar from "../Sidebar";
+import EventPage_styles from "../Styling/EventPage_styles";
+import useStyles from "../Styling/styles";
 
 const EventPage = () => {
   const classes = EventPage_styles();

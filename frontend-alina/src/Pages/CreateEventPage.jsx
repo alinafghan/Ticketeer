@@ -15,10 +15,10 @@ import {
   CardContent,
 } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
-import Sidebar from "./Sidebar";
-import CreateEventPage_styles from "./CreateEventPage_styles";
-import useStyles from "./styles";
-import api from "./api";
+import Sidebar from "../Sidebar";
+import CreateEventPage_styles from "../Styling/CreateEventPage_styles";
+import useStyles from "../Styling/styles";
+import api from "../api";
 import { useNavigate } from "react-router-dom";
 
 const CreateEventPage = () => {
