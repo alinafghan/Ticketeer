@@ -63,49 +63,16 @@ const EventPage = () => {
           <div className={classes.CardRight}>
             <CardContent>
               <CardActions>
-                {/* Each TextField and Select is placed in a separate div for a new line */}
-                <div className={classes.formField}>
-                  <TextField
-                    required
-                    id="outlined-required-1"
-                    variant="outlined"
-                    label="Event Name"
-                    className={classes.textField}
-                  />
-                </div>
+                <Typography>EVENT NAME</Typography>
 
-                <div className={classes.formField}>
-                  <TextField
-                    required
-                    id="outlined-required-2"
-                    variant="outlined"
-                    label="Event Name"
-                    className={classes.textField}
-                  />
-                </div>
+                <Typography>EVENT DATE</Typography>
 
-                <div className={classes.formField}>
-                  <TextField
-                    required
-                    id="outlined-required-3"
-                    variant="outlined"
-                    label="Event Name"
-                    className={classes.textField}
-                  />
-                </div>
+                <Typography>VENUE</Typography>
 
-                <div className={classes.formField}>
-                  <TextField
-                    required
-                    id="outlined-required-4"
-                    variant="outlined"
-                    label="Event Name"
-                    className={classes.textField}
-                  />
-                </div>
+                <Typography>PERFORMER</Typography>
               </CardActions>
               <Typography variant="body" color="text.secondary">
-                short event here
+                event description
               </Typography>
             </CardContent>
           </div>

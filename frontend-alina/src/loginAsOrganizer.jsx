@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import loginStyles from "./login_styles";
 
-const Login = () => {
+const LoginAsOrganizer = () => {
   const classes = loginStyles();
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -32,7 +32,7 @@ const Login = () => {
                 </Typography>
                 <br></br>
                 <Typography className={classes.LoginCardText} variant="h7">
-                  Log in as an organizer below.
+                  Log in as <a href="./loginOrg">organizer</a>
                 </Typography>
                 <br></br>
                 <br></br>
@@ -105,4 +105,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginAsOrganizer;

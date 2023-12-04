@@ -6,6 +6,8 @@ import HomePage from "./HomePage";
 import Ticketeer from "./Ticketeer";
 import EventPage from "./EventPage";
 import CreateEventPage from "./CreateEventPage";
+import LoginAsOrganizer from "./loginAsOrganizer";
+import RegisterAsOrganizer from "./RegisterAsOrganizer";
 
 const App = () => {
   return (
@@ -32,6 +34,14 @@ const App = () => {
 
       <Routes>
         <Route path="/create/event" element={<CreateEventPage />} />
+      </Routes>
+
+      <Routes>
+        <Route path="/loginOrg" element={<LoginAsOrganizer />} />
+      </Routes>
+
+      <Routes>
+        <Route path="/registerOrg" element={<RegisterAsOrganizer />} />
       </Routes>
     </Router>
   );

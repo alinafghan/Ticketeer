@@ -11,16 +11,16 @@ import {
 import RegisterStyles from "./register_styles";
 import { useNavigate } from "react-router-dom";
 
-const Register = () => {
+const RegisterAsOrganizer = () => {
   const Navigate = useNavigate();
+
   const classes = RegisterStyles();
+
   const [formData, setFormData] = useState({
-    username: "",
+    organizer_name: "",
     email: "",
     phone_number: "",
     password: "",
-    city_state_country: "",
-    num_of_tickets_booked: 0,
   });
 
   const handleInputChange = (e) => {
@@ -33,13 +33,16 @@ const Register = () => {
   const handleRegister = async () => {
     try {
       console.log("Handle Register function called");
-      const response = await fetch("http://localhost:3005/users/AddNewuser", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "http://localhost:3005/organizers/AddNeworganizers",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`Error during registration: ${response.statusText}`);
@@ -51,7 +54,7 @@ const Register = () => {
 
       if (responseBody === "Added") {
         console.log("Registration successful!");
-        Navigate("/login");
+        Navigate("/loginOrg");
       } else {
         console.log("Unexpected response:", responseBody);
       }
@@ -65,7 +68,7 @@ const Register = () => {
       <div className={classes.Register_mainDiv}>
         <div className={classes.Register_LeftDiv}>
           <Typography className={classes.Register_Leftwriting} variant="h2">
-            Register to our awesome website please
+            Make your own events as an organizer!
           </Typography>
         </div>
         <div className={classes.Register_RightDiv}>
@@ -77,7 +80,7 @@ const Register = () => {
                 </Typography>
                 <br></br>
                 <Typography className={classes.RegisterCardText} variant="h8">
-                  Register as <a href="./registerOrg">organizer</a> instead
+                  Register as organizer with Ticketeer!
                 </Typography>
                 <br></br>
                 <br></br>
@@ -88,7 +91,7 @@ const Register = () => {
                     id="outlined-required-1"
                     variant="outlined"
                     label="Username..."
-                    name="username"
+                    name="organizer_name"
                     className={classes.textField}
                     onChange={handleInputChange}
                   />
@@ -126,18 +129,6 @@ const Register = () => {
                     label="Password..."
                     name="password"
                     type="password"
-                    className={classes.textField}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className={classes.formField}>
-                  <TextField
-                    size="small"
-                    required
-                    id="outlined-required-1"
-                    variant="outlined"
-                    label="City/State/Region..."
-                    name="city_state_country"
                     className={classes.textField}
                     onChange={handleInputChange}
                   />
@@ -183,4 +174,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterAsOrganizer;
