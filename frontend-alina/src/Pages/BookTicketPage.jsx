@@ -25,25 +25,15 @@ const BookTicketPage = () => {
   const Navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    event_name: "",
-    venue_id: "",
-    event_date: "",
-    start_time: "",
-    end_time: "",
-    organizer_id: 1,
-    performer_id: "",
-    event_category_id: "",
-    num_of_tickets: "",
-    num_of_VIP_tickets: "",
-    num_of_general_tickets: "",
+    user_id: "",
+    ticket_id: "",
+    event_id: "",
   });
 
-  const handleInputChange = (event) => {
-    console.log("Event:", event);
-    console.log("Current FormData:", formData);
+  const handleInputChange = (bookings) => {
     setFormData({
       ...formData,
-      [event.target.name]: event.target.value,
+      [bookings.target.name]: bookings.target.value,
     });
   };
 
@@ -51,16 +41,19 @@ const BookTicketPage = () => {
     try {
       console.log("Handle Event function called");
       console.log("Form Data:", formData);
-      const response = await fetch("http://localhost:3005/events/addEvent", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "http://localhost:3005/bookings/addnewBookings",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (!response.ok) {
-        throw new Error(`Error while adding event: ${response.statusText}`);
+        throw new Error(`Error while booking ticket: ${response.statusText}`);
       }
 
       const responseBody = await response.text();
@@ -68,7 +61,7 @@ const BookTicketPage = () => {
       console.log(responseBody);
 
       if (responseBody === "Added") {
-        console.log("Event added!");
+        console.log("Ticket booked!");
         Navigate("/home");
       } else {
         console.log("Unexpected response:", responseBody);
