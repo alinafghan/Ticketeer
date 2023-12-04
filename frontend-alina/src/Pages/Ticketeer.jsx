@@ -7,7 +7,7 @@ import useStyles from "../Styling/styles";
 
 const Ticketeer = () => {
   const classes = frontpageStyles();
-  const commonclasses = useStyles();
+  const commonclasses = frontpageStyles();
 
   const [isHoveringLeft, setIsHoveringLeft] = useState(false);
 

@@ -155,7 +155,7 @@ module.exports = {
     let connection;
     try {
       connection = await getConnection();
-      const query = `INSERT INTO events (event_name, venue_id, event_date, start_time, end_time, organizer_id, performer_id, event_category_id, num_of_tickets, num_of_VIP_tickets, num_of_general_tickets) VALUES (:1, :2, :3, :4, :5,:6, :7, :8, :9, :10, :11)`;
+      const query = `INSERT INTO events (event_name, venue_id, event_date, start_time, end_time, organizer_id, performer_id, event_category_id, num_of_tickets, num_of_VIP_tickets) VALUES (:1, :2, :3, :4, :5,:6, :7, :8, :9, :10)`;
       const binds = [
         req.body.event_name,
         req.body.venue_id,
@@ -167,7 +167,6 @@ module.exports = {
         req.body.event_category_id,
         req.body.num_of_tickets,
         req.body.num_of_VIP_tickets,
-        req.body.num_of_general_tickets,
       ];
       const options = {
         autoCommit: true,
@@ -208,11 +207,10 @@ module.exports = {
         req.body.event_category_id,
         req.bod.num_of_tickets,
         req.body.num_of_VIP_tickets,
-        req.body.num_of_general_tickets,
       ];
 
       console.log("binds -> ", binds);
-      const query = `update events set event_name = :1, venue_id = :2 , event_date =:3, start_time = :4, end_time =:5 , organizer_id =:6, performer_id = :7, event_cateogory_id =:8, num_of_tickets =:9, num_of_VIP_tickets =:10, num_of_general_tickets = :11 where ${req.body.condition}`;
+      const query = `update events set event_name = :1, venue_id = :2 , event_date =:3, start_time = :4, end_time =:5 , organizer_id =:6, performer_id = :7, event_cateogory_id =:8, num_of_tickets =:9, num_of_VIP_tickets =:10 where ${req.body.condition}`;
       const options = {
         autoCommit: true,
       };

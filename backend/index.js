@@ -62,8 +62,8 @@ app.use("/seats", seatsRouter);
 const ticketRouter = require("./routes/ticketRouter");
 app.use("/tickets", ticketRouter);
 
-const transactionRouter = require("./routes/transactionRouter");
-app.use("/transactions", transactionRouter);
+const bookingsRouter = require("./routes/bookingsRouter");
+app.use("/bookings", bookingsRouter);
 
 const userRouter = require("./routes/userRouter");
 app.use("/users", userRouter);

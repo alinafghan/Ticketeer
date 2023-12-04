@@ -35,7 +35,6 @@ const CreateEventPage = () => {
     event_category_id: "",
     num_of_tickets: "",
     num_of_VIP_tickets: "",
-    num_of_general_tickets: "",
   });
 
   const handleInputChange = (event) => {
@@ -396,7 +395,7 @@ const CreateEventPage = () => {
                   />
                 </div>
                 <br />
-                <div className={classes.formField}>
+                {/* <div className={classes.formField}>
                   <TextField
                     required
                     id="outlined-required-4"
@@ -406,7 +405,7 @@ const CreateEventPage = () => {
                     className={classes.textField}
                     onChange={handleInputChange}
                   />
-                </div>
+                </div> */}
                 <br />
               </CardContent>
             </Card>
