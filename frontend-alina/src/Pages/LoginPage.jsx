@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import {
   Typography,
   Checkbox,
@@ -14,13 +15,91 @@ const Login = () => {
   const classes = loginStyles();
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
+  const [formData, setFormData] = useState({
+    user_id: "",
+    username: "",
+    password: "",
+  });
+
+  //select username from the input, check if there are any rows, if yes proceed, if no say account doesnt exist.
+  //to see if there are any rows, call the checker procedure
+
+  const handleChangeUser = async (event) => {
+    const inputUsername = event.target.value;
+    try {
+      const response = await fetch(
+        `http://localhost:3005/users/findIDfromusername?username=${inputUsername}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Error fetching user_id: ${response.statusText}`);
+      }
+
+      const responseText = await response.text();
+
+      const user_id = responseText ? JSON.parse(responseText)[0][0] : undefined;
+
+      console.log("Extracted user_id:", user_id);
+
+      setFormData({
+        ...formData,
+        user_id,
+      });
+
+      console.log("Updated FormData:", formData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    console.log("FormData:", formData);
+  }, [formData]);
+
+  const DoesUserExist = async (userId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3005/users/DoesUserExist?user_id=${userId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          `Error seeing if id exists, from frontend: ${response.statusText}`
+        );
+      }
+
+      const responseText = await response.text();
+      const nextTicketId = responseText
+        ? JSON.parse(responseText)[0][0]
+        : undefined;
+
+      console.log("Next Ticket ID:", nextTicketId);
+      return nextTicketId;
+    } catch (error) {
+      console.error(error);
+      return undefined;
+    }
+  };
+
   return (
     <CssBaseline>
       <div className={classes.Login_mainDiv}>
         <div className={classes.Login_LeftDiv}>
           <Typography className={classes.Login_Leftwriting} variant="h2">
             {" "}
-            Login to our awesome website please Amama poopy
+            Login to Ticketeer
           </Typography>
         </div>
         <div className={classes.Login_RightDiv}>
@@ -32,7 +111,7 @@ const Login = () => {
                 </Typography>
                 <br></br>
                 <Typography className={classes.LoginCardText} variant="h7">
-                  Log in as an organizer below.
+                  Log in as <a href="./loginOrg">organizer</a> instead
                 </Typography>
                 <br></br>
                 <br></br>
@@ -44,7 +123,9 @@ const Login = () => {
                     id="outlined-required-1"
                     variant="outlined"
                     label="Username..."
+                    name="user_id"
                     className={classes.textField}
+                    onChange={handleChangeUser}
                   />
                 </div>
                 <br></br>
@@ -55,7 +136,9 @@ const Login = () => {
                     id="outlined-required-2"
                     variant="outlined"
                     label="Password..."
+                    name="password"
                     className={classes.textField}
+                    // onChange = {handleChangePassword}
                   />
                 </div>
 

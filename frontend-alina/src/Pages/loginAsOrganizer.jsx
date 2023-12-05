@@ -8,6 +8,7 @@ import {
   Card,
   CardContent,
 } from "@material-ui/core";
+import { useEffect, useState } from "react";
 import loginStyles from "../Styling/login_styles";
 
 const LoginAsOrganizer = () => {
@@ -32,7 +33,7 @@ const LoginAsOrganizer = () => {
                 </Typography>
                 <br></br>
                 <Typography className={classes.LoginCardText} variant="h7">
-                  Log in as <a href="./loginOrg">organizer</a>
+                  Log in as an organizer below.
                 </Typography>
                 <br></br>
                 <br></br>
@@ -49,7 +50,6 @@ const LoginAsOrganizer = () => {
                 </div>
                 <br></br>
                 <div className={classes.formField}>
-                  {/* <Typography>Password : </Typography> */}
                   <TextField
                     required
                     id="outlined-required-2"

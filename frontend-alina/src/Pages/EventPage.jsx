@@ -8,6 +8,7 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  Button,
 } from "@material-ui/core";
 import React from "react";
 import { Search } from "@material-ui/icons";
@@ -63,17 +64,20 @@ const EventPage = () => {
           <div className={classes.CardRight}>
             <CardContent>
               <CardActions>
-                <Typography>EVENT NAME</Typography>
+                <Typography variant="h5">EVENT NAME</Typography>
 
-                <Typography>EVENT DATE</Typography>
+                <Typography variant="h5">EVENT DATE</Typography>
 
-                <Typography>VENUE</Typography>
+                <Typography variant="h5">VENUE</Typography>
 
-                <Typography>PERFORMER</Typography>
+                <Typography variant="h5">PERFORMER</Typography>
               </CardActions>
-              <Typography variant="body" color="text.secondary">
-                event description
-              </Typography>
+
+              <div className={classes.ButtonDiv}>
+                <a href="./book">
+                  <Button className={classes.Button}>BOOK TICKET</Button>
+                </a>
+              </div>
             </CardContent>
           </div>
         </Card>

@@ -37,6 +37,21 @@ const EventPage_styles = makeStyles((theme) => ({
     display: "inline-block",
     width: "66%",
   },
+
+  ButtonDiv: {
+    justifyContent: "center",
+    display: "flex",
+  },
+
+  Button: {
+    marginTop: 40,
+    backgroundColor: "#000000",
+    color: "#FCFBF4",
+    fontFamily: "Krona one",
+    borderRadius: 30,
+    padding: 20,
+    position: "relative",
+  },
 }));
 
 export default EventPage_styles;

@@ -21,4 +21,6 @@ router.delete(
 
 router.get("/findIDfromusername", userController.FindIDfromUsername);
 
+router.get("/DoesUserExist", userController.DoesUserExist);
+
 module.exports = router;

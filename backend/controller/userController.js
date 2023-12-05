@@ -152,6 +152,57 @@ module.exports = {
     }
   },
 
+  DoesUserExist: async function (req, res) {
+    let connection;
+    try {
+      connection = await getConnection();
+      const username = req.query.username;
+      const query = `select user_id from users where username =:username`;
+      const binds = { username: username };
+
+      try {
+        const result = await connection.execute(query, binds);
+        console.log(result.rows);
+      } catch (error) {
+        console.error("Error executing SQL query:", error);
+        res.status(500).send("Internal Server Error");
+      }
+
+      try {
+        const user_id = result.rows;
+        console.log("save id as a constant", user_id);
+
+        const query = "exec checker(:user_id)";
+        const binds = { user_id: user_id };
+
+        try {
+          const result = await connection.execute(query, binds);
+          console.log(result.rows);
+        } catch {
+          console.error("Error executing SQL query:", error);
+          res
+            .status(500)
+            .send("Internal Server Error while running the procedure");
+        }
+      } catch (error) {
+        console.error("Error in seeing is the id is in the table:", error);
+        res.status(500).send("inner issue");
+      }
+    } catch (error) {
+      console.error("Error executing SQL query:", error);
+      res.status(500).send("Internal Server Error");
+    } finally {
+      if (connection) {
+        try {
+          // Release the connection when done
+          await connection.close();
+        } catch (error) {
+          console.error("Error closing database connection:", error);
+        }
+      }
+    }
+  },
+
   getuserswithCondition: async function (req, res) {
     let connection;
     try {
