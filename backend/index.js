@@ -62,6 +62,9 @@ app.use("/seats", seatsRouter);
 const ticketRouter = require("./routes/ticketRouter");
 app.use("/tickets", ticketRouter);
 
+const ticket_typeRouter = require("./routes/ticket_typeRouter");
+app.use("/ticket_type", ticket_typeRouter);
+
 const bookingsRouter = require("./routes/bookingsRouter");
 app.use("/bookings", bookingsRouter);
 

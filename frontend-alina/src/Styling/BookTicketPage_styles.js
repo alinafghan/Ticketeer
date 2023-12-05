@@ -35,6 +35,7 @@ const BookTicketPage_styles = makeStyles((theme) => ({
   formField: {
     justifyContent: "center",
     display: "flex",
+    paddingBottom: 30,
   },
 
   Button: {

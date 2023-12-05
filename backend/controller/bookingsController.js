@@ -114,13 +114,12 @@ module.exports = {
     let connection;
     try {
       connection = await getConnection();
-      const query = `INSERT INTO bookings (user_id,ticket_id,event_id,amt_paid,transaction_time) VALUES (:1, :2,:3,:4,:5)`;
+      const query = `INSERT INTO bookings (user_id,ticket_id,event_id,ticket_type) VALUES (:1,:2,:3,:4)`;
       const binds = [
         req.body.user_id,
         req.body.ticket_id,
         req.body.event_id,
-        req.body.amt_paid,
-        req.body.transaction_time,
+        req.body.ticket_type,
       ];
       const options = {
         autoCommit: true,

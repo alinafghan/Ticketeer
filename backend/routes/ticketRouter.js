@@ -10,11 +10,15 @@ router.get("/GetWholeTable", ticketController.GetWholeTable);
 
 router.get("/getticketwithCondition", ticketController.getTicketswithCondition);
 
-router.post("/AddNewticket",ticketController.AddNewTickets);
-router.put("/Updateticket",ticketController.UpdateTickets);
+router.post("/AddNewticket", ticketController.AddNewTickets);
+router.put("/Updateticket", ticketController.UpdateTickets);
 
-router.delete("/DeleteticketAtID",ticketController.DeleteTicketsAtID);
-router.delete("/DeleteticketWithCondition", ticketController.DeleteTicketsWithCondition);
+router.delete("/DeleteticketAtID", ticketController.DeleteTicketsAtID);
+router.delete(
+  "/DeleteticketWithCondition",
+  ticketController.DeleteTicketsWithCondition
+);
 
+router.get("/findNextId", ticketController.FindNextAvailableTickForEvent);
 
 module.exports = router;

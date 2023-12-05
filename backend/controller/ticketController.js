@@ -149,6 +149,35 @@ module.exports = {
     }
   },
 
+  FindNextAvailableTickForEvent: async function (req, res) {
+    let connection;
+    try {
+      connection = await getConnection();
+
+      // Extract the event_id from the query parameters
+      const eventId = req.query.event_id;
+
+      const query = `select ticket_id from tickets where event_id = :1 and booked = 'n' fetch first 1 rows only`;
+      const binds = [eventId];
+
+      const table = await connection.execute(query, binds);
+      console.log(table.rows);
+      res.status(200).send(table.rows);
+    } catch (error) {
+      console.error("Error executing SQL query:", error);
+      res.status(500).send("Internal Server Error");
+    } finally {
+      if (connection) {
+        try {
+          // Release the connection when done
+          await connection.close();
+        } catch (error) {
+          console.error("Error closing database connection:", error);
+        }
+      }
+    }
+  },
+
   UpdateTickets: async function (req, res) {
     let connection;
     try {

@@ -1,11 +1,18 @@
 const { getConnection } = require("../config/connection");
 
+// Path: ticket_type/....
+
+// event_id int NOT NULL,
+// ticket_type int NOT NULL,
+// seat_num int NOT NULL,
+// venue_id int NOT NULL,
+// booked char(1),
 module.exports = {
-  removeAllusers: async function (req, res) {
+  removeAllticket_type: async function (req, res) {
     let connection;
     try {
       connection = await getConnection();
-      const query = "TRUNCATE TABLE users";
+      const query = "TRUNCATE TABLE ticket_type";
       const options = {
         autoCommit: true, // Commit each insert immediately
       };
@@ -26,85 +33,12 @@ module.exports = {
       }
     }
   },
-  populateusers: async function (req, res) {
-    let connection;
-    try {
-      connection = await getConnection();
-      const datausers = [
-        [
-          "Beyonce",
-          "beyonce@gmail.com",
-          3028898756,
-          "beybey2828",
-          "Colorado",
-          1,
-        ],
-        [
-          "TSwizzle",
-          "taylorswift@gmail.com",
-          3028898756,
-          "password1",
-          "Colorado",
-          1,
-        ],
-        ["Jayz", "jayzbayz@gmail.com", 3028898756, "password1", "Colorado", 1],
-        [
-          "Spongebob Squarepants",
-          "squidwardfan@gmail.com",
-          3028898756,
-          "password1",
-          "Colorado",
-          3,
-        ],
-        [
-          "the Strokes",
-          "roomonfire@hotmail.com",
-          3028898756,
-          "password1",
-          "Colorado",
-          1,
-        ],
-        [
-          "Nasty Nas",
-          "theking@gmail.com",
-          3028898756,
-          "password1",
-          "Colorado",
-          1,
-        ],
-      ];
-
-      for (const usersData of datausers) {
-        const queryusers = `INSERT INTO users (username, email, phone_number,password, city_state_country, user_type) VALUES (:1, :2, :3)`;
-        const bindsusers = usersData; // Bind the usersData array directly
-        const optionsusers = {
-          autoCommit: true, // Commit each insert immediately
-        };
-        // console.log(query , "aaa----------->>>>")
-        await connection.execute(queryusers, bindsusers, optionsusers);
-      }
-
-      res.status(202).send("Populated");
-    } catch (error) {
-      console.error("Error executing SQL query:", error);
-      res.status(500).send("Internal Server Error");
-    } finally {
-      if (connection) {
-        try {
-          // Release the connection when done
-          await connection.close();
-        } catch (error) {
-          console.error("Error closing database connection:", error);
-        }
-      }
-    }
-  },
 
   GetWholeTable: async function (req, res) {
     let connection;
     try {
       connection = await getConnection();
-      const result = await connection.execute("SELECT * from users");
+      const result = await connection.execute("SELECT * from ticket_type");
       const data = result.rows;
       res.status(200).json(data);
     } catch (error) {
@@ -121,42 +55,12 @@ module.exports = {
     }
   },
 
-  FindIDfromUsername: async function (req, res) {
+  getticket_typewithCondition: async function (req, res) {
     let connection;
     try {
+      // console.log(req, "req from getDesertwithCondition")
       connection = await getConnection();
-      const username = req.query.username;
-      const query = `select user_id from users where username =:username`;
-      const binds = { username: username };
-
-      try {
-        const result = await connection.execute(query, binds);
-        console.log(result.rows);
-        res.status(200).send(result.rows);
-      } catch (error) {
-        console.error("Error executing SQL query:", error);
-        res.status(500).send("Internal Server Error");
-      }
-    } catch (error) {
-      console.error("Error executing SQL query:", error);
-      res.status(500).send("Internal Server Error");
-    } finally {
-      if (connection) {
-        try {
-          // Release the connection when done
-          await connection.close();
-        } catch (error) {
-          console.error("Error closing database connection:", error);
-        }
-      }
-    }
-  },
-
-  getuserswithCondition: async function (req, res) {
-    let connection;
-    try {
-      connection = await getConnection();
-      const query = `SELECT users.*,users.user_id, users.username,users.email, users.phone_number,users.password, users.city_state_country, users.user_type FROM users WHERE ${req.body.condition}`;
+      const query = `SELECT * FROM ticket_type WHERE ${req.body.condition}`;
 
       const table = await connection.execute(query);
       // console.log(table.rows);
@@ -176,23 +80,21 @@ module.exports = {
     }
   },
 
-  AddNewuser: async function (req, res) {
+  AddNewticket_type: async function (req, res) {
     let connection;
     try {
       connection = await getConnection();
-      const query = `INSERT INTO users ( username,email, phone_number,password, city_state_country,num_of_tickets_booked) VALUES (:1, :2, :3, :4, :5, :6)`;
+      const query = `INSERT INTO ticket_type (event_id, ticket_type,seat_num, venue_id,booked) VALUES (:1, :2, :3,:4, 'n')`;
       const binds = [
-        req.body.username,
-        req.body.email,
-        req.body.phone_number,
-        req.body.password,
-        req.body.city_state_country,
-        req.body.num_of_tickets_booked,
+        req.body.event_id,
+        req.body.ticket_type,
+        req.body.seat_num,
+        req.body.venue_id,
       ];
       const options = {
-        autoCommit: true,
+        autoCommit: true, // Commit each insert immediately
       };
-
+      // console.log(query , "aaa----------->>>>")
       await connection.execute(query, binds, options);
       res.status(202).send("Added");
     } catch (error) {
@@ -210,21 +112,48 @@ module.exports = {
     }
   },
 
-  Updateusers: async function (req, res) {
+  FindNextAvailableTickForEvent: async function (req, res) {
+    let connection;
+    try {
+      connection = await getConnection();
+
+      // Extract the event_id from the query parameters
+      const eventId = req.query.event_id;
+
+      const query = `select ticket_id from ticket_type where event_id = :1 and booked = 'n' fetch first 1 rows only`;
+      const binds = [eventId];
+
+      const table = await connection.execute(query, binds);
+      console.log(table.rows);
+      res.status(200).send(table.rows);
+    } catch (error) {
+      console.error("Error executing SQL query:", error);
+      res.status(500).send("Internal Server Error");
+    } finally {
+      if (connection) {
+        try {
+          // Release the connection when done
+          await connection.close();
+        } catch (error) {
+          console.error("Error closing database connection:", error);
+        }
+      }
+    }
+  },
+
+  Updateticket_type: async function (req, res) {
     let connection;
     try {
       connection = await getConnection();
       const binds = [
-        req.body.username,
-        req.body.email,
-        req.body.phone_number,
-        req.body.password,
-        req.body.city_state_country,
-        req.body.user_type,
+        req.body.event_id,
+        req.body.ticket_type,
+        req.body.seat_num,
+        req.body.booked,
       ];
 
       console.log("binds -> ", binds);
-      const query = `UPDATE users SET  username= :1,email =:2, phone_number =: 3,password =: 4, city_state_country =:5, user_type = :6 WHERE ${req.body.condition}`;
+      const query = `UPDATE ticket_type SET event_id = :1, ticket_type = :2, seat_num = :3, booked = :4 WHERE ${req.body.condition}`;
       const options = {
         autoCommit: true, // Commit each insert immediately
       };
@@ -247,12 +176,12 @@ module.exports = {
     }
   },
 
-  DeleteUserAtID: async function (req, res) {
+  Deleteticket_typeAtID: async function (req, res) {
     let connection;
     try {
       connection = await getConnection();
-      const query = `Delete from users WHERE user_id = :1`;
-      const binds = [req.body.user_id];
+      const query = `Delete from ticket_type WHERE ticket_id = :1`;
+      const binds = [req.body.ticket_id];
       const options = {
         autoCommit: true, // Commit each insert immediately
       };
@@ -273,14 +202,14 @@ module.exports = {
     }
   },
 
-  DeleteUserWithCondition: async function (req, res) {
+  Deleteticket_typeWithCondition: async function (req, res) {
     let connection;
     try {
       connection = await getConnection();
-      const query = `Delete from users WHERE ${req.body.condition}`;
+      const query = `Delete from ticket_type WHERE ${req.body.condition}`;
 
       await connection.execute(query);
-      res.status(202).send("Deleted");
+      res.status(202).send("Deleted!");
     } catch (error) {
       console.log("Error executing SQL query:", error);
       res.status(500).send("Internal Server Error");

@@ -10,13 +10,12 @@ router.get("/GetWholeTable", seatsController.GetWholeTable);
 
 router.get("/getseatswithCondition", seatsController.getseatswithCondition);
 
-router.post("/AddNewseats",seatsController.AddNewseats);
+router.post("/AddNewseats", seatsController.AddNewseats);
 
-router.put("/Updateseats",seatsController.Updateseats);
+router.put("/Updateseats", seatsController.Updateseats);
 
-router.delete("/DeleteseatsAtID",seatsController.DeleteseatsAtID);
+router.delete("/DeleteseatsAtID", seatsController.DeleteseatsAtID);
 
-router.delete("/DeleteseatsAtID",seatsController.DeleteseatsWithCondition);
-
+router.delete("/DeleteseatsAtID", seatsController.DeleteseatsWithCondition);
 
 module.exports = router;

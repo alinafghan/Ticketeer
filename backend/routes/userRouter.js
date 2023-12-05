@@ -10,12 +10,15 @@ router.get("/GetWholeTable", userController.GetWholeTable);
 
 router.get("/getuserwithCondition", userController.getuserswithCondition);
 
-router.post("/AddNewuser",userController.AddNewuser);
-router.put("/Updateuser",userController.Updateusers);
+router.post("/AddNewuser", userController.AddNewuser);
+router.put("/Updateuser", userController.Updateusers);
 
-router.delete("/DeleteuserAtID",userController.DeleteUserAtID);
-router.delete("/DeleteuserWithCondition", userController.DeleteUserWithCondition);
+router.delete("/DeleteuserAtID", userController.DeleteUserAtID);
+router.delete(
+  "/DeleteuserWithCondition",
+  userController.DeleteUserWithCondition
+);
 
-
+router.get("/findIDfromusername", userController.FindIDfromUsername);
 
 module.exports = router;

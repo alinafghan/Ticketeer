@@ -63,6 +63,110 @@ SELECT
 FROM
   ORGANIZERS;
 
+set serveroutput on;
+
+CREATE OR REPLACE TRIGGER BOOKINGS_PROCEDURE BEFORE
+  INSERT ON BOOKINGS FOR EACH ROW
+DECLARE
+  NUM_OF_TICKS      INT;
+  NUM_OF_VIP_TICKS  INT;
+  NUM_OF_BOOKED_VIP INT;
+  NUM_OF_BOOKED_GEN INT;
+BEGIN
+  SELECT
+    NUM_OF_TICKETS INTO NUM_OF_TICKS
+  FROM
+    EVENTS
+  WHERE
+    EVENT_ID = :NEW.EVENT_ID;
+  DBMS_OUTPUT.PUT_LINE('number of tickets'
+                       ||NUM_OF_TICKS);
+  SELECT
+    NUM_OF_VIP_TICKETS INTO NUM_OF_VIP_TICKS
+  FROM
+    EVENTS
+  WHERE
+    EVENT_ID = :NEW.EVENT_ID;
+  DBMS_OUTPUT.PUT_LINE('number of vip tickets'
+                       ||NUM_OF_VIP_TICKS);
+ -- Count booked VIP and general tickets
+  SELECT
+    COUNT(BOOKED) INTO NUM_OF_BOOKED_VIP
+  FROM
+    TICKETS
+  WHERE
+    TICKET_TYPE = 1
+    AND BOOKED = 'y'
+    AND EVENT_ID = :NEW.EVENT_ID;
+  DBMS_OUTPUT.PUT_LINE('number of booked vip tickets'
+                       ||NUM_OF_BOOKED_VIP);
+  SELECT
+    COUNT(BOOKED) INTO NUM_OF_BOOKED_GEN
+  FROM
+    TICKETS
+  WHERE
+    TICKET_TYPE = 0
+    AND BOOKED = 'y'
+    AND EVENT_ID = :NEW.EVENT_ID;
+  DBMS_OUTPUT.PUT_LINE('number of booked general tickets'
+                       ||NUM_OF_BOOKED_GEN);
+  IF :NEW.TICKET_TYPE = 1 THEN
+    DBMS_OUTPUT.PUT_LINE('the type is vip');
+    IF NUM_OF_BOOKED_VIP < NUM_OF_VIP_TICKS THEN
+      DBMS_OUTPUT.PUT_LINE('vip ticks are available');
+      UPDATE TICKETS
+      SET
+        BOOKED = 'y'
+      WHERE
+        TICKET_ID = :NEW.TICKET_ID
+        AND EVENT_ID = :NEW.EVENT_ID
+        AND TICKET_TYPE = 1
+        AND ROWNUM = 1;
+      UPDATE USERS
+      SET
+        NUM_OF_TICKETS_BOOKED = (
+          NUM_OF_TICKETS_BOOKED+1
+        )
+      WHERE
+        USER_ID = :NEW.USER_ID;
+      DBMS_OUTPUT.PUT_LINE('one VIP insertion');
+    END IF;
+  ELSIF :NEW.TICKET_TYPE = 0 THEN
+    DBMS_OUTPUT.PUT_LINE('the type is general');
+    IF NUM_OF_BOOKED_GEN < (NUM_OF_TICKS - NUM_OF_VIP_TICKS) THEN
+      UPDATE TICKETS
+      SET
+        BOOKED = 'y'
+      WHERE
+        TICKET_ID = :NEW.TICKET_ID
+        AND EVENT_ID = :NEW.EVENT_ID
+        AND TICKET_TYPE = 0
+        AND ROWNUM = 1;
+      UPDATE USERS
+      SET
+        NUM_OF_TICKETS_BOOKED = (
+          NUM_OF_TICKETS_BOOKED+1
+        )
+      WHERE
+        USER_ID = :NEW.USER_ID;
+      DBMS_OUTPUT.PUT_LINE('one general insertion');
+    END IF;
+  END IF;
+END;
+/
+
+INSERT INTO BOOKINGS (
+  USER_ID,
+  TICKET_ID,
+  EVENT_ID,
+  TICKET_TYPE
+) VALUES (
+  1,
+  1,
+  46,
+  1
+);
+
 CREATE TABLE PERFORMER_TYPE (
   PERFORMER_TYPE_ID INT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY,
   TYPE_NAME VARCHAR2(255) NOT NULL
