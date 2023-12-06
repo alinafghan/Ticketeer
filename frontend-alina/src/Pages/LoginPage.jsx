@@ -10,22 +10,20 @@ import {
   CardContent,
 } from "@material-ui/core";
 import loginStyles from "../Styling/login_styles";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const Navigate = useNavigate();
   const classes = loginStyles();
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
   const [formData, setFormData] = useState({
     user_id: "",
-    username: "",
-    password: "",
   });
-
-  //select username from the input, check if there are any rows, if yes proceed, if no say account doesnt exist.
-  //to see if there are any rows, call the checker procedure
 
   const handleChangeUser = async (event) => {
     const inputUsername = event.target.value;
+    console.log("username from frontend", inputUsername);
     try {
       const response = await fetch(
         `http://localhost:3005/users/findIDfromusername?username=${inputUsername}`,
@@ -62,10 +60,12 @@ const Login = () => {
     console.log("FormData:", formData);
   }, [formData]);
 
-  const DoesUserExist = async (userId) => {
+  const DoesUserExist = async (event) => {
+    const user_id = formData.user_id;
+    console.log("user_id from frontend", user_id);
     try {
       const response = await fetch(
-        `http://localhost:3005/users/DoesUserExist?user_id=${userId}`,
+        `http://localhost:3005/users/DoesUserExist?user_id=${user_id}`,
         {
           method: "GET",
           headers: {
@@ -80,13 +80,14 @@ const Login = () => {
         );
       }
 
-      const responseText = await response.text();
-      const nextTicketId = responseText
-        ? JSON.parse(responseText)[0][0]
-        : undefined;
+      const responseBody = await response.text();
 
-      console.log("Next Ticket ID:", nextTicketId);
-      return nextTicketId;
+      if (responseBody === "User exists!") {
+        console.log("Ticket booked!");
+        Navigate("/home");
+      } else {
+        console.log("Unexpected response:", responseBody);
+      }
     } catch (error) {
       console.error(error);
       return undefined;
@@ -163,7 +164,10 @@ const Login = () => {
                 <br></br>
 
                 <div className={classes.LoginButtonDiv}>
-                  <Button onClick="" className={classes.LoginButton}>
+                  <Button
+                    onClick={DoesUserExist}
+                    className={classes.LoginButton}
+                  >
                     {" "}
                     LOGIN{" "}
                   </Button>

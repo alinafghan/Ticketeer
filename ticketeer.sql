@@ -157,10 +157,50 @@ BEGIN
 END;
 /
 
+DROP TRIGGER BOOKINGS_PROCEDURE;
+
+INSERT INTO BOOKINGS (
+  USER_ID,
+  TICKET_ID,
+  EVENT_ID,
+  TICKET_TYPE
+) VALUES (
+  1,
+  0,
+  46,
+  1
+);
+
+INSERT INTO BOOKINGS (
+  USER_ID,
+  EVENT_ID,
+  TICKET_ID,
+  TICKET_TYPE
+) VALUES (
+  1,
+  46,
+  0,
+  1
+);
+
+SELECT
+  *
+FROM
+  BOOKINGS;
+
+DELETE FROM BOOKINGS
+WHERE
+  TICKET_ID = 0;
+
 SELECT
   *
 FROM
   USERS;
+
+SELECT
+  *
+FROM
+  BOOKINGS;
 
 CREATE OR REPLACE PROCEDURE CHECKER(
   INPUT_USER_ID INT
@@ -179,13 +219,12 @@ BEGIN
                                     || INPUT_USER_ID
                                     || ' does not exist.');
   ELSE
-    THEN
-      DBMS_OUTPUT.PUT_LINE('LOGIN SUCCESSFUL!');
-    END IF;
-  END CHECKER;
+    DBMS_OUTPUT.PUT_LINE('LOGIN SUCCESSFUL!');
+  END IF;
+END CHECKER;
 /
 
-exec checker(11);
+exec checker(189);
 
 INSERT INTO BOOKINGS (
   USER_ID,

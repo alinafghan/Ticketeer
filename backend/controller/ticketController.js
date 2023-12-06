@@ -156,6 +156,7 @@ module.exports = {
 
       // Extract the event_id from the query parameters
       const eventId = req.query.event_id;
+      console.log(eventId);
 
       const query = `select ticket_id from tickets where event_id = :1 and booked = 'n' fetch first 1 rows only`;
       const binds = [eventId];
