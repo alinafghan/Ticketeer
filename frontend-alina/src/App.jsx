@@ -9,6 +9,7 @@ import CreateEventPage from "./Pages/CreateEventPage";
 import LoginAsOrganizer from "./Pages/loginAsOrganizer";
 import RegisterAsOrganizer from "./Pages/RegisterAsOrganizer";
 import BookTicketPage from "./Pages/BookTicketPage";
+import DeleteEventPage from "./Pages/DeleteEventPage";
 
 const App = () => {
   return (
@@ -47,6 +48,10 @@ const App = () => {
 
       <Routes>
         <Route path="/book" element={<BookTicketPage />} />
+      </Routes>
+
+      <Routes>
+        <Route path="/delete/Event" element={<DeleteEventPage />} />
       </Routes>
     </Router>
   );

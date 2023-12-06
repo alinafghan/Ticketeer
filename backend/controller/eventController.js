@@ -49,6 +49,7 @@ module.exports = {
       }
     }
   },
+
   populateEvents: async function (req, res) {
     let connection;
     try {
@@ -238,13 +239,13 @@ module.exports = {
     try {
       connection = await getConnection();
       const query = `Delete from events WHERE event_id = :1`;
-      const binds = [req.body.id];
+      const binds = [req.body.event_id];
       const options = {
         autoCommit: true, // Commit each insert immediately
       };
 
       await connection.execute(query, binds, options);
-      res.status(202).send("Deleted");
+      res.status(202).send("Deleted!");
     } catch (error) {
       console.log("Error executing SQL query:", error);
       res.status(500).send("Internal Server Error");
@@ -254,6 +255,39 @@ module.exports = {
           await connection.close();
         } catch (error) {
           console.log("Error closing database connection:", error);
+        }
+      }
+    }
+  },
+
+  FindIDfromEventname: async function (req, res) {
+    let connection;
+    try {
+      connection = await getConnection();
+      console.log("called");
+      const event_name = req.query.event_name;
+
+      const query = `select event_id from events where event_name =:event_name`;
+      const binds = { event_name: event_name };
+
+      try {
+        const result = await connection.execute(query, binds);
+        console.log(result.rows);
+        res.status(200).send(result.rows);
+      } catch (error) {
+        console.error("Error executing SQL query:", error);
+        res.status(500).send("Internal Server Error");
+      }
+    } catch (error) {
+      console.error("Error executing SQL query:", error);
+      res.status(500).send("Internal Server Error");
+    } finally {
+      if (connection) {
+        try {
+          // Release the connection when done
+          await connection.close();
+        } catch (error) {
+          console.error("Error closing database connection:", error);
         }
       }
     }
