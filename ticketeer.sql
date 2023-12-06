@@ -224,7 +224,34 @@ BEGIN
 END CHECKER;
 /
 
-exec checker(189);
+CREATE OR REPLACE PROCEDURE ORGCHECKER(
+  INPUT_USER_ID INT
+) AS
+  USER_COUNT NUMBER;
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('called.');
+  SELECT
+    COUNT(*) INTO USER_COUNT
+  FROM
+    organizers
+  WHERE
+    organizer_id = INPUT_USER_ID;
+  IF USER_COUNT = 0 THEN
+    RAISE_APPLICATION_ERROR(-20002, 'Organizer with ID '
+                                    || INPUT_USER_ID
+                                    || ' does not exist.');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('LOGIN SUCCESSFUL!');
+  END IF;
+END ORGCHECKER;
+/
+
+begin
+orgchecker(21);
+end;
+
+select * from organizers;
+
 
 INSERT INTO BOOKINGS (
   USER_ID,

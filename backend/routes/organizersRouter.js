@@ -8,15 +8,27 @@ router.post("/populateorganizerss", organizersController.populateorganizers);
 
 router.get("/GetWholeTable", organizersController.GetWholeTable);
 
-router.get("/getorganizerswithCondition", organizersController.getorganizerswithCondition);
+router.get(
+  "/getorganizerswithCondition",
+  organizersController.getorganizerswithCondition
+);
 
-router.post("/AddNeworganizers",organizersController.AddNeworganizers);
+router.post("/AddNeworganizers", organizersController.AddNeworganizers);
 
-router.put("/Updateorganizers",organizersController.Updateorganizers);
+router.put("/Updateorganizers", organizersController.Updateorganizers);
 
-router.delete("/DeleteorganizersAtID",organizersController.DeleteorganizersAtID);
+router.delete(
+  "/DeleteorganizersAtID",
+  organizersController.DeleteorganizersAtID
+);
 
-router.delete("/DeleteorganizersAtID",organizersController.DeleteorganizersWithCondition);
+router.delete(
+  "/DeleteorganizersAtID",
+  organizersController.DeleteorganizersWithCondition
+);
 
+router.get("/findIDfromusername", organizersController.FindIDfromUsername);
+
+router.get("/DoesOrganizerExist", organizersController.DoesOrganizerExist);
 
 module.exports = router;
