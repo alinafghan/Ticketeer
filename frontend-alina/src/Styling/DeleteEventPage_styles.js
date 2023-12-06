@@ -18,29 +18,29 @@ const DeleteEventPage_styles = makeStyles((theme) => ({
   },
 
   middleDiv: {
-    marginTop: 200,
-    justifyContent: "center",
-
+    marginTop: 100,
     display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    justifyContent: "center",
   },
 
   Card: {
     display: "flex",
-    width: "70%",
-    height: "200%",
+    width: "75%",
   },
 
-  cardContainer: {
-    display: "flex",
-    gap: 16, // Adjust the gap as needed
-    justifyContent: "center", // Optional: Center the cards horizontally
+  CardLeft: {
+    display: "inline-block",
+    width: "40%",
   },
-  EventCard: {
-    flex: 1, // Allow the cards to grow and fill the available space
-    maxWidth: 500,
-    // Add any other styles you need for the cards
+
+  CardRight: {
+    display: "inline-block",
+    width: "60%",
+  },
+
+  ButtonDiv: {
+    justifyContent: "center",
+    display: "flex",
   },
 
   Button: {

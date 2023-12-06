@@ -140,7 +140,7 @@ const DeleteEventPage = () => {
           <div className={classes.CardRight}>
             <CardContent>
               <CardActions>
-                <Typography variant="h5"></Typography>
+                {/* <Typography variant="h5">EVENT</Typography> */}
 
                 <Typography variant="h5"></Typography>
 
