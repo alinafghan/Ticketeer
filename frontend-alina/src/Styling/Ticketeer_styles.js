@@ -106,6 +106,8 @@ const frontpageStyles = makeStyles((theme) => ({
     fontSize: "12px",
     width: "33%",
     backgroundColor: "#C1E1D2",
+    backgroundImage: "url(standup.jpg)",
+    backgroundSize: 'cover',
     height: "100vh",
   },
 
@@ -121,6 +123,8 @@ const frontpageStyles = makeStyles((theme) => ({
     fontSize: "12px",
     width: "33%",
     height: "100vh",
+    backgroundImage: "url(fb.jpg)",
+    backgroundSize: 'cover',
     backgroundColor: "#FFD580",
     justifyContent: "center",
   },
@@ -141,7 +145,8 @@ const frontpageStyles = makeStyles((theme) => ({
     width: "33%",
     backgroundColor: "#0E2038",
     height: "100vh",
-    backgroundImage: "url(use_this.jpg)",
+    backgroundImage: "url(conc.jpg)",
+    backgroundSize: 'cover',
   },
 
   middle2Leftwriting: {

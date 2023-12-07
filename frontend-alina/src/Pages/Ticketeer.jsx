@@ -55,7 +55,8 @@ const Ticketeer = () => {
             </a>
           </div>
         </div>
-        <Divider variant="middle"></Divider>
+        <Divider variant="middle">
+        </Divider>
         <div className={classes.middleDiv}>
           <Typography variant="h4" className={classes.middleDivWriting}>
             We believe that in a world where people have become numbers, a
@@ -75,7 +76,7 @@ const Ticketeer = () => {
             >
               {isHoveringLeft
                 ? "purchase tickets online and save yourself a spot!"
-                : "TICKETEER"}
+                : " "}
             </Typography>
           </div>
           <div
