@@ -31,7 +31,7 @@ const App = () => {
       </Routes>
 
       <Routes>
-        <Route path="/event" element={<EventPage />} />
+        <Route path="/event/:event_id" element={<EventPage />} />
       </Routes>
 
       <Routes>

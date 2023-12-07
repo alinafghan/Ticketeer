@@ -72,8 +72,7 @@ const HomePage = () => {
             <div className={classes.parent}>
               <div className={classes.one}>
                 <Typography variant="h5" color="textPrimary" gutterBottom>
-                  Happening soon near you!{" "}
-                  <a href="/"> Change location</a>
+                  Happening soon near you! <a href="/"> Change location</a>
                 </Typography>
               </div>
               <div className={classes.two}>
@@ -92,9 +91,11 @@ const HomePage = () => {
           <div className={classes.gridContainer}>
             <Grid container spacing={9} justify="center">
               {events.map((event) => (
-                <Grid key={event.event_id} item xs={12} sm={3}>
+                <Grid key={event[0]} item xs={12} sm={3}>
                   <Card sx={{ maxWidth: 340 }}>
-                    <CardActionArea component={Link} to={`/event/${event.event_id}`}> // Link to the specific event's page
+                    <CardActionArea component={Link} to={`/event/${event[0]}`}>
+                      {" "}
+                      // Link to the specific event's page
                       <CardMedia
                         component="img"
                         sx={{ height: 180 }}
