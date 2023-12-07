@@ -157,10 +157,50 @@ BEGIN
 END;
 /
 
+DROP TRIGGER BOOKINGS_PROCEDURE;
+
+INSERT INTO BOOKINGS (
+  USER_ID,
+  TICKET_ID,
+  EVENT_ID,
+  TICKET_TYPE
+) VALUES (
+  1,
+  0,
+  46,
+  1
+);
+
+INSERT INTO BOOKINGS (
+  USER_ID,
+  EVENT_ID,
+  TICKET_ID,
+  TICKET_TYPE
+) VALUES (
+  1,
+  46,
+  0,
+  1
+);
+
+SELECT
+  *
+FROM
+  BOOKINGS;
+
+DELETE FROM BOOKINGS
+WHERE
+  TICKET_ID = 0;
+
 SELECT
   *
 FROM
   USERS;
+
+SELECT
+  *
+FROM
+  BOOKINGS;
 
 CREATE OR REPLACE PROCEDURE CHECKER(
   INPUT_USER_ID INT
@@ -179,13 +219,39 @@ BEGIN
                                     || INPUT_USER_ID
                                     || ' does not exist.');
   ELSE
-    THEN
-      DBMS_OUTPUT.PUT_LINE('LOGIN SUCCESSFUL!');
-    END IF;
-  END CHECKER;
+    DBMS_OUTPUT.PUT_LINE('LOGIN SUCCESSFUL!');
+  END IF;
+END CHECKER;
 /
 
-exec checker(11);
+CREATE OR REPLACE PROCEDURE ORGCHECKER(
+  INPUT_USER_ID INT
+) AS
+  USER_COUNT NUMBER;
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('called.');
+  SELECT
+    COUNT(*) INTO USER_COUNT
+  FROM
+    organizers
+  WHERE
+    organizer_id = INPUT_USER_ID;
+  IF USER_COUNT = 0 THEN
+    RAISE_APPLICATION_ERROR(-20002, 'Organizer with ID '
+                                    || INPUT_USER_ID
+                                    || ' does not exist.');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('LOGIN SUCCESSFUL!');
+  END IF;
+END ORGCHECKER;
+/
+
+begin
+orgchecker(21);
+end;
+
+select * from organizers;
+
 
 INSERT INTO BOOKINGS (
   USER_ID,

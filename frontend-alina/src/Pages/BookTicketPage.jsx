@@ -125,7 +125,7 @@ const BookTicketPage = () => {
 
   const handleChangeTicketType = (selectedtickettype) => {
     const selectedTicketTypeObject = ticket_type.find(
-      (TicketType) => TicketType.ticket_type === selectedtickettype
+      (TicketType) => TicketType.ticket_type === selectedtickettype //strict comparator
     );
     setSelectedTicketType(selectedTicketTypeObject);
     console.log("Selected Ticket Type:", selectedTicketTypeObject);
@@ -135,7 +135,7 @@ const BookTicketPage = () => {
         ? selectedTicketTypeObject.ticket_type
         : "",
     });
-    console.log("FormData after ticketype Change:", formData);
+    console.log("FormData after ticket type Change:", formData);
   };
 
   const classes = BookTicketPage_styles();
