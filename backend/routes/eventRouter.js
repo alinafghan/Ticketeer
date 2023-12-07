@@ -12,5 +12,6 @@ router.post("/addEvent", eventController.AddNewEvent);
 router.put("/updateEvent", eventController.UpdateEvent);
 router.delete("/deleteEvent", eventController.DeleteEventAtID);
 router.get("/getIDfromname", eventController.FindIDfromEventname);
+router.get("/findEventfromID", eventController.FindEventfromID);
 
 module.exports = router;

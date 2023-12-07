@@ -13,6 +13,7 @@ import {
   Toolbar,
   CardActionArea,
 } from "@material-ui/core";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import Sidebar from "../Sidebar";
 import { Search } from "@material-ui/icons";
 import HomePage_styles from "../Styling/HomePage_styles";
@@ -71,7 +72,7 @@ const HomePage = () => {
             <div className={classes.parent}>
               <div className={classes.one}>
                 <Typography variant="h5" color="textPrimary" gutterBottom>
-                  Happening soon at a location near you!{" "}
+                  Happening soon near you!{" "}
                   <a href="/"> Change location</a>
                 </Typography>
               </div>
@@ -93,7 +94,7 @@ const HomePage = () => {
               {events.map((event) => (
                 <Grid key={event.event_id} item xs={12} sm={3}>
                   <Card sx={{ maxWidth: 340 }}>
-                    <CardActionArea>
+                    <CardActionArea component={Link} to={`/event/${event.event_id}`}> // Link to the specific event's page
                       <CardMedia
                         component="img"
                         sx={{ height: 180 }}

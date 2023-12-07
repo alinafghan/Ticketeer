@@ -105,29 +105,6 @@ module.exports = {
     }
   },
 
-  GetWholeTable: async function (req, res) {
-    let connection;
-    try {
-      connection = await getConnection();
-      const table = await connection.execute("SELECT * from events");
-      const data = table.rows;
-      res.status(200).send(data);
-    } catch (error) {
-      console.error("Error executing SQL query:", error);
-      res.status(500).send("Internal Server Error");
-    } finally {
-      if (connection) {
-        try {
-          // Release the connection when done
-          await connection.close();
-        } catch (error) {
-          console.error("Error closing database connection:", error);
-        }
-      }
-    }
-    // return table;
-  },
-
   getEventwithCondition: async function (req, res) {
     let connection;
     try {
@@ -151,6 +128,37 @@ module.exports = {
       }
     }
   },
+
+  FindEventfromID: async function (req, res) {
+    let connection;
+    try {
+      connection = await getConnection();
+      const event_id = req.query.event_id;
+      const query = `select * from events where event_id =:event_id`;
+      const binds = { event_id: event_id };
+
+      try {
+        const result = await connection.execute(query, binds);
+        console.log(result.rows);
+        res.status(200).send(result.rows);
+      } catch (error) {
+        console.error("Error executing SQL query:", error);
+        res.status(500).send("Internal Server Error");
+      }
+    } catch (error) {
+      console.error("Error executing SQL query:", error);
+      res.status(500).send("Internal Server Error");
+    } finally {
+      if (connection) {
+        try {
+          // Release the connection when done
+          await connection.close();
+        } catch (error) {
+          console.error("Error closing database connection:", error);
+        }
+      }
+    }},
+  
 
   AddNewEvent: async function (req, res) {
     let connection;

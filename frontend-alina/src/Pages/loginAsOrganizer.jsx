@@ -110,11 +110,10 @@ const LoginAsOrganizer = () => {
             <Card className={classes.LoginCard} sx={{ maxWidth: 340 }}>
               <CardContent>
                 <Typography className={classes.LoginCardText} variant="h4">
-                  Already have an account?{" "}
+                  Log in as an organizer {" "}
                 </Typography>
                 <br></br>
                 <Typography className={classes.LoginCardText} variant="h7">
-                  Log in as an organizer below.
                 </Typography>
                 <br></br>
                 <br></br>

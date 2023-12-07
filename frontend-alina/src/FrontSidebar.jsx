@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Menu,Settings,ExitToApp} from '@material-ui/icons';
 import {IconButton,Box,Drawer,List,Divider,ListItem,ListItemIcon,ListItemText} from '@material-ui/core';
+import { Link } from 'react-router-dom'; // Import the Link component from react-router-dom
 
 export default function TemporaryDrawer() {
 
@@ -28,102 +29,48 @@ export default function TemporaryDrawer() {
     >
       <List>
 
+        <ListItem key='Home' disablePadding>
+          <ListItemIcon>
+            <Menu></Menu>
+          </ListItemIcon>
+          <ListItemText primary={<Link to="/home">Home</Link>} /> {/* */}
+        </ListItem>
 
+        <ListItem key='Search' disablePadding>
+          <ListItemIcon>
+            <Menu></Menu>
+          </ListItemIcon>
+          <ListItemText primary='Search' />
+        </ListItem>
 
-      <ListItem key = 'someTask' disablePadding>
-
-
-{/* <ListItemButton> */}
-
-  <ListItemIcon>
-  <Menu></Menu>
-  </ListItemIcon>
-
-  <ListItemText primary='Task1' />
-{/* </ListItemButton> */}
-
-</ListItem>
-
-<ListItem key = 'Task2' disablePadding>
-
-{/* <ListItemButton> */}
-
-  <ListItemIcon>
-  <Menu></Menu>
-  </ListItemIcon>
-
-  <ListItemText primary='Task2'/>
-{/* </ListItemButton> */}
-
-</ListItem>
-<ListItem key = 'Task3' disablePadding>
-
-{/* <ListItemButton> */}
-
-  <ListItemIcon>
-  <Menu></Menu>
-  </ListItemIcon>
-
-  <ListItemText primary='Task3'/>
-{/* </ListItemButton> */}
-
-</ListItem>
-<ListItem key = 'Task4' disablePadding>
-
-{/* <ListItemButton> */}
-
-  <ListItemIcon>
-  <Menu></Menu>
-  </ListItemIcon>
-
-  <ListItemText primary='Task4'/>
-{/* </ListItemButton> */}
-
-</ListItem>
-
-
-
+    
+        <ListItem key='Events Near You' disablePadding>
+          <ListItemIcon>
+            <Menu></Menu>
+          </ListItemIcon>
+          <ListItemText primary={<Link to="/home">Events Near You</Link>} /> {/* */}
+        </ListItem>
       </List>
-
 
       <Divider />
 
-
       <List> 
 
+        <ListItem key='settings' disablePadding>
+          <ListItemIcon>
+            <Settings /> 
+          </ListItemIcon>
+          <ListItemText primary='Settings' />
+        </ListItem>
 
-          <ListItem key = 'settings' disablePadding>
+        <ListItem key='logout' disablePadding>
+          <ListItemIcon>
+            <ExitToApp /> 
+          </ListItemIcon>
+          <ListItemText primary={<Link to="/login">Log out</Link>} /> {/* Use the Link component to create a link to the login page */}
+        </ListItem>
 
-
-            {/* <ListItemButton> */}
-
-              <ListItemIcon>
-                <Settings /> 
-              </ListItemIcon>
-
-              <ListItemText primary='Settings' />
-            {/* </ListItemButton> */}
-
-            </ListItem>
-
-            <ListItem key = 'logout' disablePadding>
-
-            {/* <ListItemButton> */}
-
-              <ListItemIcon>
-                <ExitToApp /> 
-              </ListItemIcon>
-
-              <ListItemText primary='Log out'/>
-            {/* </ListItemButton> */}
-
-          </ListItem>
-
-        
-        
-        
       </List>
-
 
     </Box>
   );
@@ -135,25 +82,22 @@ export default function TemporaryDrawer() {
 
         <React.Fragment key={anchor}>
 
-<IconButton
-  size="large"
-  edge="start"
-  color = 'inherit'
-//   style={{ color: '#FFFFFF' }}
-  aria-label="menu"
-  sx={{ mr: 2 }}
-  onClick={toggleDrawer(anchor, true)}
->
-  <Menu></Menu>
-</IconButton>
-
+          <IconButton
+            size="large"
+            edge="start"
+            color='inherit'
+            aria-label="menu"
+            sx={{ mr: 2 }}
+            onClick={toggleDrawer(anchor, true)}
+          >
+            <Menu></Menu>
+          </IconButton>
 
           <Drawer
             anchor={anchor}
             open={state[anchor]}
             onClose={toggleDrawer(anchor, false)}
           >
-
             {list(anchor)}
           </Drawer>
         </React.Fragment>
@@ -161,4 +105,3 @@ export default function TemporaryDrawer() {
     </div>
   );
 }
-
