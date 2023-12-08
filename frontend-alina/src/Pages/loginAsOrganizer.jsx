@@ -86,7 +86,7 @@ const LoginAsOrganizer = () => {
 
       if (responseBody === "Organizer exists!") {
         console.log("Proceed to home");
-        Navigate("/home");
+        Navigate("/org_home");
       } else {
         console.log("Unexpected response:", responseBody);
       }
@@ -110,11 +110,13 @@ const LoginAsOrganizer = () => {
             <Card className={classes.LoginCard} sx={{ maxWidth: 340 }}>
               <CardContent>
                 <Typography className={classes.LoginCardText} variant="h4">
-                  Log in as an organizer {" "}
+                  Log in as an organizer{" "}
                 </Typography>
                 <br></br>
-                <Typography className={classes.LoginCardText} variant="h7">
-                </Typography>
+                <Typography
+                  className={classes.LoginCardText}
+                  variant="h7"
+                ></Typography>
                 <br></br>
                 <br></br>
                 <br></br>

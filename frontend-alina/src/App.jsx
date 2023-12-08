@@ -11,12 +11,17 @@ import RegisterAsOrganizer from "./Pages/RegisterAsOrganizer";
 import BookTicketPage from "./Pages/BookTicketPage";
 import DeleteEventPage from "./Pages/DeleteEventPage";
 import UpdateEventPage from "./Pages/UpdateEventPage";
+import OrganizerHomePage from "./Pages/OrganizerHomePage";
 
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/home" element={<HomePage />} />
+      </Routes>
+
+      <Routes>
+        <Route path="/org_home" element={<OrganizerHomePage />} />
       </Routes>
 
       <Routes>
