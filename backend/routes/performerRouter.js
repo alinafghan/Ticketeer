@@ -8,13 +8,19 @@ router.post("/populateperformers", performerController.populatePerformers);
 
 router.get("/GetWholeTable", performerController.GetWholeTable);
 
-router.get("/getperformerwithCondition", performerController.getPerformerswithCondition);
+router.get(
+  "/getperformerwithCondition",
+  performerController.getPerformerswithCondition
+);
 
-router.post("/AddNewperformer",performerController.AddNewPerformer);
-router.put("/Updateperformer",performerController.UpdatePerformers);
+router.post("/AddNewperformer", performerController.AddNewPerformer);
+router.put("/Updateperformer", performerController.UpdatePerformers);
 
-router.delete("/DeleteperformerAtID",performerController.DeletePerformerAtID);
-router.delete("/DeletePerformerWithCondition", performerController.DeletePerformerWithCondition);
-
+router.delete("/DeleteperformerAtID", performerController.DeletePerformerAtID);
+router.delete(
+  "/DeletePerformerWithCondition",
+  performerController.DeletePerformerWithCondition
+);
+router.get("/getPerformerfromID", performerController.FindPerformerfromID);
 
 module.exports = router;

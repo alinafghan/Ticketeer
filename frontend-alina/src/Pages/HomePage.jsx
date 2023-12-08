@@ -25,6 +25,7 @@ const HomePage = () => {
   const commonclasses = useStyles();
 
   const [events, setEvents] = useState([]);
+
   useEffect(() => {
     api
       .get("/events/GetWholeTable")
@@ -95,7 +96,6 @@ const HomePage = () => {
                   <Card sx={{ maxWidth: 340 }}>
                     <CardActionArea component={Link} to={`/event/${event[0]}`}>
                       {" "}
-                      // Link to the specific event's page
                       <CardMedia
                         component="img"
                         sx={{ height: 180 }}

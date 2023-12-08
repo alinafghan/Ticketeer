@@ -157,8 +157,8 @@ module.exports = {
           console.error("Error closing database connection:", error);
         }
       }
-    }},
-  
+    }
+  },
 
   AddNewEvent: async function (req, res) {
     let connection;
