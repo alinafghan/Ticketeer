@@ -205,6 +205,8 @@ module.exports = {
     let connection;
     try {
       connection = await getConnection();
+      console.log("called");
+      const event_id = req.query.event_id;
       const binds = [
         req.body.event_name,
         req.body.venue_id,
@@ -214,19 +216,20 @@ module.exports = {
         req.body.organizer_id,
         req.body.performer_id,
         req.body.event_category_id,
-        req.bod.num_of_tickets,
+        req.body.num_of_tickets,
         req.body.num_of_VIP_tickets,
+        parseInt(event_id),
       ];
 
       console.log("binds -> ", binds);
-      const query = `update events set event_name = :1, venue_id = :2 , event_date =:3, start_time = :4, end_time =:5 , organizer_id =:6, performer_id = :7, event_cateogory_id =:8, num_of_tickets =:9, num_of_VIP_tickets =:10 where ${req.body.condition}`;
+      const query = `update events set event_name = :1, venue_id = :2 , event_date =:3, start_time = :4, end_time =:5 , organizer_id =:6, performer_id = :7, event_category_id =:8, num_of_tickets =:9, num_of_VIP_tickets =:10 where event_id = :11`;
       const options = {
         autoCommit: true,
       };
 
-      const respnse = await connection.execute(query, binds, options);
+      const response = await connection.execute(query, binds, options);
 
-      res.status(202).send("Updated");
+      res.status(202).send("Updated!");
     } catch (error) {
       console.error("Error executing SQL query:", error);
       res.status(500).send("Internal Server Error");

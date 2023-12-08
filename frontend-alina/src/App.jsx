@@ -10,6 +10,7 @@ import LoginAsOrganizer from "./Pages/loginAsOrganizer";
 import RegisterAsOrganizer from "./Pages/RegisterAsOrganizer";
 import BookTicketPage from "./Pages/BookTicketPage";
 import DeleteEventPage from "./Pages/DeleteEventPage";
+import UpdateEventPage from "./Pages/UpdateEventPage";
 
 const App = () => {
   return (
@@ -51,7 +52,11 @@ const App = () => {
       </Routes>
 
       <Routes>
-        <Route path="/delete/Event" element={<DeleteEventPage />} />
+        <Route path="/delete/event" element={<DeleteEventPage />} />
+      </Routes>
+
+      <Routes>
+        <Route path="/update/event/:event_id" element={<UpdateEventPage />} />
       </Routes>
     </Router>
   );
