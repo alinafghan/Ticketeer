@@ -15,7 +15,7 @@ import {
   CardContent,
 } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
-import Sidebar from "../Sidebar";
+import OrganizerSideBar from "../OrganizerSideBar";
 import CreateEventPage_styles from "../Styling/CreateEventPage_styles";
 import useStyles from "../Styling/styles";
 import api from "../api";
@@ -190,7 +190,7 @@ const CreateEventPage = () => {
       <div>
         <AppBar className={commonclasses.Appbar}>
           <Toolbar style={{ display: "flex", justifyContent: "center" }}>
-            <Sidebar />
+            <OrganizerSideBar></OrganizerSideBar>
             <Typography className={classes.header} variant="h4">
               Ticketeer
             </Typography>

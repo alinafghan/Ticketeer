@@ -40,14 +40,34 @@ export default function TemporaryDrawer() {
           <ListItemIcon>
             <Menu></Menu>
           </ListItemIcon>
-          <ListItemText primary={<Link to="/home">Home</Link>} /> {/* */}
+          <ListItemText primary={<Link to="/org_home">Home</Link>} /> {/* */}
         </ListItem>
 
-        <ListItem key="Search" disablePadding>
+        <ListItem key="Create Event" disablePadding>
           <ListItemIcon>
             <Menu></Menu>
           </ListItemIcon>
-          <ListItemText primary="Search" />
+          <ListItemText
+            primary={<Link to="/create/event">Create a new Event</Link>}
+          />{" "}
+        </ListItem>
+
+        <ListItem key="Delete Event" disablePadding>
+          <ListItemIcon>
+            <Menu></Menu>
+          </ListItemIcon>
+          <ListItemText
+            primary={<Link to="/delete/event">Delete an old Event</Link>}
+          />{" "}
+        </ListItem>
+
+        <ListItem key="Delete Event" disablePadding>
+          <ListItemIcon>
+            <Menu></Menu>
+          </ListItemIcon>
+          <ListItemText
+            primary={<Link to="/update/event">Update an old Event</Link>}
+          />{" "}
         </ListItem>
 
         <ListItem key="Events Near You" disablePadding>

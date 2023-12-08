@@ -14,11 +14,11 @@ import {
   CardActionArea,
 } from "@material-ui/core";
 import { Link } from "react-router-dom"; // Import Link from react-router-dom
-import Sidebar from "../Sidebar";
 import { Search } from "@material-ui/icons";
 import HomePage_styles from "../Styling/HomePage_styles";
 import useStyles from "../Styling/styles";
 import api from "../api";
+import OrganizerSideBar from "../OrganizerSideBar";
 
 const OrganizerHomePage = () => {
   const classes = HomePage_styles();
@@ -31,7 +31,7 @@ const OrganizerHomePage = () => {
       .get("/events/GetWholeTable")
       .then((response) => {
         console.log("API Data:", response.data);
-        console.log("something something"); // Log only the data
+        console.log("something something");
         setEvents(response.data);
       })
       .catch((error) => {
@@ -45,7 +45,7 @@ const OrganizerHomePage = () => {
         <div>
           <AppBar className={commonclasses.Appbar}>
             <Toolbar style={{ display: "flex", justifyContent: "center" }}>
-              <Sidebar></Sidebar>
+              <OrganizerSideBar></OrganizerSideBar>
               <Typography variant="h4">Ticketeer</Typography>
               <div style={{ marginLeft: "auto" }}>
                 <Search></Search>

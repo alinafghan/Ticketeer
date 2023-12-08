@@ -12,6 +12,7 @@ import BookTicketPage from "./Pages/BookTicketPage";
 import DeleteEventPage from "./Pages/DeleteEventPage";
 import UpdateEventPage from "./Pages/UpdateEventPage";
 import OrganizerHomePage from "./Pages/OrganizerHomePage";
+import ChooseEventToUpdatePage from "./Pages/ChooseEventToUpdatePage";
 
 const App = () => {
   return (
@@ -38,6 +39,10 @@ const App = () => {
 
       <Routes>
         <Route path="/event/:event_id" element={<EventPage />} />
+      </Routes>
+
+      <Routes>
+        <Route path="/update/event" element={<ChooseEventToUpdatePage />} />
       </Routes>
 
       <Routes>

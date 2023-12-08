@@ -21,9 +21,9 @@ import OrganizerSideBar from "../OrganizerSideBar";
 import DeleteEventPage_styles from "../Styling/DeleteEventPage_styles";
 import useStyles from "../Styling/styles";
 import api from "../api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
-const DeleteEventPage = () => {
+const ChooseEventToUpdatePage = () => {
   const classes = DeleteEventPage_styles();
   const commonclasses = useStyles();
   const Navigate = useNavigate();
@@ -31,37 +31,6 @@ const DeleteEventPage = () => {
   const [formData, setFormData] = useState({
     event_id: "",
   });
-
-  const handleDeleteEvent = async () => {
-    try {
-      console.log("Handle Delete Event function called");
-      console.log("Form Data:", formData);
-      const response = await fetch("http://localhost:3005/events/deleteEvent", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Error while deleting event: ${response.statusText}`);
-      }
-
-      const responseBody = await response.text();
-
-      console.log(responseBody);
-
-      if (responseBody === "Deleted!") {
-        console.log("Event deleted!");
-        Navigate("/home");
-      } else {
-        console.log("Unexpected response:", responseBody);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState("");
@@ -179,9 +148,9 @@ const DeleteEventPage = () => {
               </CardActions>
 
               <div className={classes.ButtonDiv}>
-                <Button onClick={handleDeleteEvent} className={classes.Button}>
-                  Delete Event
-                </Button>
+                <Link to={`/update/event/${formData.event_id}`}>
+                  <Button className={classes.Button}>Continue</Button>
+                </Link>
               </div>
             </CardContent>
           </div>
@@ -200,4 +169,4 @@ const DeleteEventPage = () => {
   );
 };
 
-export default DeleteEventPage;
+export default ChooseEventToUpdatePage;
