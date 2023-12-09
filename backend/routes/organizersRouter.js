@@ -4,8 +4,6 @@ const organizersController = require("../controller/organizersController.js");
 
 router.delete("/", organizersController.removeAllorganizers);
 
-router.post("/populateorganizerss", organizersController.populateorganizers);
-
 router.get("/GetWholeTable", organizersController.GetWholeTable);
 
 router.get(

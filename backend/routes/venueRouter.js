@@ -4,8 +4,6 @@ const venueController = require("../controller/venueController.js");
 
 router.delete("/", venueController.removeAllVenues);
 
-router.post("/populateVenues", venueController.populateVenues);
-
 router.get("/GetWholeTable", venueController.GetWholeTable);
 
 router.get("/getVenuewithCondition", venueController.getVenueswithCondition);

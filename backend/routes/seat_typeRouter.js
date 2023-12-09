@@ -4,8 +4,6 @@ const seat_typeController = require("../controller/seat_typeController.js");
 
 // router.delete("/", seat_typeController.removeAllseat_type);
 
-router.post("/populateseat_type", seat_typeController.populateseat_type);
-
 router.get("/GetWholeTable", seat_typeController.GetWholeTable);
 
 // router.get("/getseat_typewithCondition", seat_typeController.getseat_typewithCondition);

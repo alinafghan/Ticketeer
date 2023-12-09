@@ -46,46 +46,6 @@ module.exports = {
       }
     }
   },
-  populatelocations: async function (req, res) {
-    let connection;
-    try {
-      connection = await getConnection();
-      const datalocations = [
-        [1, "Khi", 1],
-        [2, "Edmonton", 3],
-        [3, "Toronto", 3],
-        [4, "Berlin", 4],
-      ];
-
-      for (const locationsData of datalocations) {
-        const querylocations = `INSERT INTO locations (location_id, location_name, country_id) VALUES (:1, :2, :3)`;
-        const bindslocations = locationsData; // Bind the locationsData array directly
-        const optionslocations = {
-          autoCommit: true, // Commit each insert immediately
-        };
-        // console.log(query , "aaa----------->>>>")
-        await connection.execute(
-          querylocations,
-          bindslocations,
-          optionslocations
-        );
-      }
-
-      res.status(202).send("Populated");
-    } catch (error) {
-      console.error("Error executing SQL query:", error);
-      res.status(500).send("Internal Server Error");
-    } finally {
-      if (connection) {
-        try {
-          // Release the connection when done
-          await connection.close();
-        } catch (error) {
-          console.error("Error closing database connection:", error);
-        }
-      }
-    }
-  },
 
   getlocationswithCondition: async function (req, res) {
     let connection;

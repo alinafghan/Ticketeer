@@ -33,43 +33,6 @@ module.exports = {
       }
     }
   },
-  populateTickets: async function (req, res) {
-    let connection;
-    try {
-      connection = await getConnection();
-
-      const dataTickets = [
-        [1, 1, 1, 1, "n"],
-        [2, 2, 2, 1, "n"],
-        [3, 3, 3, 1, "n"],
-        [4, 4, 4, 1, "n"],
-      ];
-
-      for (const TicketsData of dataTickets) {
-        const queryTickets = `INSERT INTO Tickets (event_id, ticket_type,seat_num, venue_id, booked) VALUES (:1, :2, :3, :4, :5)`;
-        const bindsTickets = TicketsData; // Bind the TicketsData array directly, ticket_id not req bc autoincrement
-        const optionsTickets = {
-          autoCommit: true, // Commit each insert immediately
-        };
-        // console.log(query , "aaa----------->>>>")
-        await connection.execute(queryTickets, bindsTickets, optionsTickets);
-      }
-
-      res.status(202).send("Populated");
-    } catch (error) {
-      console.error("Error executing SQL query:", error);
-      res.status(500).send("Internal Server Error");
-    } finally {
-      if (connection) {
-        try {
-          // Release the connection when done
-          await connection.close();
-        } catch (error) {
-          console.error("Error closing database connection:", error);
-        }
-      }
-    }
-  },
 
   GetWholeTable: async function (req, res) {
     let connection;

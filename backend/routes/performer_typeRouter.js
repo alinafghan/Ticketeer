@@ -4,8 +4,6 @@ const performer_typeController = require("../controller/performer_typeController
 
 router.delete("/", performer_typeController.removeAllperformer_type);
 
-router.post("/populateperformer_types", performer_typeController.populateperformer_type);
-
 router.get("/GetWholeTable", performer_typeController.GetWholeTable);
 
 router.get("/getperformer_typewithCondition", performer_typeController.getperformer_typewithCondition);

@@ -4,8 +4,6 @@ const performerController = require("../controller/performerController.js");
 
 router.delete("/", performerController.removeAllPerformers);
 
-router.post("/populateperformers", performerController.populatePerformers);
-
 router.get("/GetWholeTable", performerController.GetWholeTable);
 
 router.get(

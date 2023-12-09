@@ -4,8 +4,6 @@ const seatsController = require("../controller/seatsController.js");
 
 router.delete("/", seatsController.removeAllseats);
 
-router.post("/populateseatss", seatsController.populateseats);
-
 router.get("/GetWholeTable", seatsController.GetWholeTable);
 
 router.get("/getseatswithCondition", seatsController.getseatswithCondition);

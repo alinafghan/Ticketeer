@@ -26,45 +26,6 @@ module.exports = {
             }
         }
     },
-    populateperformer_type: async function (req, res){
-
-        let connection ;
-        try {
-
-            
-            connection = await getConnection();
-            const dataperformer_type = [
-                [1,"Pakistan"],[2,"Alaska"],[3,"Canada"],[4,"Germany"]
-            ];
-            
-            for (const performer_typeData of dataperformer_type) {
-                const queryperformer_type = `INSERT INTO performer_type (type_name) VALUES (:1)`;
-                const bindsperformer_type = performer_typeData; // Bind the performer_typeData array directly
-                const optionsperformer_type = {
-                  autoCommit: true, // Commit each insert immediately
-                };
-                // console.log(query , "aaa----------->>>>")
-                await connection.execute(queryperformer_type,bindsperformer_type,optionsperformer_type);
-              }
-
-              res.status(202).send("Populated");
-        } 
-        catch (error) {
-            console.error('Error executing SQL query:', error);
-            res.status(500).send('Internal Server Error');
-          
-        } 
-        finally {
-            if (connection) {
-              try {
-                // Release the connection when done
-                await connection.close();
-              } catch (error) {
-                console.error('Error closing database connection:', error);
-              }
-            }
-        }
-    },
 
     GetWholeTable: async function (req, res) {
       let connection;

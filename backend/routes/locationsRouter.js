@@ -4,8 +4,6 @@ const locationsController = require("../controller/locationsController.js");
 
 router.delete("/", locationsController.removeAlllocations);
 
-router.post("/populatelocations", locationsController.populatelocations);
-
 router.get("/GetWholeTable", locationsController.GetWholeTable);
 
 router.get("/getlocationswithCondition", locationsController.getlocationswithCondition);

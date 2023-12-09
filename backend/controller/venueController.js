@@ -39,44 +39,6 @@ module.exports = {
       }
     }
   },
-  populateVenues: async function (req, res) {
-    let connection;
-    try {
-      connection = await getConnection();
-      // const dataVenues = [
-      //     [1,'Gugenheim', 840, 2],
-      //     [2,'Metropolitan Museum of Art', 700, 3],
-      //     [3,'Bobs bar', 450, 7],
-      //     [2,'Krabby Patty', 3000, 24],
-      //     [4,'Airbnb at Tipu Sultan', 500, 9],
-      //     [5,'Checking', 150, 8],
-      // ];
-
-      for (const VenuesData of dataVenues) {
-        const queryVenues = `INSERT INTO Venues (venue_name, venue_capacity, num_of_pit_seats,num_of_general_seats,num_of_balcony_seats, location_id) VALUES (:1, :2, :3, :4, :5, :6)`;
-        const bindsVenues = VenuesData; // Bind the VenuesData array directly
-        const optionsVenues = {
-          autoCommit: true, // Commit each insert immediately
-        };
-        // console.log(query , "aaa----------->>>>")
-        await connection.execute(queryVenues, bindsVenues, optionsVenues);
-      }
-
-      res.status(202).send("Populated");
-    } catch (error) {
-      console.error("Error executing SQL query:", error);
-      res.status(500).send("Internal Server Error");
-    } finally {
-      if (connection) {
-        try {
-          // Release the connection when done
-          await connection.close();
-        } catch (error) {
-          console.error("Error closing database connection:", error);
-        }
-      }
-    }
-  },
 
   GetWholeTable: async function (req, res) {
     let connection;

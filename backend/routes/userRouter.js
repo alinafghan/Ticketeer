@@ -4,8 +4,6 @@ const userController = require("../controller/userController.js");
 
 router.delete("/", userController.removeAllusers);
 
-router.post("/populateusers", userController.populateusers);
-
 router.get("/GetWholeTable", userController.GetWholeTable);
 
 router.get("/getuserwithCondition", userController.getuserswithCondition);

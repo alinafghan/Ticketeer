@@ -50,60 +50,7 @@ module.exports = {
     }
   },
 
-  populateEvents: async function (req, res) {
-    let connection;
-    try {
-      connection = await getConnection();
-      const dataEvent = [
-        // eventname,venueid,date,starttime,endtime,organizrid,performerid,eventcategoryid,numoftickets,numo_of_VIP_tickets,num_of_general_tickets
-
-        [
-          "Strokes Concert",
-          1,
-          "2023-10-31",
-          "15:00:00",
-          "18:00:00",
-          1,
-          1,
-          1,
-          10,
-          5,
-          5,
-        ],
-
-        /* [1,'Bachelorette Party',2, '01-Oct-2010','9:00','6:00',3,4,1,500], 
-            [2,'Met Gala',2, '01-Oct-2010', '9:00','6:00',3,4,2,500],
-            [3,'Coachella',2, '01-Oct-2010','9:00','6:00',3,4,1,500],
-            [2,'Kashmir Concert',2, '01-Oct-2010', '9:00','6:00',3,2,500],
-            [4,'Eras Tour',2, '01-Oct-2010', '9:00','6:00',3,3,500],
-            [5,'Lollapalooza',2, '01-Oct-2010', '9:00','6:00',3,3,500], */
-      ];
-
-      for (const EventData of dataEvent) {
-        const queryEvent = `INSERT INTO events (event_name, venue_id, event_date, start_time, end_time, organizer_id, performer_id, event_category_id, num_of_tickets, num_of_VIP_tickets,num_of_general_tickets) VALUES (:1, :2, :3, :4, :5,:6, :7, :8, :9, :10, :11)`;
-        const bindsEvent = EventData;
-        const optionsEvent = {
-          autoCommit: true, // Commit each insert immediately
-        };
-        // console.log(query , "aaa----------->>>>")
-        await connection.execute(queryEvent, bindsEvent, optionsEvent);
-      }
-
-      res.status(202).send("Populated");
-    } catch (error) {
-      console.error("Error executing SQL query:", error);
-      res.status(500).send("Internal Server Error");
-    } finally {
-      if (connection) {
-        try {
-          // Release the connection when done
-          await connection.close();
-        } catch (error) {
-          console.error("Error closing database connection:", error);
-        }
-      }
-    }
-  },
+  
 
   getEventwithCondition: async function (req, res) {
     let connection;

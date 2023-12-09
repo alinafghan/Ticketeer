@@ -5,8 +5,6 @@ const bodyParser = require('body-parser');
 
 router.delete("/", countriesController.removeAllCountries);
 
-router.post("/populatecountriess", countriesController.populateCountries);
-
 router.get("/GetWholeTable", countriesController.GetWholeTable);
 
 router.get("/getcountrieswithCondition", countriesController.getCountrieswithCondition);

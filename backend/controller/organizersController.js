@@ -105,41 +105,6 @@ module.exports = {
       }
     }
   },
-  populateorganizers: async function (req, res) {
-    let connection;
-    try {
-      connection = await getConnection();
-      const dataorganizers = [["Alina"], ["Hiba"], ["Maaz"], ["Bilal"]];
-
-      for (const organizersData of dataorganizers) {
-        const queryorganizers = `INSERT INTO organizers ( organizer_name) VALUES (:1)`;
-        const bindsorganizers = organizersData; // Bind the organizersData array directly
-        const optionsorganizers = {
-          autoCommit: true, // Commit each insert immediately
-        };
-        // console.log(query , "aaa----------->>>>")
-        await connection.execute(
-          queryorganizers,
-          bindsorganizers,
-          optionsorganizers
-        );
-      }
-
-      res.status(202).send("Populated");
-    } catch (error) {
-      console.error("Error executing SQL query:", error);
-      res.status(500).send("Internal Server Error");
-    } finally {
-      if (connection) {
-        try {
-          // Release the connection when done
-          await connection.close();
-        } catch (error) {
-          console.error("Error closing database connection:", error);
-        }
-      }
-    }
-  },
 
   GetWholeTable: async function (req, res) {
     let connection;

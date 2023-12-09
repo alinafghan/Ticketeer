@@ -26,46 +26,7 @@ module.exports = {
             }
         }
     },
-    populateseat_type: async function (req, res){
-
-        let connection ;
-        try {
-
-            
-            connection = await getConnection();
-            const dataseat_type = [
-                ["Pit"],["General"],["Balcony"]
-            ];
-            
-            for (const seat_typeData of dataseat_type) {
-                const queryseat_type = `INSERT INTO seat_type (seat_type_name) VALUES (:1)`;
-                const bindsseat_type = seat_typeData; // Bind the seat_typeData array directly
-                const optionsseat_type = {
-                  autoCommit: true, // Commit each insert immediately
-                };
-                // console.log(query , "aaa----------->>>>")
-                await connection.execute(queryseat_type,bindsseat_type,optionsseat_type);
-              }
-
-              res.status(202).send("Populated");
-        } 
-        catch (error) {
-            console.error('Error executing SQL query:', error);
-            res.status(500).send('Internal Server Error');
-          
-        } 
-        finally {
-            if (connection) {
-              try {
-                // Release the connection when done
-                await connection.close();
-              } catch (error) {
-                console.error('Error closing database connection:', error);
-              }
-            }
-        }
-    },
-
+   
     GetWholeTable: async function (req, res) {
       let connection;
       try {

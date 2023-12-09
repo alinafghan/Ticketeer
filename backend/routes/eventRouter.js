@@ -5,7 +5,6 @@ const eventController = require("../controller/eventController");
 const router = express.Router();
 
 router.get("/GetWholeTable", eventController.GetWholeTable);
-router.post("/populate", eventController.populateEvents);
 router.delete("/deleteAll", eventController.removeAllEvents);
 router.get("/getEventwithCondition", eventController.getEventwithCondition);
 router.post("/addEvent", eventController.AddNewEvent);

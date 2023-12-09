@@ -4,8 +4,6 @@ const ticketController = require("../controller/ticketController.js");
 
 router.delete("/", ticketController.removeAllTickets);
 
-router.post("/populatetickets", ticketController.populateTickets);
-
 router.get("/GetWholeTable", ticketController.GetWholeTable);
 
 router.get("/getticketwithCondition", ticketController.getTicketswithCondition);

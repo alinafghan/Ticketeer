@@ -46,48 +46,7 @@ module.exports = {
             }
         }
     },
-    populateperformer_type_B: async function (req, res){
-
-        let connection ;
-        try {
-
-            
-            connection = await getConnection();
-            const dataperformer_type_B = [
-                ["Sports Team"]
-            ];
-            
-            for (const performer_type_BData of dataperformer_type_B) {
-                const queryperformer_type_B = `INSERT INTO performer_type_B (performer_type_B_name) VALUES (:1)`;
-                const bindsperformer_type_B = performer_type_BData; // Bind the performer_type_BData array directly
-                const optionsperformer_type_B = {
-                  autoCommit: true, // Commit each insert immediately
-                };
-                // console.log(query , "aaa----------->>>>")
-                await connection.execute(queryperformer_type_B,bindsperformer_type_B,optionsperformer_type_B);
-              }
-
-              res.status(202).send("Populated");
-        } 
-        catch (error) {
-            console.error('Error executing SQL query:', error);
-            res.status(500).send('Internal Server Error');
-          
-        } 
-        finally {
-            if (connection) {
-              try {
-                // Release the connection when done
-                await connection.close();
-              } catch (error) {
-                console.error('Error closing database connection:', error);
-              }
-            }
-        }
-    },
-
     
-
     getperformer_type_BwithCondition: async function (req, res){
         let connection ;
         try {

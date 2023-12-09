@@ -26,44 +26,6 @@ module.exports = {
       }
     }
   },
-  // populatebookings: async function (req, res){
-
-  //     let connection ;
-  //     try {
-
-  //         connection = await getConnection();
-  //         const databookings = [
-  //             [1,3,2],[2,1,1],[3,2,3,45.45,'8:00'],[4,1,2,99.99,'8:00']
-  //         ];
-
-  //         for (const bookingsData of databookings) {
-  //             const querybookings = `INSERT INTO bookings (user_id,ticket_id,event_id,amt_paid,transaction_time) VALUES (:1, :2, :3, :4, :5)`;
-  //             const bindsbookings = bookingsData; // Bind the bookingsData array directly
-  //             const optionsbookings = {
-  //               autoCommit: true, // Commit each insert immediately
-  //             };
-  //             // console.log(query , "aaa----------->>>>")
-  //             await connection.execute(querybookings,bindsbookings,optionsbookings);
-  //           }
-
-  //           res.status(202).send("Populated");
-  //     }
-  //     catch (error) {
-  //         console.error('Error executing SQL query:', error);
-  //         res.status(500).send('Internal Server Error');
-
-  //     }
-  //     finally {
-  //         if (connection) {
-  //           try {
-  //             // Release the connection when done
-  //             await connection.close();
-  //           } catch (error) {
-  //             console.error('Error closing database connection:', error);
-  //           }
-  //         }
-  //     }
-  // },
 
   GetWholeTable: async function (req, res) {
     let connection;

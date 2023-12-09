@@ -26,41 +26,7 @@ module.exports = {
       }
     }
   },
-  populateCountries: async function (req, res) {
-    let connection;
-    try {
-      connection = await getConnection();
-      const datacountries = [["Pakistan"], ["Alaska"], ["Canada"], ["Germany"]];
-
-      for (const countriesData of datacountries) {
-        const querycountries = `INSERT INTO countries ( country_name) VALUES (:1)`;
-        const bindscountries = countriesData; // Bind the countriesData array directly
-        const optionscountries = {
-          autoCommit: true, // Commit each insert immediately
-        };
-        // console.log(query , "aaa----------->>>>")
-        await connection.execute(
-          querycountries,
-          bindscountries,
-          optionscountries
-        );
-      }
-
-      res.status(202).send("Populated");
-    } catch (error) {
-      console.error("Error executing SQL query:", error);
-      res.status(500).send("Internal Server Error");
-    } finally {
-      if (connection) {
-        try {
-          // Release the connection when done
-          await connection.close();
-        } catch (error) {
-          console.error("Error closing database connection:", error);
-        }
-      }
-    }
-  },
+ 
 
   GetWholeTable: async function (req, res) {
     let connection;

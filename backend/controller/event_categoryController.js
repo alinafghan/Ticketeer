@@ -48,47 +48,7 @@ module.exports = {
       }
     }
   },
-  populateevent_category: async function (req, res) {
-    let connection;
-    try {
-      connection = await getConnection();
-      const dataevent_category = [
-        [1, "Sports Event"],
-        [2, "Musical Event"],
-        [3, "Theatre Event"],
-        [4, "Comedy Event"],
-      ];
-
-      for (const event_categoryData of dataevent_category) {
-        const queryevent_category = `INSERT INTO event_category (event_category_id, event_category_name) VALUES (:1, :2)`;
-        const bindsevent_category = event_categoryData; // Bind the event_categoryData array directly
-        const optionsevent_category = {
-          autoCommit: true, // Commit each insert immediately
-        };
-        // console.log(query , "aaa----------->>>>")
-        await connection.execute(
-          queryevent_category,
-          bindsevent_category,
-          optionsevent_category
-        );
-      }
-
-      res.status(202).send("Populated");
-    } catch (error) {
-      console.error("Error executing SQL query:", error);
-      res.status(500).send("Internal Server Error");
-    } finally {
-      if (connection) {
-        try {
-          // Release the connection when done
-          await connection.close();
-        } catch (error) {
-          console.error("Error closing database connection:", error);
-        }
-      }
-    }
-  },
-
+  
   getevent_categorywithCondition: async function (req, res) {
     let connection;
     try {
