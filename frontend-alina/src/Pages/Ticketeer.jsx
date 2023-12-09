@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Typography,
-  CssBaseline,
-  Button,
-  Divider,
-} from "@material-ui/core";
+import { Typography, CssBaseline, Button, Divider } from "@material-ui/core";
 import frontpageStyles from "../Styling/Ticketeer_styles";
 import FrontSideBar from "../Components/FrontSidebar";
 import useStyles from "../Styling/styles";
@@ -60,33 +55,57 @@ const Ticketeer = () => {
     <CssBaseline>
       <div className={classes.Ticketeer}>
         <div className={classes.headerDiv}>
-          <div className={classes.FrontSidebar}>
-            <FrontSideBar></FrontSideBar>
+          <div className={classes.hibasCarousel}>
+            <img
+              src={images[currentImageIndex].src}
+              alt="Carousel image"
+              style={{
+                height: "80vh",
+                width: "100%",
+                paddingTop: 0,
+                marginTop: 0,
+              }}
+            />
+
+            <Typography
+              className={classes.logintitle}
+              variant="h1"
+              style={{
+                position: "inherit",
+                bottom: "0px",
+                color: "black",
+              }}
+            >
+              TICKETEER
+            </Typography>
+            <Typography
+              className={classes.frontpageLine}
+              variant="h4"
+              style={{
+                position: "inherit",
+                bottom: "0px",
+                color: "black",
+              }}
+            >
+              Buy your tickets now, wherever, whenever
+            </Typography>
+
+            <div className={classes.FrontSidebar}>
+              <FrontSideBar></FrontSideBar>
+            </div>
+
+            {/* <Typography
+              className={classes.carouselCaption}
+              variant="h2"
+              style={{
+                position: "inherit",
+                color: "black",
+                marginTop: "-95px",
+              }}
+            >
+              {images[currentImageIndex].caption}
+            </Typography> */}
           </div>
-          <Typography className={classes.headerText} variant="h3" style={{ textAlign: "left", marginTop: 0 }}>
-            Ticketeer
-          </Typography>
-          <img
-            src={images[currentImageIndex].src}
-            alt="Carousel image"
-            style={{ height: "80vh", width: "100%", objectFit: "cover" }}
-          />
-          <Typography
-            className={classes.carouselCaption}
-            variant="h2"
-            style={{
-              position: "absolute",
-              bottom: "25px",
-              left: "10px",
-              color: "white",
-            }}
-          >
-            {images[currentImageIndex].caption}
-          </Typography>
-          <Typography className={classes.logintitle} variant="h1">TICKETEER</Typography>
-          <Typography className={classes.frontpageLine} variant="h4">
-            Buy your tickets now, wherever, whenever
-          </Typography>
         </div>
         <div className={classes.bodyDiv}>
           <div className={classes.ButtonsDiv}>
