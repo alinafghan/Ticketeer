@@ -109,15 +109,24 @@ module.exports = {
     let connection;
     try {
       connection = await getConnection();
-      const query = `SELECT * from events WHERE ${req.body.condition}`;
-      const binds = [req.body.condition];
-      const table = await connection.execute(query, binds);
-      res.status(200).send(table);
+  
+      const { column, value } = req.body;
+  
+      // Use bind variables in the query
+      const query = `SELECT * FROM events WHERE ${column} = :value`;
+      const binds = { value };
+  
+      // Execute the query with bind variables
+      const result = await connection.execute(query, binds);
+  
+      // Extract only the rows from the result
+      const rows = result.rows;
+  
+      res.status(200).send(rows);
     } catch (error) {
-      console.error("Error executing SQL query:", error);
-      res
-        .status(500)
-        .send("Internal Server Error (smt is the problem w ur sql query)");
+      console.error("Error executing SQL query:", error.message);
+      console.error("Oracle Database Error:", error);
+      res.status(500).send("Internal Server Error");
     } finally {
       if (connection) {
         try {
@@ -127,8 +136,8 @@ module.exports = {
         }
       }
     }
-  },
-
+  },  
+  
   FindEventfromID: async function (req, res) {
     let connection;
     try {
