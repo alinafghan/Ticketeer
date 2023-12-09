@@ -1,2 +1,0 @@
-# Ticketeer
-Databases Project 
