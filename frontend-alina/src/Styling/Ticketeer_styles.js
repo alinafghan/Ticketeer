@@ -24,23 +24,24 @@ const frontpageStyles = makeStyles((theme) => ({
 
   headerDiv: {
     paddingTop: 1,
-    //backgroundImage: "url(jueki.jpg)",
     backgroundSize: "cover",
     textAlign: "center",
     backgroundColor: theme.palette.background.paper,
     height: "100vh",
-    marginTop: 0
+    marginTop: 0,
+    marginBottom: "-100px",
   },
 
   FrontSidebar: {
-    marginLeft: "94%",
-    marginTop: 15,
+    position: "absolute",
+    top: "10px", // Adjust this value based on your layout
+    right: "10px", // Adjust this value based on your layout
   },
 
   logintitle: {
     fontFamily: "Krona one",
     color: "#000000",
-    marginTop: "36%",
+    marginTop: "-200px",
   },
 
   frontpageLine: {
@@ -51,12 +52,11 @@ const frontpageStyles = makeStyles((theme) => ({
   },
 
   bodyDiv: {
-    marginBottom: 40,
+    marginBottom: 20,
     backgroundColor: theme.palette.background.paper,
   },
 
   ButtonsDiv: {
-    marginTop: "2%",
     alignContent: "center",
     align: "center",
     textAlign: "center",
@@ -137,6 +137,7 @@ const frontpageStyles = makeStyles((theme) => ({
   middle2midbottomwriting: {
     fontFamily: "Krona one",
     marginTop: "150%",
+    color: "white",
   },
   middle2Left: {
     display: "inline-block",
@@ -158,6 +159,14 @@ const frontpageStyles = makeStyles((theme) => ({
 
   middle2LeftHoverwriting: {
     fontFamily: "Krona one",
+  },
+
+  hibasCarousel: {
+    fontFamily: "Krona one",
+    marginTop: 0,
+    paddingTop: 0,
+    position: "relative",
+    marginBottom: 0,
   },
 }));
 
