@@ -74,6 +74,9 @@ app.use("/users", userRouter);
 const venueRouter = require("./routes/venueRouter");
 app.use("/venues", venueRouter);
 
+const searchRouter = require("./routes/searchRouter");
+app.use("/search", searchRouter);
+
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
