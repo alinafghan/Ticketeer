@@ -197,7 +197,9 @@ module.exports = {
       console.error("Error executing SQL query:", error);
       res
         .status(500)
-        .send("Internal Server Error (smt is the matter w ur sql query)");
+        .send(
+          "Internal Server Error. Hint: This venue may not have the capacity for that many tickets!"
+        );
     } finally {
       if (connection) {
         try {
@@ -205,6 +207,43 @@ module.exports = {
           await connection.close();
         } catch (error) {
           console.error("Error closing database connection:", error);
+        }
+      }
+    }
+  },
+
+  SortEvents: async function (req, res) {
+    let connection;
+    try {
+      connection = await getConnection();
+      const sortByField = req.query.sortBy;
+
+      if (
+        !sortByField ||
+        !["venue_id", "performer_id", "event_date"].includes(sortByField)
+      ) {
+        return res
+          .status(400)
+          .send(
+            "Invalid sortBy field. Please provide 'venue', 'performer', or 'event_date'."
+          );
+      }
+
+      const query = `SELECT * FROM events ORDER BY ${sortByField}`;
+
+      const result = await connection.execute(query);
+      const sortedEvents = result.rows;
+
+      res.status(200).json(sortedEvents);
+    } catch (error) {
+      console.log("Error executing SQL query:", error);
+      res.status(500).send("Internal Server Error");
+    } finally {
+      if (connection) {
+        try {
+          await connection.close();
+        } catch (error) {
+          console.log("Error closing database connection:", error);
         }
       }
     }

@@ -4,6 +4,8 @@
 
 ##<3
 
+dont insert more than nine tickets when creating practise event in practise venue
+
 ### Business Scenario
 
 With the rise in ticketed events, it can be difficult to buy tickets for each event from individual venues/performers. A ticket management system, like Ticketeer, aims to solve this problem by allowing users to book tickets for all types of ticketed events on one platform.

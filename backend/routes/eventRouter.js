@@ -13,5 +13,6 @@ router.put("/updateEvent", eventController.UpdateEvent);
 router.delete("/deleteEvent", eventController.DeleteEventAtID);
 router.get("/getIDfromname", eventController.FindIDfromEventname);
 router.get("/findEventfromID", eventController.FindEventfromID);
+router.get("/filterby", eventController.SortEvents);
 
 module.exports = router;

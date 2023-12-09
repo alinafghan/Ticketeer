@@ -19,7 +19,11 @@ import HomePage_styles from "../Styling/HomePage_styles";
 import useStyles from "../Styling/styles";
 import api from "../api";
 import OrganizerSideBar from "../Components/OrganizerSideBar";
+<<<<<<< Updated upstream
 import OrganizerSideBar from "../organizerSideBar";
+=======
+import BasicMenu from "../Components/FilterMenu";
+>>>>>>> Stashed changes
 
 const OrganizerHomePage = () => {
   const classes = HomePage_styles();
@@ -39,6 +43,32 @@ const OrganizerHomePage = () => {
         console.error("API Error:", error);
       });
   }, []);
+
+  const handleSortBy = async (groupByField) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3005/events/filterby?sortBy=${groupByField}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          `Error grouping by ${groupByField}: ${response.statusText}`
+        );
+      }
+
+      const groupedEvents = await response.json();
+
+      setEvents(groupedEvents);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -78,9 +108,7 @@ const OrganizerHomePage = () => {
                 </Typography>
               </div>
               <div className={classes.two}>
-                <Typography className={classes.filter} variant="p">
-                  Filter by: <a href="/"> date</a>
-                </Typography>
+                <BasicMenu handleGroupBy={handleSortBy}></BasicMenu>
               </div>
             </div>
           </div>

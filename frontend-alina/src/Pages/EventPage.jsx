@@ -28,6 +28,10 @@ const EventPage = () => {
     venue_name: "",
   });
 
+  const [formData3, setFormData3] = useState({
+    num_of_unbooked_tickets: "",
+  });
+
   const id = useParams();
 
   const handleChangeUser = async () => {
@@ -77,8 +81,41 @@ const EventPage = () => {
     }
   };
 
+  const getTickets = async () => {
+    const inputID = id.event_id;
+    console.log("this is the id from the url", inputID);
+
+    try {
+      const response = await fetch(
+        `http://localhost:3005/tickets/ticketsLeft?event_id=${inputID}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Error fetching event_id: ${response.statusText}`);
+      }
+
+      const num_of_unbooked_tickets = await response.json();
+
+      console.log("num_of_unbooked_tickets", num_of_unbooked_tickets);
+
+      setFormData3({
+        ...formData3,
+        num_of_unbooked_tickets,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     handleChangeUser();
+    getTickets();
   }, []);
 
   // useEffect(() => {
@@ -139,6 +176,9 @@ const EventPage = () => {
                 <Typography variant="h5">{formData2.venue_name}</Typography>
 
                 <Typography variant="h5">{formData2.performer_name}</Typography>
+                <Typography variant="h5">
+                  {formData3.num_of_unbooked_tickets}
+                </Typography>
               </CardActions>
 
               <div className={classes.ButtonDiv}>
