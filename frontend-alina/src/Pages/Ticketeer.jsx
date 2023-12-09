@@ -1,5 +1,10 @@
-import React from "react";
-import { Typography, CssBaseline, Button, Divider } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import {
+  Typography,
+  CssBaseline,
+  Button,
+  Divider,
+} from "@material-ui/core";
 import frontpageStyles from "../Styling/Ticketeer_styles";
 import FrontSideBar from "../Components/FrontSidebar";
 import { useState } from "react";
@@ -29,6 +34,29 @@ const Ticketeer = () => {
     setIsHoveringMiddle(false);
   };
 
+  const image1 = require("../carousel/carousel1.jpg");
+  const image2 = require("../carousel/carousel2.jpg");
+  const image3 = require("../carousel/carousel3.jpg");
+  const image4 = require("../carousel/carousel4.jpg");
+  const image5 = require("../carousel/carousel5.jpg");
+
+  const images = [
+    { src: image1, caption: "Book tickets for concerts" },
+    { src: image2, caption: "Book tickets for football games" },
+    { src: image3, caption: "Book tickets for idk what to call this" },
+    { src: image4, caption: "Book tickets for conventions" },
+    { src: image5, caption: "Book tickets for movies" },
+  ];
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImageIndex((currentImageIndex + 1) % images.length);
+    }, 2000);
+
+    return () => clearInterval(timer);
+  }, [currentImageIndex, images]);
+
   return (
     <CssBaseline>
       <div className={classes.Ticketeer}>
@@ -36,6 +64,23 @@ const Ticketeer = () => {
           <div className={classes.FrontSidebar}>
             <FrontSideBar></FrontSideBar>
           </div>
+          <img
+            src={images[currentImageIndex].src}
+            alt="Carousel image"
+            style={{ height: "90vh", width: "100%", objectFit: "cover" }}
+          />
+          <Typography
+            className={classes.carouselCaption}
+            variant="h2"
+            style={{
+              position: "absolute",
+              bottom: "10px",
+              left: "10px",
+              color: "white",
+            }}
+          >
+            {images[currentImageIndex].caption}
+          </Typography>
           <Typography className={classes.logintitle} variant="h1">
             TICKETEER
           </Typography>

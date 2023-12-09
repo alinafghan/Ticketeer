@@ -24,11 +24,12 @@ const frontpageStyles = makeStyles((theme) => ({
 
   headerDiv: {
     paddingTop: 1,
-    backgroundImage: "url(jueki.jpg)",
+    //backgroundImage: "url(jueki.jpg)",
     backgroundSize: "cover",
     textAlign: "center",
     backgroundColor: theme.palette.background.paper,
     height: "100vh",
+    marginTop: 0
   },
 
   FrontSidebar: {
