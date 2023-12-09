@@ -21,4 +21,6 @@ router.delete(
 
 router.get("/findNextId", ticketController.FindNextAvailableTickForEvent);
 
+router.get("/ticketsLeft", ticketController.FindNumTicksLeftforEvent);
+
 module.exports = router;

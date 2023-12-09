@@ -143,7 +143,7 @@ module.exports = {
     try {
       connection = await getConnection();
       const event_id = req.query.event_id;
-      const query = `select * from events where event_id =:event_id`;
+      const query = `select event_name, event_date, venue_name, performer_name from events e,performers p,venues v where e.event_id =:event_id and e.performer_id = p.performer_id and e.venue_id = v.venue_id `;
       const binds = { event_id: event_id };
 
       try {

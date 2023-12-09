@@ -18,6 +18,7 @@ import { Search } from "@material-ui/icons";
 import HomePage_styles from "../Styling/HomePage_styles";
 import useStyles from "../Styling/styles";
 import api from "../api";
+import OrganizerSideBar from "../Components/OrganizerSideBar";
 import OrganizerSideBar from "../organizerSideBar";
 
 const OrganizerHomePage = () => {

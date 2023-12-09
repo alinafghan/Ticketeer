@@ -17,6 +17,7 @@ import {
   FormControl,
 } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
+import OrganizerSideBar from "../Components/OrganizerSideBar";
 import OrganizerSideBar from "../organizerSideBar";
 import DeleteEventPage_styles from "../Styling/DeleteEventPage_styles";
 import useStyles from "../Styling/styles";

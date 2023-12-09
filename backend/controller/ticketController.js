@@ -261,4 +261,35 @@ module.exports = {
       }
     }
   },
+
+  FindNumTicksLeftforEvent: async function (req, res) {
+    let connection;
+    try {
+      connection = await getConnection();
+      const event_id = req.query.event_id;
+      const query = `select count(*) from tickets where event_id = :event_id and booked = 'n'`;
+      const binds = { event_id: event_id };
+
+      try {
+        const result = await connection.execute(query, binds);
+        console.log(result.rows);
+        res.status(200).send(result.rows);
+      } catch (error) {
+        console.error("Error executing SQL query:", error);
+        res.status(500).send("Internal Server Error");
+      }
+    } catch (error) {
+      console.error("Error executing SQL query:", error);
+      res.status(500).send("Internal Server Error");
+    } finally {
+      if (connection) {
+        try {
+          // Release the connection when done
+          await connection.close();
+        } catch (error) {
+          console.error("Error closing database connection:", error);
+        }
+      }
+    }
+  },
 };

@@ -16,7 +16,7 @@ import {
   FormControl,
 } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
-import Sidebar from "../Sidebar";
+import Sidebar from "../Components/Sidebar";
 import BookTicketPage_styles from "../Styling/BookTicketPage_styles";
 import useStyles from "../Styling/styles";
 import { useNavigate } from "react-router-dom";

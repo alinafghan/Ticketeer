@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography, CssBaseline, Button, Divider } from "@material-ui/core";
 import frontpageStyles from "../Styling/Ticketeer_styles";
-import FrontSideBar from "../FrontSidebar";
+import FrontSideBar from "../Components/FrontSidebar";
 import { useState } from "react";
 import useStyles from "../Styling/styles";
 
@@ -55,8 +55,7 @@ const Ticketeer = () => {
             </a>
           </div>
         </div>
-        <Divider variant="middle">
-        </Divider>
+        <Divider variant="middle"></Divider>
         <div className={classes.middleDiv}>
           <Typography variant="h4" className={classes.middleDivWriting}>
             We believe that in a world where people have become numbers, a
@@ -84,24 +83,20 @@ const Ticketeer = () => {
             onMouseOut={handleMouseOutMiddle}
             className={classes.middle2Mid}
           >
-            <Typography className={classes.middle2midwriting}>
-              middle
-            </Typography>
+            <Typography className={classes.middle2midwriting}></Typography>
             <div className={classes.HoverText}>
               <Typography className={classes.middle2midbottomwriting}>
-                middle bottom
+                Want to buy a ticket?
               </Typography>
               {isHoveringMiddle && (
                 <h2 className={commonclasses.FontSet}>
-                  shhhhhhh its a secret...
+                  You're in the right place!
                 </h2>
               )}
             </div>
           </div>
           <div className={classes.middle2Right}>
-            <Typography className={classes.middle2Rightwriting}>
-              rightside
-            </Typography>
+            <Typography className={classes.middle2Rightwriting}></Typography>
           </div>
         </div>
 
