@@ -7,7 +7,6 @@ import {
 } from "@material-ui/core";
 import frontpageStyles from "../Styling/Ticketeer_styles";
 import FrontSideBar from "../Components/FrontSidebar";
-import { useState } from "react";
 import useStyles from "../Styling/styles";
 
 const Ticketeer = () => {
@@ -43,7 +42,7 @@ const Ticketeer = () => {
   const images = [
     { src: image1, caption: "Book tickets for concerts" },
     { src: image2, caption: "Book tickets for football games" },
-    { src: image3, caption: "Book tickets for idk what to call this" },
+    { src: image3, caption: "Book tickets for seminars" },
     { src: image4, caption: "Book tickets for conventions" },
     { src: image5, caption: "Book tickets for movies" },
   ];
@@ -64,26 +63,27 @@ const Ticketeer = () => {
           <div className={classes.FrontSidebar}>
             <FrontSideBar></FrontSideBar>
           </div>
+          <Typography className={classes.headerText} variant="h3" style={{ textAlign: "left", marginTop: 0 }}>
+            Ticketeer
+          </Typography>
           <img
             src={images[currentImageIndex].src}
             alt="Carousel image"
-            style={{ height: "90vh", width: "100%", objectFit: "cover" }}
+            style={{ height: "80vh", width: "100%", objectFit: "cover" }}
           />
           <Typography
             className={classes.carouselCaption}
             variant="h2"
             style={{
               position: "absolute",
-              bottom: "10px",
+              bottom: "25px",
               left: "10px",
               color: "white",
             }}
           >
             {images[currentImageIndex].caption}
           </Typography>
-          <Typography className={classes.logintitle} variant="h1">
-            TICKETEER
-          </Typography>
+          <Typography className={classes.logintitle} variant="h1">TICKETEER</Typography>
           <Typography className={classes.frontpageLine} variant="h4">
             Buy your tickets now, wherever, whenever
           </Typography>

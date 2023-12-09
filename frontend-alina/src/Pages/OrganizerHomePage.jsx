@@ -19,11 +19,7 @@ import HomePage_styles from "../Styling/HomePage_styles";
 import useStyles from "../Styling/styles";
 import api from "../api";
 import OrganizerSideBar from "../Components/OrganizerSideBar";
-<<<<<<< Updated upstream
-import OrganizerSideBar from "../organizerSideBar";
-=======
 import BasicMenu from "../Components/FilterMenu";
->>>>>>> Stashed changes
 
 const OrganizerHomePage = () => {
   const classes = HomePage_styles();

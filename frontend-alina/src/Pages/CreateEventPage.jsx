@@ -16,7 +16,6 @@ import {
 } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import OrganizerSideBar from "../Components/OrganizerSideBar";
-import OrganizerSideBar from "../organizerSideBar";
 import CreateEventPage_styles from "../Styling/CreateEventPage_styles";
 import useStyles from "../Styling/styles";
 import api from "../api";
