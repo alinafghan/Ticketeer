@@ -15,7 +15,7 @@ import {
   CardContent,
 } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
-import OrganizerSideBar from "../OrganizerSideBar";
+import OrganizerSideBar from "../Components/OrganizerSideBar";
 import CreateEventPage_styles from "../Styling/CreateEventPage_styles";
 import useStyles from "../Styling/styles";
 import api from "../api";

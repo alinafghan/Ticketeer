@@ -14,7 +14,7 @@ import {
   CardActionArea,
 } from "@material-ui/core";
 import { Link } from "react-router-dom"; // Import Link from react-router-dom
-import Sidebar from "../Sidebar";
+import Sidebar from "../Components/Sidebar";
 import { Search } from "@material-ui/icons";
 import HomePage_styles from "../Styling/HomePage_styles";
 import useStyles from "../Styling/styles";
