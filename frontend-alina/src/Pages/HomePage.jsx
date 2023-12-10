@@ -38,7 +38,9 @@ const HomePage = () => {
       .catch((error) => {
         console.error("API Error:", error);
       });
-  }, []);
+  }, []); 
+
+
 
   const handleSortBy = async (groupByField) => {
     try {
