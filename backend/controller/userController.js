@@ -26,7 +26,7 @@ module.exports = {
       }
     }
   },
- 
+
   GetWholeTable: async function (req, res) {
     let connection;
     try {
@@ -153,7 +153,8 @@ module.exports = {
     let connection;
     try {
       connection = await getConnection();
-      const query = `INSERT INTO users ( username,email, phone_number,password, city_state_country,num_of_tickets_booked) VALUES (:1, :2, :3, :4, :5, :6)`;
+      const query = `INSERT INTO users ( username,email, phone_number,password,
+         city_state_country,num_of_tickets_booked) VALUES (:1, :2, :3, :4, :5, :6)`;
       const binds = [
         req.body.username,
         req.body.email,

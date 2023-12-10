@@ -149,7 +149,7 @@ const Login = () => {
                   </div>
 
                   <div className={classes.AlrAccDiv}>
-                    <a href="/">Already have an account?</a>
+                    <a href="/register">Don't have an account?</a>
                   </div>
                 </div>
 

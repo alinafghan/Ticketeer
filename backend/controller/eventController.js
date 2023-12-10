@@ -50,25 +50,23 @@ module.exports = {
     }
   },
 
-  
-
   getEventwithCondition: async function (req, res) {
     let connection;
     try {
       connection = await getConnection();
-  
+
       const { column, value } = req.body;
-  
+
       // Use bind variables in the query
       const query = `SELECT * FROM events WHERE ${column} = :value`;
       const binds = { value };
-  
+
       // Execute the query with bind variables
       const result = await connection.execute(query, binds);
-  
+
       // Extract only the rows from the result
       const rows = result.rows;
-  
+
       res.status(200).send(rows);
     } catch (error) {
       console.error("Error executing SQL query:", error.message);
@@ -83,14 +81,16 @@ module.exports = {
         }
       }
     }
-  },  
-  
+  },
+
   FindEventfromID: async function (req, res) {
     let connection;
     try {
       connection = await getConnection();
       const event_id = req.query.event_id;
-      const query = `select event_name, event_date, venue_name, performer_name from events e,performers p,venues v where e.event_id =:event_id and e.performer_id = p.performer_id and e.venue_id = v.venue_id `;
+      const query = `select event_name, event_date, venue_name, performer_name from events e,
+      performers p,venues v where e.event_id =:event_id and e.performer_id = p.performer_id and
+       e.venue_id = v.venue_id `;
       const binds = { event_id: event_id };
 
       try {
@@ -120,7 +120,9 @@ module.exports = {
     let connection;
     try {
       connection = await getConnection();
-      const query = `INSERT INTO events (event_name, venue_id, event_date, start_time, end_time, organizer_id, performer_id, event_category_id, num_of_tickets, num_of_VIP_tickets) VALUES (:1, :2, :3, :4, :5,:6, :7, :8, :9, :10)`;
+      const query = `INSERT INTO events (event_name, venue_id, event_date, start_time, end_time, 
+        organizer_id, performer_id, event_category_id, num_of_tickets, num_of_VIP_tickets) VALUES 
+        (:1, :2, :3, :4, :5,:6, :7, :8, :9, :10)`;
       const binds = [
         req.body.event_name,
         req.body.venue_id,
@@ -217,7 +219,9 @@ module.exports = {
       ];
 
       console.log("binds -> ", binds);
-      const query = `update events set event_name = :1, venue_id = :2 , event_date =:3, start_time = :4, end_time =:5 , organizer_id =:6, performer_id = :7, event_category_id =:8, num_of_tickets =:9, num_of_VIP_tickets =:10 where event_id = :11`;
+      const query = `update events set event_name = :1, venue_id = :2 , event_date =:3, start_time = :4, 
+      end_time =:5 , organizer_id =:6, performer_id = :7, event_category_id =:8, num_of_tickets =:9, 
+      num_of_VIP_tickets =:10 where event_id = :11`;
       const options = {
         autoCommit: true,
       };

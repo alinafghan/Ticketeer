@@ -147,7 +147,7 @@ const Register = () => {
                     <a href="/">Forgot Password? </a>
                   </div>
                   <div className={classes.AlrAccDiv}>
-                    <a href="/">Already have an account?</a>
+                    <a href="/login">Already have an account?</a>
                   </div>
                 </div>
                 <div className={classes.RegisterCheckBoxDiv}>

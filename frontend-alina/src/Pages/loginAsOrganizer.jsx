@@ -150,7 +150,7 @@ const LoginAsOrganizer = () => {
                   </div>
 
                   <div className={classes.AlrAccDiv}>
-                    <a href="/">Already have an account?</a>
+                    <a href="/registerOrg">Don't have an account?</a>
                   </div>
                 </div>
 

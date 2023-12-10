@@ -141,7 +141,7 @@ const RegisterAsOrganizer = () => {
                     <a href="/">Forgot Password? </a>
                   </div>
                   <div className={classes.AlrAccDiv}>
-                    <a href="/">Already have an account?</a>
+                    <a href="/loginOrg">Already have an account?</a>
                   </div>
                 </div>
                 <div className={classes.RegisterCheckBoxDiv}>

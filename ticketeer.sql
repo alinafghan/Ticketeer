@@ -35,13 +35,7 @@ DROP TABLE SEATS CASCADE CONSTRAINTS;
 
 DROP TABLE USERS CASCADE CONSTRAINTS;
 
-DROP TABLE TRANSACTIONS CASCADE CONSTRAINTS;
-
 DROP TABLE BOOKINGS CASCADE CONSTRAINTS;
-
-DROP TABLE PERFORMER_TYPE_A CASCADE CONSTRAINTS;
-
-DROP TABLE PERFORMER_TYPE_B CASCADE CONSTRAINTS;
 
 DROP SEQUENCE EVENT_ID_SEQ;
 
@@ -77,13 +71,9 @@ CREATE TABLE EVENT_CATEGORY (
 CREATE TABLE TICKET_TYPE(
   TICKET_TYPE_ID INT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY,
   TICKET_TYPE_NAME VARCHAR2(255) NOT NULL,
-  TICKET_TYPE INT NOT NULL
 );
 
-SELECT
-  *
-FROM
-  TICKET_TYPE;
+select * from ticket_type;
 
 CREATE TABLE ORGANIZERS (
   ORGANIZER_ID INT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY,
@@ -216,7 +206,18 @@ CREATE TABLE BOOKINGS(
 );
 
 --PROCEDURES
+
+create or replace trigger ticket_deletion_trigger before delete on events for each row 
+begin
+delete from tickets where event_id = :old.event_id;
+end;
+
+select * from events;
+
 SET SERVEROUTPUT ON;
+
+insert into locations (location_name,country_id) values('new york',1);
+select * from locations;
 
 CREATE OR REPLACE TRIGGER BOOKINGS_PROCEDURE BEFORE
   INSERT ON BOOKINGS FOR EACH ROW
@@ -804,6 +805,18 @@ WHERE
   EVENT_ID = :11 DELETE FROM BOOKINGS
 WHERE
   TICKET_ID = 0;
+  
+  insert into venues (venue_name,venue_capacity,num_of_pit_seats,num_of_general_seats,num_of_balcony_seats,location_id) 
+  values ('Wembley Stadium', 20,5,10,5,1);
+  
+  select * from venues;
+  
+  select * from seats;
+  
+  select * from events;
+  
+  select * from tickets;
+  
 SELECT
   E.EVENT_ID,
   E.EVENT_NAME,

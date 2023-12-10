@@ -118,14 +118,6 @@ const EventPage = () => {
     getTickets();
   }, []);
 
-  // useEffect(() => {
-  //   console.log("FormData:", formData);
-  // }, [formData]);
-
-  // useEffect(() => {
-  //   console.log("FormData2:", formData2);
-  // }, [formData2]);
-
   return (
     <CssBaseline>
       <div>

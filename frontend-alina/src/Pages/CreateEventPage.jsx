@@ -68,7 +68,7 @@ const CreateEventPage = () => {
 
       if (responseBody === "Added") {
         console.log("Event added!");
-        Navigate("/home");
+        Navigate("/org_home");
       } else {
         console.log("Unexpected response:", responseBody);
       }

@@ -78,7 +78,7 @@ const UpdateEventPage = () => {
 
       if (responseBody === "Updated!") {
         console.log("Event updated!");
-        Navigate("/home");
+        Navigate("/org_home");
       } else {
         console.log("Unexpected response:", responseBody);
       }

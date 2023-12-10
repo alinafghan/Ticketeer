@@ -54,7 +54,7 @@ const DeleteEventPage = () => {
 
       if (responseBody === "Deleted!") {
         console.log("Event deleted!");
-        Navigate("/home");
+        Navigate("/org_home");
       } else {
         console.log("Unexpected response:", responseBody);
       }
