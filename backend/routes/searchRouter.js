@@ -1,17 +1,16 @@
-const express = require('express');
+const express = require("express");
 const { getConnection } = require("../config/connection");
 const router = express.Router();
 
+router.get(`/`, async (req, res) => {
+  let connection;
 
-router.get('/', async (req, res) => {
-    let connection;
+  try {
+    connection = await getConnection();
 
-    try {
-        connection = await getConnection();
+    const searchKeyword = req.query.searchKeyword || "";
 
-        const searchKeyword = req.query.keyword || '';
-
-        const query = `
+    const query = `
             SELECT
                 e.event_id,
                 e.event_name,
@@ -38,25 +37,26 @@ router.get('/', async (req, res) => {
                 OR UPPER(c.country_name) LIKE UPPER('%${searchKeyword}%')
         `;
 
-        console.log(query);
-        const result = await connection.execute(query);
-        console.log(result);
-        const rows = result.rows;
+    console.log(query);
+    console.log("this is the search keyword", searchKeyword);
+    const result = await connection.execute(query);
+    const rows = result.rows;
+    console.log("this is the result", result.rows);
 
-        res.status(200).json(rows);
-    } catch (error) {
-        console.error("Error executing SQL query:", error.message);
-        console.error("Oracle Database Error:", error);
-        res.status(500).send("Internal Server Error");
-    } finally {
-        if (connection) {
-            try {
-                await connection.close();
-            } catch (error) {
-                console.error("Error closing database connection:", error);
-            }
-        }
+    res.status(200).json(rows);
+  } catch (error) {
+    console.error("Error executing SQL query:", error.message);
+    console.error("Oracle Database Error:", error);
+    res.status(500).send("Internal Server Error");
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (error) {
+        console.error("Error closing database connection:", error);
+      }
     }
-})
+  }
+});
 
 module.exports = router;

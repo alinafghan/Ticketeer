@@ -76,15 +76,8 @@ module.exports = {
     let connection;
     try {
       connection = await getConnection();
-      const query = `INSERT INTO Performers (performer_name,email, phone_number,password, city_state_country, performer_type) VALUES (:1, :2, :3, :4, :5, :6)`;
-      const binds = [
-        req.body.performer_name,
-        req.body.email,
-        req.body.phone_number,
-        req.body.password,
-        req.body.city_state_country,
-        req.body.performer_type,
-      ];
+      const query = `INSERT INTO Performers (performer_name, performer_type) VALUES (:1, :2)`;
+      const binds = [req.body.performer_name, req.body.performer_type];
       const options = {
         autoCommit: true,
       };

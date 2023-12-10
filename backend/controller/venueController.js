@@ -1,18 +1,5 @@
 const { getConnection } = require("../config/connection");
 
-// Path: order/....
-
-// CREATE TABLE venues (
-//   venue_id INT PRIMARY KEY,
-//   venue_name VARCHAR(255) NOT NULL,
-//   venue_capacity INT NOT NULL,
-//   num_of_pit_seats int not null,
-//   num_of_general_seats int not null,
-//   num_of_balcony_seats int not null,
-//   location_id INT NOT NULL,
-//   CONSTRAINT location_fk FOREIGN KEY (location_id) REFERENCES locations (location_id)
-// );
-
 module.exports = {
   removeAllVenues: async function (req, res) {
     let connection;

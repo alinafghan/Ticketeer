@@ -65,7 +65,7 @@ const Register = () => {
       <div className={classes.Register_mainDiv}>
         <div className={classes.Register_LeftDiv}>
           <Typography className={classes.Register_Leftwriting} variant="h2">
-            Register to our awesome website please
+            Register with Ticketeer!
           </Typography>
         </div>
         <div className={classes.Register_RightDiv}>

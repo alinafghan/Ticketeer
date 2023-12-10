@@ -38,9 +38,7 @@ const HomePage = () => {
       .catch((error) => {
         console.error("API Error:", error);
       });
-  }, []); 
-
-
+  }, []);
 
   const handleSortBy = async (groupByField) => {
     try {
@@ -68,6 +66,35 @@ const HomePage = () => {
     }
   };
 
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = async (event) => {
+    console.log("user searched:", searchTerm);
+
+    try {
+      const response = await fetch(
+        `http://localhost:3005/search/?searchKeyword=${searchTerm}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Error fetching search result: ${response.statusText}`);
+      }
+
+      const responseText = await response.json();
+      setEvents(responseText);
+      setSearchKeyword(searchTerm);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <CssBaseline>
@@ -88,7 +115,17 @@ const HomePage = () => {
                     backgroundColor: "#FFFFFF",
                   },
                 }}
-              ></TextField>
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleSearch}
+                style={{ marginLeft: "10px" }}
+              >
+                Search
+              </Button>
             </Toolbar>
           </AppBar>
         </div>

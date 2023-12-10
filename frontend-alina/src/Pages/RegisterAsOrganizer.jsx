@@ -33,6 +33,9 @@ const RegisterAsOrganizer = () => {
   const handleRegister = async () => {
     try {
       console.log("Handle Register function called");
+
+      console.log(formData);
+
       const response = await fetch(
         "http://localhost:3005/organizers/AddNeworganizers",
         {
