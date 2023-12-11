@@ -73,7 +73,7 @@ const Ticketeer = () => {
               style={{
                 position: "inherit",
                 bottom: "0px",
-                color: "black",
+                color: "white",
               }}
             >
               TICKETEER
@@ -84,7 +84,7 @@ const Ticketeer = () => {
               style={{
                 position: "inherit",
                 bottom: "0px",
-                color: "black",
+                color: "white",
               }}
             >
               Buy your tickets now, wherever, whenever

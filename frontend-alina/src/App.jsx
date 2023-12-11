@@ -34,7 +34,7 @@ const App = () => {
       </Routes>
 
       <Routes>
-        <Route path="/front" element={<Ticketeer />} />
+        <Route path="/" element={<Ticketeer />} />
       </Routes>
 
       <Routes>

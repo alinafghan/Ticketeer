@@ -40,13 +40,11 @@ const frontpageStyles = makeStyles((theme) => ({
 
   logintitle: {
     fontFamily: "Krona one",
-    color: "#000000",
     marginTop: "-200px",
   },
 
   frontpageLine: {
     fontFamily: "Krona one",
-    color: "#000000",
     padding: 15,
     marginBottom: 30,
   },

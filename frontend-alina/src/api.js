@@ -1,8 +1,8 @@
-import axios from 'axios';
+import axios from "axios";
 
 const Instance = axios.create({
-  baseURL: 'http://localhost:3005', // Replace with your backend server URL
-  timeout: 5000, // Adjust as needed
+  baseURL: "http://localhost:3005",
+  timeout: 5000,
 });
 
 export default Instance;
