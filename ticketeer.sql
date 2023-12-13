@@ -107,6 +107,14 @@ CREATE TABLE VENUES (
   CONSTRAINT LOCATION_FK FOREIGN KEY (LOCATION_ID) REFERENCES LOCATIONS (LOCATION_ID)
 );
 
+insert into venues (venue_name,venue_capacity,num_of_pit_seats,num_of_general_seats,num_of_balcony_seats,location_id) values
+('Venue!!',20,5,10,5,1);
+
+
+select * from venues;
+
+
+
 INSERT INTO VENUES (
   VENUE_NAME,
   VENUE_CAPACITY,
@@ -704,8 +712,8 @@ INSERT INTO EVENTS (
   NUM_OF_TICKETS,
   NUM_OF_VIP_TICKETS
 ) VALUES (
-  'Strokes Concert',
-  1,
+  'Live at Denver',
+  24,
   '12-10-2002',
   '9pm',
   '10pm',
@@ -715,6 +723,13 @@ INSERT INTO EVENTS (
   10,
   5
 );
+
+select * from events;
+select * from seats;
+
+select * from tickets;
+
+
 SELECT
   *
 FROM
