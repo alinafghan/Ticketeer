@@ -28,7 +28,7 @@ const BookTicketPage = () => {
   const [formData, setFormData] = useState({
     user_id: "",
     event_id: "",
-    ticket_id: "",
+    ticket_id: "1",
     ticket_type: "",
   });
 
@@ -183,10 +183,10 @@ const BookTicketPage = () => {
         return;
       }
 
-      setFormData({
-        ...formData,
-        ticket_id: nextTicketId,
-      });
+      // setFormData({
+      //   ...formData,
+      //   ticket_id: nextTicketId,
+      // });
 
       console.log("Form Data before fetch:", formData);
 
